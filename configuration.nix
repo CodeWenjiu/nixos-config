@@ -3,24 +3,11 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
-let
-  # 1. 声明 oh-my-rime 仓库源
-  ohMyRime = pkgs.fetchFromGitHub {
-    owner = "Mintimate";
-    repo = "oh-my-rime";
-    rev = "main";  # 可替换为特定 commit 或 tag
-    sha256 = "1v6aj2021wgdc30ddlc8d1yyfl7waik07w03z8bgz1scl23lvf4v";  # 需替换实际 hash
-  };
-
-  # 2. 创建自动链接脚本
-  rimeConfLinker = pkgs.writeShellScriptBin "rime-conf-linker" ''
-    mkdir -p ~/.local/share/fcitx5/rime
-    ln -sf ${ohMyRime}/* ~/.local/share/fcitx5/rime/
-  '';
-in {
+{
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./modules/oh-my-rime.nix
     ];
 
   # Bootloader.
@@ -45,30 +32,9 @@ in {
 
   # Select internationalisation properties.
   i18n.defaultLocale = "zh_CN.UTF-8";
-  i18n.inputMethod = {
-    type = "fcitx5";
-    enable = true;
-    fcitx5.addons = with pkgs; [
-      fcitx5-rime
-      fcitx5-chinese-addons
-    ];
-  };
-
-  systemd.user.services.fcitx5-rime-init = {
-    description = "Link oh-my-rime config to Fcitx5";
-    wantedBy = [ "fcitx5.service" ];
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStart = "${rimeConfLinker}/bin/rime-conf-linker";
-      User = "%I";
-    };
-  };
 
   environment.variables = {
-    # input method settings
-    GTK_IM_MODULE = "fcitx";
-    QT_IM_MODULE = "fcitx";
-    XMODIFIERS = "@im=fcitx";
+    # wayland settings
     NIXOS_OZONE_WL = "1";
 
     # proxy settings
@@ -77,11 +43,6 @@ in {
     http_procy = "http://127.0.0.1:7897";
     https_procy = "http://127.0.0.1:7897";
   };
-
-  fonts.packages = with pkgs; [
-    noto-fonts-cjk-sans
-    sarasa-gothic
-  ];
 
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
@@ -139,8 +100,6 @@ in {
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    rimeConfLinker
-
     vscode
 
     clash-verge-rev
