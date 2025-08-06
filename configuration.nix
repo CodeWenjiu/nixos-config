@@ -7,15 +7,11 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+
+      ./basic/boot.nix
+
       ./modules/oh-my-rime.nix
     ];
-
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernel.sysctl = {
-    "vm.swappiness" = 10; # Reduce swappiness to avoid excessive swapping.
-  };
 
   networking.hostName = "wenjiu"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -29,9 +25,6 @@
 
   # Set your time zone.
   time.timeZone = "Asia/Hong_Kong";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "zh_CN.UTF-8";
 
   environment.variables = {
     # wayland settings

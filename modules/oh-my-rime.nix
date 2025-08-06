@@ -24,6 +24,9 @@ in {
     ];
   };
 
+  # Select internationalisation properties.
+  i18n.defaultLocale = "zh_CN.UTF-8";
+
   # systemd 服务配置 - 自动链接 oh-my-rime 配置
   systemd.user.services.fcitx5-rime-init = {
     description = "Link oh-my-rime config to Fcitx5";
