@@ -3,9 +3,10 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    vscode-server.url = "github:nix-community/nixos-vscode-server";
   };
 
-  outputs = { self, nixpkgs }:
+  outputs = { self, nixpkgs, vscode-server }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
@@ -19,6 +20,11 @@
           inherit system;
           modules = [
             ./configuration.nix
+
+            vscode-server.nixosModules.default
+            ({ config, pkgs, ... }: {
+              services.vscode-server.enable = true;
+            })
           ];
         };
       };
