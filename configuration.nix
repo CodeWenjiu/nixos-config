@@ -149,6 +149,8 @@ in {
     # gui-for-clash
     qq
 
+    yazi-unwrapped
+
     git lazygit
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
@@ -169,6 +171,9 @@ in {
     dates = "weekly";
     options = "--delete-older-than 7d";
   };
+
+  # flake
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
