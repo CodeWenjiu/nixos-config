@@ -12,6 +12,7 @@
 
       ./modules/oh-my-rime.nix
       ./modules/clash.nix
+      ./modules/editor.nix
     ];
 
   networking.hostName = "wenjiu"; # Define your hostname.
@@ -83,13 +84,11 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    vscode
     qq
 
     yazi-unwrapped
 
     git lazygit
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     
     wget
     nettools
