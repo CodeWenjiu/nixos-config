@@ -11,6 +11,7 @@
       ./basic/boot.nix
 
       ./modules/oh-my-rime.nix
+      ./modules/clash.nix
     ];
 
   networking.hostName = "wenjiu"; # Define your hostname.
@@ -25,17 +26,6 @@
 
   # Set your time zone.
   time.timeZone = "Asia/Hong_Kong";
-
-  environment.variables = {
-    # wayland settings
-    NIXOS_OZONE_WL = "1";
-
-    # proxy settings
-    HTTPS_PROCY = "http://127.0.0.1:7897";
-    HTTP_PROXY = "http://127.0.0.1:7897";
-    http_procy = "http://127.0.0.1:7897";
-    https_procy = "http://127.0.0.1:7897";
-  };
 
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
@@ -94,11 +84,6 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     vscode
-
-    clash-verge-rev
-    # clashtui 
-    # clash-nyanpasu
-    # gui-for-clash
     qq
 
     yazi-unwrapped
