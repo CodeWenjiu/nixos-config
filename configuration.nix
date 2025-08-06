@@ -30,7 +30,7 @@ in {
     "vm.swappiness" = 10; # Reduce swappiness to avoid excessive swapping.
   };
 
-  networking.hostName = "wenjiu_laptop"; # Define your hostname.
+  networking.hostName = "wenjiu"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
