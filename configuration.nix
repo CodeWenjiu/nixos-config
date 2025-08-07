@@ -94,15 +94,6 @@
     nettools
   ];
 
-  programs.git = {
-    enable = true;
-    config = {
-      user.name = "wenjiu";
-      user.email = "2784307979@qq.com";
-      core.editor = "vim"; # Set your preferred editor for git commit messages.
-    };
-  };
-
   # gc
   nix.gc = {
     automatic = true;

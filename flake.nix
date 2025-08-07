@@ -1,45 +1,59 @@
 {
-  description = "A very basic flake";
+  description = "wenjiu's NixOS configuration";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     vscode-server.url = "github:nix-community/nixos-vscode-server";
-    home-manager.url = "github:nix-community/home-manager";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, vscode-server, home-manager }:
     let
       system = "x86_64-linux";
-      pkgs = import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-      };
-      lib = nixpkgs.lib;
     in {
       nixosConfigurations = {
         wenjiu = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
             ./configuration.nix
+            ./hardware-configuration.nix
+            ./basic/boot.nix
 
+            ./modules/oh-my-rime.nix
+            ./modules/clash.nix
+            ./modules/editor.nix
+            
+            # 允许 unfree 包
+            { nixpkgs.config.allowUnfree = true; }
+            
+            # VSCode 服务器模块
             vscode-server.nixosModules.default
             ({ config, pkgs, ... }: {
               services.vscode-server.enable = true;
             })
+            
+            # 集成 Home Manager
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.wenjiu = import ./home.nix;
+              
+              # 设置备份扩展名，避免文件冲突
+              home-manager.backupFileExtension = "backup";
+            }
           ];
         };
       };
 
-      hmConfig = {
+      # 独立的 Home Manager 配置
+      homeConfigurations = {
         wenjiu = home-manager.lib.homeManagerConfiguration {
-          inherit system pkgs;
-          username = "wenjiu";
-          homeDirectory = "/home/wenjiu";
-          configuration = {
-            imports = [
-              ./home.nix 
-            ];
-          };
+          pkgs = nixpkgs.legacyPackages.${system};
+          modules = [ ./home.nix ];
         };
       };
     };
