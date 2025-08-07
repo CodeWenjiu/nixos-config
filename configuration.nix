@@ -86,8 +86,6 @@
     qq
 
     yazi-unwrapped
-
-    git lazygit
     
     wget
     nettools
