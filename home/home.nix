@@ -27,7 +27,7 @@
   };
 
   home.sessionVariables = {
-    EDITOR = "vim";
     BROWSER = "firefox";
+    EDITOR = "vim";
   };
 }
