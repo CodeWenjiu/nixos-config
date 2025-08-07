@@ -12,7 +12,6 @@
 
       ./modules/oh-my-rime.nix
       ./modules/clash.nix
-      ./modules/editor.nix
     ];
 
   networking.hostName = "wenjiu"; # Define your hostname.

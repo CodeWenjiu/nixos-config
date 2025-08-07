@@ -9,6 +9,10 @@
     zip
   ];
 
+  imports = [
+    ./modules/editor.nix
+  ];
+
   programs = {
     git = {
       enable = true;

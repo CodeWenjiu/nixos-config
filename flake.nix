@@ -24,7 +24,6 @@
 
             ./modules/oh-my-rime.nix
             ./modules/clash.nix
-            ./modules/editor.nix
             
             # 允许 unfree 包
             { nixpkgs.config.allowUnfree = true; }
@@ -40,20 +39,12 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.wenjiu = import ./home.nix;
+              home-manager.users.wenjiu = import ./home/home.nix;
               
               # 设置备份扩展名，避免文件冲突
               home-manager.backupFileExtension = "backup";
             }
           ];
-        };
-      };
-
-      # 独立的 Home Manager 配置
-      homeConfigurations = {
-        wenjiu = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.${system};
-          modules = [ ./home.nix ];
         };
       };
     };
