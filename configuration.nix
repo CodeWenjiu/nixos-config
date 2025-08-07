@@ -74,22 +74,9 @@
     ];
   };
 
-  # Install firefox.
-  programs.firefox.enable = true;
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    qq
-
-    yazi-unwrapped
-    
-    wget
-    nettools
-  ];
+  environment.systemPackages = with pkgs; [];
 
   # gc
   nix.gc = {

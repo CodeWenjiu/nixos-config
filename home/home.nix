@@ -10,24 +10,17 @@
   ];
 
   imports = [
+    ./modules/browser.nix
+    ./modules/chat.nix
     ./modules/editor.nix
+    ./modules/tools.nix
     ./modules/vcs.nix
   ];
 
-  programs = {
-    firefox = {
-      enable = true;
-      profiles.default = {
-        settings = {
-          "browser.startup.homepage" = "https://www.google.com";
-          "browser.search.defaultenginename" = "Google";
-        };
-      };
-    };
-  };
-
+  # 环境变量配置
   home.sessionVariables = {
-    BROWSER = "firefox";
     EDITOR = "vim";
+    BROWSER = "firefox";
+    sysfetch = "macchina";
   };
 }
