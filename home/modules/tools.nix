@@ -25,7 +25,7 @@ in {
     source = macchinaCfg;
     recursive = true;
   };
-
+  
   programs.zsh.initContent = ''
     alias sysfetch='macchina'
     alias gitfetch='onefetch'
