@@ -5,10 +5,10 @@
   services.xserver.enable = true;
 
   # # Configure keymap in X11
-  # services.xserver.xkb = {
-  #   layout = "cn";
-  #   variant = "";
-  # };
+  services.xserver.xkb = {
+    layout = "cn";
+    variant = "";
+  };
 
   # # Enable the KDE Plasma Desktop Environment.
   # services.displayManager.sddm.enable = true;
@@ -19,12 +19,11 @@
     enable = true;
     xwayland.enable = true;
   };
+
   environment.systemPackages = with pkgs; [
     foot
     kitty
     waybar
-    swaylock
-    xdg-desktop-portal-hyprland
   ];
 
   # Enable CUPS to print documents.

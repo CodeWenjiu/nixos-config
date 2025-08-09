@@ -33,10 +33,7 @@
     isNormalUser = true;
     description = "wenjiu";
     extraGroups = [ "networkmanager" "wheel" "vedio" "audio" ];
-    packages = with pkgs; [
-      # kdePackages.kate
-    #  thunderbird
-    ];
+    packages = with pkgs; [];
     shell = pkgs.zsh;
   };
   programs.zsh.enable = true;
