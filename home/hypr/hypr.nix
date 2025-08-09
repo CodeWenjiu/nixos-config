@@ -38,7 +38,7 @@
         weather.unit = "metric";
       };
 
-      menus.dashboard.directories.enabled = false;
+      menus.dashboard.directories.enabled = true;
       menus.dashboard.stats.enable_gpu = true;
 
       theme.bar.transparent = true;
