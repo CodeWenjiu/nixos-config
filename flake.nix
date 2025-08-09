@@ -32,9 +32,6 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.wenjiu = import ./home/home.nix;
-              
-              # 设置备份扩展名，避免文件冲突
-              home-manager.backupFileExtension = "backup";
             }
           ];
         };

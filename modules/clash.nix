@@ -13,8 +13,12 @@
 
   environment.systemPackages = with pkgs; [
     clash-verge-rev
-    # clashtui 
-    # clash-nyanpasu
-    # gui-for-clash
   ];
+
+  programs.clash-verge = {
+    enable = true;
+    autoStart = true;
+    serviceMode = true;
+    tunMode = true;
+  };
 }
