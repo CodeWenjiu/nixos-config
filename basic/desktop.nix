@@ -1,8 +1,8 @@
 { config, pkgs, ... }:
 {
-  # # Enable the X11 windowing system.
-  # # You can disable this if you're only using the Wayland session.
-  # services.xserver.enable = true;
+  # Enable the X11 windowing system.
+  # You can disable this if you're only using the Wayland session.
+  services.xserver.enable = true;
 
   # # Configure keymap in X11
   # services.xserver.xkb = {
@@ -15,8 +15,13 @@
   # services.desktopManager.plasma6.enable = true;
 
   # Enable the hyprland Desktop Environment.
-  programs.hyprland.enable = true;
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
   environment.systemPackages = with pkgs; [
+    foot
+    kitty
     waybar
     swaylock
     xdg-desktop-portal-hyprland

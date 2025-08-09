@@ -32,14 +32,16 @@
   users.users.wenjiu = {
     isNormalUser = true;
     description = "wenjiu";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "vedio" "audio" ];
     packages = with pkgs; [
-      kdePackages.kate
+      # kdePackages.kate
     #  thunderbird
     ];
     shell = pkgs.zsh;
   };
   programs.zsh.enable = true;
+
+  services.getty.autologinUser = "wenjiu";
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
