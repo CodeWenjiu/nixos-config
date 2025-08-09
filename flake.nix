@@ -19,12 +19,6 @@
           inherit system;
           modules = [
             ./configuration.nix
-            ./hardware-configuration.nix
-            ./basic/boot.nix
-
-            # basic modules
-            ./modules/oh-my-rime.nix
-            ./modules/clash.nix
             
             { nixpkgs.config.allowUnfree = true; }
             
