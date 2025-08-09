@@ -18,6 +18,7 @@
     ./modules/terminal.nix
     ./modules/tools.nix
     ./modules/vcs.nix
+    ./modules/vedio.nix
 
     ./hypr/hypr.nix
   ];

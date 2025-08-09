@@ -1,0 +1,29 @@
+{
+  "bar.customModules.storage.paths": [
+    "/"
+  ],
+  "theme.bar.menus.enableShadow": true,
+  "theme.bar.floating": true,
+  "theme.bar.buttons.enableBorders": true,
+  "theme.bar.enableShadow": true,
+  "theme.bar.buttons.workspaces.enableBorder": true,
+  "bar.workspaces.show_icons": false,
+  "bar.workspaces.show_numbered": false,
+  "bar.workspaces.workspaceMask": false,
+  "bar.workspaces.showWsIcons": true,
+  "bar.workspaces.showApplicationIcons": true,
+  "theme.bar.buttons.workspaces.smartHighlight": true,
+  "theme.bar.buttons.windowtitle.enableBorder": false,
+  "bar.windowtitle.custom_title": true,
+  "theme.bar.buttons.volume.enableBorder": false,
+  "bar.battery.label": true,
+  "bar.battery.hideLabelWhenFull": true,
+  "theme.bar.menus.monochrome": false,
+  "wallpaper.pywal": false,
+  "wallpaper.enable": true,
+  "menus.power.lowBatteryNotification": true,
+  "menus.transitionTime": 100,
+  "theme.font.size": "1.0rem",
+  "theme.font.name": "CaskaydiaCove Nerd Font",
+  "theme.font.label": "CaskaydiaCove Nerd Font Bold"
+}

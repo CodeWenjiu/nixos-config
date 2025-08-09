@@ -29,6 +29,13 @@
 
       bar.launcher.autoDetectIcon = true;
       bar.workspaces.show_icons = true;
+      bar.workspaces.show_numbered = false;
+      bar.workspaces.workspaceMask = false;
+      bar.workspaces.showWsIcons = true;
+      bar.workspaces.showApplicationIcons = true;
+
+      bar.battery.label = true;
+      bar.battery.hideLabelWhenFull = true;
 
       menus.clock = {
         time = {
@@ -40,12 +47,17 @@
 
       menus.dashboard.directories.enabled = true;
       menus.dashboard.stats.enable_gpu = true;
+      menus.power.lowBatteryNotification =  true;
+      menus.transitionTime = 100;
 
+      theme.bar.menus.enableShadow = true;
+      theme.bar.floating = true;
+      theme.bar.buttons.enableBorders = true;
       theme.bar.transparent = true;
 
       theme.font = {
+        size = "1.0rem";
         name = "CaskaydiaCove NF";
-        size = "16px";
       };
     };
   };
