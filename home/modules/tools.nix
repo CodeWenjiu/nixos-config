@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 {
     home.packages = with pkgs; [
-        yazi-unwrapped
+        yazi
 
         # fetch
         macchina
