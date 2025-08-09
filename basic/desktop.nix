@@ -2,7 +2,7 @@
 {
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
-  services.xserver.enable = true;
+  # services.xserver.enable = true;
 
   # # Configure keymap in X11
   services.xserver.xkb = {
@@ -19,10 +19,12 @@
   services.desktopManager.gnome.enable = false;
   programs.hyprland = {
     enable = true;
-    xwayland.enable = true;
+    # xwayland.enable = true;
   };
 
   environment.systemPackages = with pkgs; [
+    pciutils
+
     foot
     kitty
 
@@ -30,6 +32,11 @@
     rofi-wayland
     hyprpaper
   ];
+
+  environment.variables = {
+    NIXOS_OZONE_WL = "1";
+    KITTY_ENABLE_WAYLAND = "1";
+  };
 
   # Enable CUPS to print documents.
   services.printing.enable = true;

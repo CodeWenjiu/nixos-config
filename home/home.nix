@@ -3,7 +3,7 @@
   home.username = "wenjiu";
   home.homeDirectory = "/home/wenjiu";
 
-  home.stateVersion = "23.11";
+  home.stateVersion = "25.05";
 
   home.packages = with pkgs; [
     zip
