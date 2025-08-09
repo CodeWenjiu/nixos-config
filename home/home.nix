@@ -5,16 +5,17 @@
 
   home.stateVersion = "25.05";
 
-  home.packages = with pkgs; [
-    zip
-  ];
+  xdg.enable = true;
 
   imports = [
     ./modules/browser.nix
     ./modules/chat.nix
     ./modules/editor.nix
     ./modules/shell.nix
+    ./modules/terminal.nix
     ./modules/tools.nix
     ./modules/vcs.nix
+
+    ./hypr/hypr.nix
   ];
 }

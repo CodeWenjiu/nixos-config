@@ -19,8 +19,7 @@ in {
     wget
     nettools
   ];
-
-  xdg.enable = true;
+  
   xdg.configFile."macchina" = {
     source = macchinaCfg;
     recursive = true;

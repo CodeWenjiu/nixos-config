@@ -23,11 +23,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    pciutils
-
-    foot
-    kitty
-
     waybar
     rofi-wayland
     hyprpaper
