@@ -1,66 +1,25 @@
-{ config, pkgs, ... }:
-{
+{ config, pkgs, lib, ... }:
+let
+  statusBar = "waybar";
+  
+  hyprlandConfig = pkgs.substituteAll {
+    src = ./hyprland.conf.template;
+    status_bar = statusBar;
+  };
+in {
   home.packages = with pkgs; [
     hyprland
-    hyprpanel
-    waybar
     rofi-wayland
     hyprpaper
   ];
 
-  programs.hyprpanel = {
-    # Configure and theme almost all options from the GUI.
-    # See 'https://hyprpanel.com/configuration/settings.html'.
-    # Default: <same as gui>
-    settings = {
+  # status bar
+  imports = lib.optionals (statusBar == "waybar") [ ./status_bar/waybar.nix ]
+         ++ lib.optionals (statusBar == "hyprpanel") [ ./status_bar/hyprpanel.nix ];
 
-      # Configure bar layouts for monitors.
-      # See 'https://hyprpanel.com/configuration/panel.html'.
-      # Default: null
-      layout = {
-        bar.layouts = {
-          "0" = {
-            left = [ "dashboard" "workspaces" ];
-            middle = [ "media" ];
-            right = [ "volume" "systray" "notifications" ];
-          };
-        };
-      };
-
-      bar.launcher.autoDetectIcon = true;
-      bar.workspaces.show_icons = true;
-      bar.workspaces.show_numbered = false;
-      bar.workspaces.workspaceMask = false;
-      bar.workspaces.showWsIcons = true;
-      bar.workspaces.showApplicationIcons = true;
-
-      bar.battery.label = true;
-      bar.battery.hideLabelWhenFull = true;
-
-      menus.clock = {
-        time = {
-          military = true;
-          hideSeconds = true;
-        };
-        weather.unit = "metric";
-      };
-
-      menus.dashboard.directories.enabled = true;
-      menus.dashboard.stats.enable_gpu = true;
-      menus.power.lowBatteryNotification =  true;
-      menus.transitionTime = 100;
-
-      theme.bar.menus.enableShadow = true;
-      theme.bar.floating = true;
-      theme.bar.buttons.enableBorders = true;
-      theme.bar.transparent = true;
-
-      theme.font = {
-        size = "1.0rem";
-        name = "CaskaydiaCove NF";
-      };
-    };
-  };
-
-  xdg.configFile."hypr/hyprland.conf".source = ./hyprland.conf;
+  # xdg.configFile."hypr/hyprland.conf".source = ./hyprland.conf;
+  xdg.configFile."hypr/hyprland.conf".text = ''
+      $status_bar = ${statusBar}
+      ${builtins.readFile ./hyprland.conf}
+    '';
 }
