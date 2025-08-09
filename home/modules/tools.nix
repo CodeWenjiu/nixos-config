@@ -1,21 +1,41 @@
 { config, pkgs, ... }:
-{
-    home.packages = with pkgs; [
-        yazi
+let
+  macchinaCfg = pkgs.fetchFromGitHub {
+    owner = "CodeWenjiu";
+    repo = "macchina-config";
+    rev = "ddabf53784d21cc45f81357b178ddeca86ff4dfc";
+    hash = "sha256-18cVcYuvWnhnQ0DyE/2bAFYxH/7L4zSbcVHIvSg/Kpg=";
+  };
+in {
+  home.packages = with pkgs; [
+    yazi
 
-        # fetch
-        macchina
-        onefetch
-        
-        ripgrep
+    # fetch
+    macchina
+    onefetch
+    
+    ripgrep
 
-        wget
-        nettools
-    ];
+    wget
+    nettools
+  ];
 
-    # 可选：如果你想在这里设置工具相关的环境变量
-    # 但建议在主 home.nix 中统一管理
-    # home.sessionVariables = {
-    #   sysfetch = "macchina";
-    # };
+  xdg.enable = true;
+  xdg.configFile."macchina" = {
+    source = macchinaCfg;
+    recursive = true;
+  };
+
+  programs.zsh.initContent = ''
+    alias sysfetch='macchina'
+    alias gitfetch='onefetch'
+
+    function yy() {
+      local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+      yazi "$@" --cwd-file="$tmp"
+      IFS= read -r -d ''' cwd < "$tmp"
+      [ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+      rm -f -- "$tmp"
+    }
+  '';
 }
