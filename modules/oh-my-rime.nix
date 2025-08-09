@@ -38,18 +38,25 @@ in {
     };
   };
 
+  fonts.packages = [
+      pkgs.nerd-fonts.caskaydia-cove
+  ];
+
+  fonts.fontconfig = {
+      enable = true;
+      defaultFonts = {
+          monospace = [ "CaskaydiaCove Nerd Font Mono" ];
+          sansSerif = [ "CaskaydiaCove Nerd Font" ];
+          serif = [ "CaskaydiaCove Nerd Font" ];
+      };
+  };
+
   # 输入法相关环境变量
   environment.variables = {
     GTK_IM_MODULE = "fcitx";
     QT_IM_MODULE = "fcitx";
     XMODIFIERS = "@im=fcitx";
   };
-
-  # 中文字体配置
-  fonts.packages = with pkgs; [
-    noto-fonts-cjk-sans
-    sarasa-gothic
-  ];
 
   # 将链接脚本添加到系统包中
   environment.systemPackages = with pkgs; [

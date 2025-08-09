@@ -17,7 +17,7 @@
       ];
       userSettings = {
         "editor.fontSize" = 14;
-        "editor.fontFamily" = "'JetBrains Mono', 'Droid Sans Mono', monospace";
+        "editor.fontFamily" = "'CaskaydiaCove Mono', monospace";
         "workbench.colorTheme" = "Dracula";
         "workbench.iconTheme" = "material-icon-theme";
       };
