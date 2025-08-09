@@ -22,19 +22,17 @@
             ./hardware-configuration.nix
             ./basic/boot.nix
 
+            # basic modules
             ./modules/oh-my-rime.nix
             ./modules/clash.nix
             
-            # 允许 unfree 包
             { nixpkgs.config.allowUnfree = true; }
             
-            # VSCode 服务器模块
             vscode-server.nixosModules.default
             ({ config, pkgs, ... }: {
               services.vscode-server.enable = true;
             })
             
-            # 集成 Home Manager
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
