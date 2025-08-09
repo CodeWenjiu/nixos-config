@@ -17,16 +17,6 @@
   # Enable the hyprland Desktop Environment.
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = false;
-  programs.hyprland = {
-    enable = true;
-    # xwayland.enable = true;
-  };
-
-  environment.systemPackages = with pkgs; [
-    waybar
-    rofi-wayland
-    hyprpaper
-  ];
 
   environment.variables = {
     NIXOS_OZONE_WL = "1";
