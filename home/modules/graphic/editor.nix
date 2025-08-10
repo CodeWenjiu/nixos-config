@@ -18,9 +18,4 @@
         };
         };
     };
-
-    imports = [
-        ./file_manager.nix
-        ./editor.nix
-    ];
 }

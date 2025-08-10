@@ -7,6 +7,22 @@
 
   xdg.enable = true;
 
+  gtk = {
+    enable = true;
+      theme = {
+      name = "Adwaita-dark";
+      package = pkgs.gnome-themes-extra;
+    };
+      iconTheme = {
+      name = "Adwaita";
+      package = pkgs.adwaita-icon-theme;
+    };
+  };
+
+  home.sessionVariables = {
+    GTK_THEME = "Adwaita:dark";
+  };
+
   imports = [
     ./modules/fonts.nix
     ./modules/remote.nix

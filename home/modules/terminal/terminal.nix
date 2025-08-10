@@ -2,12 +2,19 @@
 {
     home.packages = with pkgs; [
 	    kitty
+    
+        ripgrep
+        dust
+
+        wget
+        nettools
     ];
 
     imports = [
         ./editor.nix
         ./shell.nix
         ./vcs.nix
-        ./tools.nix
+        ./fetch.nix
+        ./file_manager.nix
     ];
 }
