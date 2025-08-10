@@ -18,7 +18,7 @@
           "0" = {
             left = [ "dashboard" "workspaces" ];
             middle = [ "media" ];
-            right = [ "volume" "systray" "notifications" ];
+            right = [ "volume" "systrayed" "notifications" ];
           };
         };
       };
