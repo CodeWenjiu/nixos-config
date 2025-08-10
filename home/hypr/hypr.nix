@@ -23,4 +23,6 @@ in {
       $status_bar = ${statusBar}
       ${builtins.readFile ./hyprland.conf}
     '';
+
+  xdg.configFile."rofi".source = ./rofi;
 }
