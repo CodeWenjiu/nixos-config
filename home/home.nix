@@ -8,17 +8,12 @@
   xdg.enable = true;
 
   imports = [
-    ./modules/browser.nix
-    ./modules/chat.nix
-    ./modules/editor.nix
     ./modules/fonts.nix
-    ./modules/music.nix
     ./modules/remote.nix
-    ./modules/shell.nix
-    ./modules/terminal.nix
-    ./modules/tools.nix
-    ./modules/vcs.nix
-    ./modules/vedio.nix
+    
+    ./modules/media/media.nix
+    ./modules/terminal/terminal.nix
+    ./modules/graphic/graphic.nix
 
     ./hypr/hypr.nix
   ];

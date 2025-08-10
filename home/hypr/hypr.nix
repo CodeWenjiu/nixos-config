@@ -1,6 +1,6 @@
 { config, pkgs, lib, ... }:
 let
-  statusBar = "eww";
+  statusBar = "hyprpanel";
   
   hyprlandConfig = pkgs.substituteAll {
     src = ./hyprland.conf.template;
