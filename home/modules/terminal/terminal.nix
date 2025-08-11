@@ -2,7 +2,9 @@
 {
     home.packages = with pkgs; [
         ripgrep
+
         dust
+        duf
 
         wget
         nettools
@@ -16,7 +18,7 @@
         settings = {
             background_opacity = "0.7";
             confirm_os_window_close = 0;
-            background_blur = "1";
+            background_blur = "1"; # only supported on macOS or KDE, see https://www.reddit.com/r/KittyTerminal/comments/qobs52/kitty_terminal_blur_archlinux/
         };
         
         extraConfig = ''
