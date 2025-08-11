@@ -12,6 +12,13 @@
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # hyprland.url = "github:hyprwm/hyprland?ref=v0.36.0";
+    rose-pine-hyprcursor = {
+      url = "github:ndom91/rose-pine-hyprcursor";
+      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.hyprlang.follows = "hyprland/hyprlang";
+    };
   };
 
   outputs = { self, nixpkgs, vscode-server, home-manager, stylix, ... }@inputs:
@@ -42,6 +49,8 @@
                   (import ./home/home.nix)
                 ];
               };
+
+              home-manager.extraSpecialArgs = { inherit inputs; };
             }
           ];
         };
