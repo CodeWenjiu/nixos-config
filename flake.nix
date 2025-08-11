@@ -19,6 +19,7 @@
           inherit system;
           modules = [
             ./configuration.nix
+            ./hosts/wenjiu_laptop/hardware-configuration.nix
             
             { nixpkgs.config.allowUnfree = true; }
             

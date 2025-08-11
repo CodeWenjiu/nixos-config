@@ -1,7 +1,6 @@
 - pull and generate
 ```zsh
 git pull git@github.com:CodeWenjiu/nixos-config.git
-sudo nixos-generate-config --show-hardware-config > hardware-configuration.nix
 ```
 
 - match

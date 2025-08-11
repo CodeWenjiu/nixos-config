@@ -1,7 +1,8 @@
 { config, pkgs, ... }:
 let custom-sddm-astronaut = pkgs.sddm-astronaut.override {
-    embeddedTheme = "hyprland_kath";
+    embeddedTheme = "purple_leaves";
     themeConfig = {
+      # see https://github.com/Keyitdev/sddm-astronaut-theme/tree/master/Themes
       AllowUppercaseLettersInUsernames = "true";
     };
   };
@@ -36,7 +37,7 @@ in {
       enable = true;
       package = pkgs.kdePackages.sddm;
       wayland = {
-        enable = true;
+      enable = true;
       };
       autoNumlock = true;
       enableHidpi = true;
@@ -49,7 +50,7 @@ in {
         };
       };
       extraPackages = with pkgs; [
-        custom-sddm-astronaut
+      custom-sddm-astronaut
       ];
     };
   };
