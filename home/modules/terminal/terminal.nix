@@ -1,14 +1,22 @@
 { config, pkgs, ... }:
 {
     home.packages = with pkgs; [
-	    kitty
-    
         ripgrep
         dust
 
         wget
         nettools
     ];
+
+    programs.kitty = {
+        enable = true;
+        package = pkgs.kitty;
+
+        extraConfig = ''
+        map ctrl+c copy_and_clear_or_interrupt
+        map ctrl+v paste_from_clipboard
+        '';
+    };
 
     imports = [
         ./editor.nix
