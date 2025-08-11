@@ -1,4 +1,9 @@
-{ config, pkgs, inputs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 {
   home.username = "wenjiu";
   home.homeDirectory = "/home/wenjiu";
@@ -25,7 +30,23 @@
   stylix.cursor.name = "BreezX-RosePine-Linux";
 
   stylix.overlays.enable = false;
-  stylix.targets.firefox.profileNames = ["default"];
+  stylix.targets.firefox.profileNames = [ "default" ];
+
+  # fonts
+  stylix.fonts.monospace = {
+    name = "CaskaydiaCove Nerd Font Mono";
+    package = pkgs.nerd-fonts.caskaydia-cove;
+  };
+
+  stylix.fonts.sansSerif = {
+    name = "Source Han Sans SC";
+    package = pkgs.source-han-sans;
+  };
+
+  stylix.fonts.serif = {
+    name = "Source Han Serif SC";
+    package = pkgs.source-han-serif;
+  };
 
   imports = [
     ./modules/fonts.nix

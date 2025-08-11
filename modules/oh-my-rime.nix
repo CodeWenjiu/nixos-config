@@ -4,8 +4,8 @@ let
   ohMyRime = pkgs.fetchFromGitHub {
     owner = "Mintimate";
     repo = "oh-my-rime";
-    rev = "main";  # 可替换为特定 commit 或 tag
-    sha256 = "1v6aj2021wgdc30ddlc8d1yyfl7waik07w03z8bgz1scl23lvf4v";  # 需替换实际 hash
+    rev = "main"; # 可替换为特定 commit 或 tag
+    sha256 = "1v6aj2021wgdc30ddlc8d1yyfl7waik07w03z8bgz1scl23lvf4v"; # 需替换实际 hash
   };
 
   # 创建自动链接脚本
@@ -13,7 +13,8 @@ let
     mkdir -p ~/.local/share/fcitx5/rime
     ln -sf ${ohMyRime}/* ~/.local/share/fcitx5/rime/
   '';
-in {
+in
+{
   # fcitx5 输入法配置
   i18n.inputMethod = {
     type = "fcitx5";
@@ -38,27 +39,32 @@ in {
     };
   };
 
-  fonts.packages = with pkgs; [
-    nerd-fonts.caskaydia-cove
-    source-han-sans
-    source-han-serif
-  ];
+  # Font configuration with fallback support
+  fonts = {
+    packages = with pkgs; [
+      # Already included by Stylix, but explicitly listed for clarity
+      nerd-fonts.caskaydia-cove
+      source-han-sans
+      source-han-serif
+      noto-fonts-color-emoji
+    ];
 
-  fonts.fontconfig = {
-    enable = true;
-    defaultFonts = {
-      monospace = [ 
-        "CaskaydiaCove Nerd Font Mono"
-        "Source Han Sans SC"
-      ];
-
-      sansSerif = [ 
-        "Source Han Sans SC"
-      ];
-      
-      serif = [ 
-        "Source Han Serif SC"
-      ];
+    fontconfig = {
+      defaultFonts = {
+        monospace = [
+          "CaskaydiaCove Nerd Font Mono"
+          "Source Han Sans SC"
+          "Source Han Mono SC"
+        ];
+        sansSerif = [
+          "Source Han Sans SC"
+          "Noto Sans"
+        ];
+        serif = [
+          "Source Han Serif SC"
+          "Noto Serif"
+        ];
+      };
     };
   };
 

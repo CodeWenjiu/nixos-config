@@ -4,15 +4,14 @@
 
 { config, pkgs, ... }:
 {
-  imports =
-    [ 
-      ./basic/desktop.nix
-      ./basic/boot.nix
+  imports = [
+    ./basic/desktop.nix
+    ./basic/boot.nix
 
-      ./modules/oh-my-rime.nix
-      ./modules/clash.nix
-      ./modules/game.nix
-    ];
+    ./modules/oh-my-rime.nix
+    ./modules/clash.nix
+    ./modules/game.nix
+  ];
 
   networking.hostName = "wenjiu"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -31,8 +30,13 @@
   users.users.wenjiu = {
     isNormalUser = true;
     description = "wenjiu";
-    extraGroups = [ "networkmanager" "wheel" "video" "audio" ];
-    packages = with pkgs; [];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "video"
+      "audio"
+    ];
+    packages = with pkgs; [ ];
     shell = pkgs.zsh;
   };
   programs.zsh.enable = true;
@@ -41,7 +45,7 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [];
+  environment.systemPackages = with pkgs; [ ];
 
   # gc
   nix.gc = {
@@ -51,7 +55,10 @@
   };
 
   # flake
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
