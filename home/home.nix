@@ -10,7 +10,7 @@
   # Stylix https://github.com/nix-community/stylix
   stylix.enable = true;
   stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
-  stylix.polarity = "dark"; 
+  stylix.polarity = "dark";
   stylix.image = ./hypr/hypr/wallpaper.png;
 
   # opacity
@@ -30,10 +30,11 @@
   imports = [
     ./modules/fonts.nix
     ./modules/remote.nix
-    
+
     ./modules/media/media.nix
     ./modules/terminal/terminal.nix
     ./modules/graphic/graphic.nix
+    ./modules/develop/main.nix
 
     ./hypr/hypr.nix
   ];
