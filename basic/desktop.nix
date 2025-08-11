@@ -23,9 +23,30 @@
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = false;
 
+  # ACPI
+  services.acpid.enable = true;
+  environment.systemPackages = with pkgs; [
+    acpi        
+    acpid       
+  ];
+
+  services.logind = {
+    lidSwitch = "suspend";                    
+    lidSwitchExternalPower = "suspend";       
+    powerKey = "suspend";                     
+    powerKeyLongPress = "poweroff";            
+  };
+
+  systemd.sleep.extraConfig = ''
+    HibernateDelaySec=1800
+    SuspendState=mem
+  '';
+
   environment.variables = {
     NIXOS_OZONE_WL = "1";
     KITTY_ENABLE_WAYLAND = "1";
+    ELECTRON_OZONE_PLATFORM_HINT = "wayland";
+    ELECTRON_ENABLE_WAYLAND = "1";
   };
 
   # Enable CUPS to print documents.
