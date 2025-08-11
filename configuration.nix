@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 {
   imports = [
     ./basic/desktop.nix
@@ -36,7 +36,7 @@
       "video"
       "audio"
     ];
-    packages = with pkgs; [ ];
+    # packages = with pkgs; [ ];
     shell = pkgs.zsh;
   };
   programs.zsh.enable = true;
@@ -45,7 +45,7 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [ ];
+  # environment.systemPackages = with pkgs; [ ];
 
   # gc
   nix.gc = {

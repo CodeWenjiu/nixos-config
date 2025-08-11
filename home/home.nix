@@ -1,5 +1,4 @@
 {
-  config,
   pkgs,
   inputs,
   ...
@@ -49,7 +48,6 @@
   };
 
   imports = [
-    ./modules/fonts.nix
     ./modules/remote.nix
 
     ./modules/media/media.nix
