@@ -1,5 +1,8 @@
-{ config, pkgs, ... }:
 {
+  config,
+  pkgs,
+  ...
+}: {
   home.packages = with pkgs; [
     hyprpanel
   ];
@@ -9,16 +12,15 @@
     # See 'https://hyprpanel.com/configuration/settings.html'.
     # Default: <same as gui>
     settings = {
-
       # Configure bar layouts for monitors.
       # See 'https://hyprpanel.com/configuration/panel.html'.
       # Default: null
       layout = {
         bar.layouts = {
           "0" = {
-            left = [ "dashboard" "workspaces" ];
-            middle = [ "media" ];
-            right = [ "volume" "systrayed" "notifications" ];
+            left = ["dashboard" "workspaces"];
+            middle = ["media"];
+            right = ["volume" "systrayed" "notifications"];
           };
         };
       };
@@ -43,7 +45,7 @@
 
       menus.dashboard.directories.enabled = true;
       menus.dashboard.stats.enable_gpu = true;
-      menus.power.lowBatteryNotification =  true;
+      menus.power.lowBatteryNotification = true;
       menus.transitionTime = 100;
 
       theme.bar.menus.enableShadow = true;

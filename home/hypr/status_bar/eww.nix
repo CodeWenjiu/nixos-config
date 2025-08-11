@@ -1,5 +1,8 @@
-{ config, pkgs, ... }:
 {
+  config,
+  pkgs,
+  ...
+}: {
   home.packages = with pkgs; [
     eww
     jq
@@ -7,6 +10,6 @@
     socat
     imagemagick
   ];
-  
+
   xdg.configFile."eww".source = ./eww;
 }

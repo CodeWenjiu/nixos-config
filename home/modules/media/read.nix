@@ -1,7 +1,10 @@
-{ config, pkgs, ... }:
 {
-    home.packages = with pkgs; [
-        readest
-	obsidian
-    ];
+  config,
+  pkgs,
+  ...
+}: {
+  home.packages = with pkgs; [
+    readest
+    obsidian
+  ];
 }

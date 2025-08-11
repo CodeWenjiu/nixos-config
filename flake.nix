@@ -19,39 +19,49 @@
     };
   };
 
-  outputs = { self, nixpkgs, vscode-server, home-manager, stylix, ... }@inputs:
-    let
-      system = "x86_64-linux";
-    in {
-      nixosConfigurations = {
-        wenjiu = nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [
-            ./configuration.nix
-            ./hosts/wenjiu_laptop/hardware-configuration.nix
-            
-            { nixpkgs.config.allowUnfree = true; }
-            
-            vscode-server.nixosModules.default
-            ({ config, pkgs, ... }: {
-              services.vscode-server.enable = true;
-            })
-            
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.wenjiu = {
-                imports = [
-                  stylix.homeModules.stylix
-                  (import ./home/home.nix)
-                ];
-              };
+  outputs = {
+    self,
+    nixpkgs,
+    vscode-server,
+    home-manager,
+    stylix,
+    ...
+  } @ inputs: let
+    system = "x86_64-linux";
+  in {
+    nixosConfigurations = {
+      wenjiu = nixpkgs.lib.nixosSystem {
+        inherit system;
+        modules = [
+          ./configuration.nix
+          ./hosts/wenjiu_laptop/hardware-configuration.nix
 
-              home-manager.extraSpecialArgs = { inherit inputs; };
-            }
-          ];
-        };
+          {nixpkgs.config.allowUnfree = true;}
+
+          vscode-server.nixosModules.default
+          ({
+            config,
+            pkgs,
+            ...
+          }: {
+            services.vscode-server.enable = true;
+          })
+
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.wenjiu = {
+              imports = [
+                stylix.homeModules.stylix
+                (import ./home/home.nix)
+              ];
+            };
+
+            home-manager.extraSpecialArgs = {inherit inputs;};
+          }
+        ];
       };
     };
+  };
 }

@@ -2,8 +2,7 @@
   pkgs,
   inputs,
   ...
-}:
-{
+}: {
   home.username = "wenjiu";
   home.homeDirectory = "/home/wenjiu";
 
@@ -29,7 +28,9 @@
   stylix.cursor.name = "BreezX-RosePine-Linux";
 
   stylix.overlays.enable = false;
-  stylix.targets.firefox.profileNames = [ "default" ];
+  stylix.targets.firefox.profileNames = ["default"];
+  # Disable stylix targets for zed to avoid conflicts with manual configuration
+  stylix.targets.zed.enable = false;
 
   # fonts
   stylix.fonts.monospace = {

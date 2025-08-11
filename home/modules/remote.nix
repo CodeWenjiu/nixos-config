@@ -1,6 +1,9 @@
-{ config, pkgs, ... }:
 {
-    home.packages = with pkgs; [
-        todesk
-    ];
+  config,
+  pkgs,
+  ...
+}: {
+  home.packages = with pkgs; [
+    todesk
+  ];
 }

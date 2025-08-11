@@ -1,5 +1,8 @@
-{ config, pkgs, ... }:
 {
+  config,
+  pkgs,
+  ...
+}: {
   home.packages = with pkgs; [
     yazi
 
@@ -7,7 +10,7 @@
     file
     btrfs-progs
   ];
-  
+
   programs.zsh.initContent = ''
     function yy() {
       local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd

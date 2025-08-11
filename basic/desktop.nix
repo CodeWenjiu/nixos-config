@@ -1,5 +1,9 @@
-{ config, pkgs, ... }:
-let custom-sddm-astronaut = pkgs.sddm-astronaut.override {
+{
+  config,
+  pkgs,
+  ...
+}: let
+  custom-sddm-astronaut = pkgs.sddm-astronaut.override {
     embeddedTheme = "purple_leaves";
     themeConfig = {
       # see https://github.com/Keyitdev/sddm-astronaut-theme/tree/master/Themes
@@ -29,7 +33,7 @@ in {
   # Enable the hyprland Desktop Environment.
   services.displayManager.gdm.enable = false;
   services.desktopManager.gnome.enable = false;
-  
+
   # https://github.com/Keyitdev/sddm-astronaut-theme/issues/51
   services.displayManager = {
     defaultSession = "hyprland";
@@ -37,7 +41,7 @@ in {
       enable = true;
       package = pkgs.kdePackages.sddm;
       wayland = {
-      enable = true;
+        enable = true;
       };
       autoNumlock = true;
       enableHidpi = true;
@@ -60,7 +64,7 @@ in {
     custom-sddm-astronaut
     kdePackages.qtmultimedia
 
-    acpi        
+    acpi
   ];
 
   services.acpid = {
@@ -70,8 +74,8 @@ in {
   services.logind = {
     lidSwitch = "suspend";
     lidSwitchExternalPower = "suspend";
-    powerKey = "suspend";                     
-    powerKeyLongPress = "poweroff";            
+    powerKey = "suspend";
+    powerKeyLongPress = "poweroff";
 
     extraConfig = ''
       HandleLidSwitch=suspend
@@ -94,7 +98,7 @@ in {
   '';
 
   environment.variables = {
-    NIXOS_OZONE_WL = "1"; # cause vsc warn for https://github.com/NixOS/nixpkgs/issues/271461 
+    NIXOS_OZONE_WL = "1"; # cause vsc warn for https://github.com/NixOS/nixpkgs/issues/271461
     KITTY_ENABLE_WAYLAND = "1";
     ELECTRON_OZONE_PLATFORM_HINT = "wayland";
     ELECTRON_ENABLE_WAYLAND = "1";
@@ -122,7 +126,7 @@ in {
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  services.blueman.enable = true;         
-  hardware.bluetooth.enable = true;       
-  services.dbus.enable = true; 
+  services.blueman.enable = true;
+  hardware.bluetooth.enable = true;
+  services.dbus.enable = true;
 }

@@ -1,11 +1,14 @@
-{ config, pkgs, ... }:
 {
-    home.packages = with pkgs; [
-        vscode
-    ];
+  config,
+  pkgs,
+  ...
+}: {
+  home.packages = with pkgs; [
+    vscode
+  ];
 
-    imports = [
-        ./file_manager.nix
-        ./editor.nix
-    ];
+  imports = [
+    ./file_manager.nix
+    ./editor.nix
+  ];
 }

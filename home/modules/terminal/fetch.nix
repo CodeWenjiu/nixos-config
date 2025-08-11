@@ -1,5 +1,8 @@
-{ config, pkgs, ... }:
-let
+{
+  config,
+  pkgs,
+  ...
+}: let
   macchinaCfg = pkgs.fetchFromGitHub {
     owner = "CodeWenjiu";
     repo = "macchina-config";
@@ -12,12 +15,12 @@ in {
     macchina
     onefetch
   ];
-  
+
   xdg.configFile."macchina" = {
     source = macchinaCfg;
     recursive = true;
   };
-  
+
   programs.zsh.initContent = ''
     alias sysfetch='macchina'
     alias gitfetch='onefetch'

@@ -1,7 +1,11 @@
-{ config, pkgs, ... }:
 {
+  config,
+  pkgs,
+  ...
+}: {
   home.packages = with pkgs; [
-    git lazygit
+    git
+    lazygit
   ];
 
   programs.git = {
@@ -9,8 +13,8 @@
     userName = "wenjiu";
     userEmail = "2784307979@qq.com";
     extraConfig = {
-        init.defaultBranch = "main";
-        pull.rebase = true;
+      init.defaultBranch = "main";
+      pull.rebase = true;
     };
   };
 }

@@ -50,7 +50,6 @@ in
         monospace = [
           "CaskaydiaCove Nerd Font Mono"
           "Source Han Sans SC"
-          "Source Han Mono SC"
         ];
         sansSerif = [
           "Source Han Sans SC"

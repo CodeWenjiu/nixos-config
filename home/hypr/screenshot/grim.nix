@@ -1,8 +1,11 @@
-{ config, pkgs, ... }:
 {
-    home.packages = with pkgs; [
-        grim 
-        slurp 
-        swappy
-    ];
+  config,
+  pkgs,
+  ...
+}: {
+  home.packages = with pkgs; [
+    grim
+    slurp
+    swappy
+  ];
 }

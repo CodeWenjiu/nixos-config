@@ -1,6 +1,9 @@
-{ config, pkgs, ... }:
 {
-    home.packages = with pkgs; [
-        flameshot
-    ];
+  config,
+  pkgs,
+  ...
+}: {
+  home.packages = with pkgs; [
+    flameshot
+  ];
 }
