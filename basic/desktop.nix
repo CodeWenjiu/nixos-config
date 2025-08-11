@@ -1,8 +1,8 @@
 {
-  config,
   pkgs,
   ...
-}: let
+}:
+let
   custom-sddm-astronaut = pkgs.sddm-astronaut.override {
     embeddedTheme = "purple_leaves";
     themeConfig = {
@@ -10,7 +10,8 @@
       AllowUppercaseLettersInUsernames = "true";
     };
   };
-in {
+in
+{
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
   # services.xserver.enable = true;
@@ -53,7 +54,7 @@ in {
           CursorSize = 24;
         };
       };
-      extraPackages = with pkgs; [
+      extraPackages = [
         custom-sddm-astronaut
       ];
     };

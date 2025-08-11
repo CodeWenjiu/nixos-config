@@ -44,8 +44,6 @@
             vscode-server.nixosModules.default
             (
               {
-                config,
-                pkgs,
                 ...
               }:
               {
