@@ -8,9 +8,13 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    stylix = {
+      url = "github:danth/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, vscode-server, home-manager }:
+  outputs = { self, nixpkgs, vscode-server, home-manager, stylix, ... }@inputs:
     let
       system = "x86_64-linux";
     in {
@@ -32,7 +36,12 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.wenjiu = import ./home/home.nix;
+              home-manager.users.wenjiu = {
+                imports = [
+                  stylix.homeModules.stylix
+                  (import ./home/home.nix)
+                ];
+              };
             }
           ];
         };

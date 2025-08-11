@@ -7,21 +7,19 @@
 
   xdg.enable = true;
 
-  gtk = {
-    enable = true;
-      theme = {
-      name = "Adwaita-dark";
-      package = pkgs.gnome-themes-extra;
-    };
-      iconTheme = {
-      name = "Adwaita";
-      package = pkgs.adwaita-icon-theme;
-    };
-  };
+  # Stylix https://github.com/nix-community/stylix
 
-  home.sessionVariables = {
-    GTK_THEME = "Adwaita:dark";
-  };
+  stylix.enable = true;
+  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
+
+  stylix.opacity.applications = 0.7;
+  stylix.opacity.desktop = 0.7;
+  stylix.opacity.popups = 0.7;
+  stylix.opacity.terminal = 0.7;
+
+  stylix.overlays.enable = false;
+
+  stylix.targets.firefox.profileNames = ["default"];
 
   imports = [
     ./modules/fonts.nix

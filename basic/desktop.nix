@@ -60,12 +60,12 @@ in {
     custom-sddm-astronaut
     kdePackages.qtmultimedia
 
-    # acpi        
+    acpi        
   ];
 
-  # services.acpid = {
-  #   enable = true;
-  # };
+  services.acpid = {
+    enable = true;
+  };
 
   services.logind = {
     lidSwitch = "suspend";
@@ -94,7 +94,7 @@ in {
   '';
 
   environment.variables = {
-    NIXOS_OZONE_WL = "1";
+    NIXOS_OZONE_WL = "1"; # cause vsc warn for https://github.com/NixOS/nixpkgs/issues/271461 
     KITTY_ENABLE_WAYLAND = "1";
     ELECTRON_OZONE_PLATFORM_HINT = "wayland";
     ELECTRON_ENABLE_WAYLAND = "1";

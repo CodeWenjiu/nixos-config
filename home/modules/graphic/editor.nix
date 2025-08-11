@@ -8,13 +8,6 @@
             extensions = with pkgs.vscode-extensions; [
                 rust-lang.rust-analyzer
             ];
-            
-            userSettings = {
-                "editor.fontSize" = 14;
-                "editor.fontFamily" = "'CaskaydiaCove Mono', monospace";
-                "workbench.colorTheme" = "Dracula";
-                "workbench.iconTheme" = "material-icon-theme";
-            };
 
             keybindings = [
                 {
@@ -29,12 +22,24 @@
                     "when" = "terminalFocus";
                 }
 
-                # {
-                #     "key" = "ctrl+c";
-                #     "command" = "workbench.action.terminal.sendSequence";
-                #     "args" = { "text" = builtins.charFromInt 3; };
-                #     "when" = "terminalFocus && !terminalTextSelected";
-                # }
+                # not work :(
+                {
+                    "key" = "ctrl+shift+c";
+                    "command" = "-";
+                    "when" = "terminalFocus && terminalTextSelected";
+                }
+
+                {
+                    "key" = "ctrl+shift+v";
+                    "command" = "-";
+                    "when" = "terminalFocus";
+                }
+
+                {
+                    "key" = "ctrl+space";
+                    "command" = "-";
+                    "when" = "editorTextFocus";
+                }
             ];
         };
     };
