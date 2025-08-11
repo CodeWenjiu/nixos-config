@@ -89,6 +89,8 @@ in
     fcitx5.addons = with pkgs; [
       fcitx5-rime
       fcitx5-chinese-addons
+      rime-data
+      fcitx5-gtk
     ];
   };
 
