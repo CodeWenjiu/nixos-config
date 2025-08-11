@@ -38,17 +38,28 @@ in {
     };
   };
 
-  fonts.packages = [
-      pkgs.nerd-fonts.caskaydia-cove
+  fonts.packages = with pkgs; [
+    nerd-fonts.caskaydia-cove
+    source-han-sans
+    source-han-serif
   ];
 
   fonts.fontconfig = {
-      enable = true;
-      defaultFonts = {
-          monospace = [ "CaskaydiaCove Nerd Font Mono" ];
-          sansSerif = [ "CaskaydiaCove Nerd Font" ];
-          serif = [ "CaskaydiaCove Nerd Font" ];
-      };
+    enable = true;
+    defaultFonts = {
+      monospace = [ 
+        "CaskaydiaCove Nerd Font Mono"
+        "Source Han Sans SC"
+      ];
+
+      sansSerif = [ 
+        "Source Han Sans SC"
+      ];
+      
+      serif = [ 
+        "Source Han Serif SC"
+      ];
+    };
   };
 
   # 输入法相关环境变量

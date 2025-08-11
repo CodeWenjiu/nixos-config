@@ -33,7 +33,7 @@
   users.users.wenjiu = {
     isNormalUser = true;
     description = "wenjiu";
-    extraGroups = [ "networkmanager" "wheel" "vedio" "audio" ];
+    extraGroups = [ "networkmanager" "wheel" "video" "audio" ];
     packages = with pkgs; [];
     shell = pkgs.zsh;
   };
