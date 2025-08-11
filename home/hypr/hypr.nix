@@ -3,22 +3,8 @@ let
   statusBar = "waybar";
   
   screenshot = "grim";
-  screenshotConfig =
-    if screenshot == "flameshot" then ''
-      # --- Screenshot (Flameshot) ---
-      bind = , PRINT, exec, flameshot gui
-    ''
-    else if screenshot == "grim" then ''
-      # --- Screenshot (grim + slurp) ---
-      $screenshot_dir = $HOME/Pictures/Screenshots
-      # 截图选定区域 -> 保存到文件
-      bind = , PRINT, exec, grim -g "$(slurp)" "$screenshot_dir/$(date +'%Y-%m-%d_%H-%M-%S').png"
-      # 截图选定区域 -> 复制到剪贴板
-      bind = SHIFT, PRINT, exec, grim -g "$(slurp)" - | wl-copy
-      # 截图选定区域 -> 使用 swappy 编辑
-      bind = CTRL, PRINT, exec, grim -g "$(slurp)" - | swappy -f -
-    ''
-    else '''';
+
+  screenshotConfig = import ./screenshot/screenshot.nix { screenshot = screenshot; };
 
   hyprlandConfigText = ''
     $status_bar = ${statusBar}
