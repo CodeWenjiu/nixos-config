@@ -1,5 +1,11 @@
 { config, pkgs, ... }:
-{
+let custom-sddm-astronaut = pkgs.sddm-astronaut.override {
+    embeddedTheme = "hyprland_kath";
+    themeConfig = {
+      AllowUppercaseLettersInUsernames = "true";
+    };
+  };
+in {
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
   # services.xserver.enable = true;
@@ -23,15 +29,37 @@
   services.displayManager.gdm.enable = false;
   services.desktopManager.gnome.enable = false;
   
-  services.displayManager.sddm = {
-    enable = true;
-    wayland.enable = true;  
-    theme = "breeze";       
+  # https://github.com/Keyitdev/sddm-astronaut-theme/issues/51
+  services.displayManager = {
+    defaultSession = "hyprland";
+    sddm = {
+      enable = true;
+      package = pkgs.kdePackages.sddm;
+      wayland = {
+        enable = true;
+      };
+      autoNumlock = true;
+      enableHidpi = true;
+      theme = "sddm-astronaut-theme";
+      settings = {
+        Theme = {
+          Current = "sddm-astronaut-theme";
+          CursorTheme = "Bibata-Modern-Ice";
+          CursorSize = 24;
+        };
+      };
+      extraPackages = with pkgs; [
+        custom-sddm-astronaut
+      ];
+    };
   };
 
   # ACPI
   services.acpid.enable = true;
   environment.systemPackages = with pkgs; [
+    custom-sddm-astronaut
+    kdePackages.qtmultimedia
+
     acpi        
     acpid       
   ];
