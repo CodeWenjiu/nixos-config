@@ -2,10 +2,18 @@
 let
   statusBar = "waybar";
   
-  hyprlandConfig = pkgs.substituteAll {
-    src = ./hyprland.conf.template;
-    status_bar = statusBar;
-  };
+  hyprlandConfigText = ''
+    $status_bar = ${statusBar}
+
+    ${builtins.readFile ./hypr/hyprland.conf.template}
+  '';
+
+  hyprConfigDir = pkgs.runCommand "hypr-config" { } ''
+    mkdir -p $out
+    cp -r ${./hypr}/. $out/
+    cp ${pkgs.writeText "hyprland.conf" hyprlandConfigText} $out/hyprland.conf
+    rm $out/hyprland.conf.template
+  '';
 in {
   home.packages = with pkgs; [
     hyprland
@@ -23,12 +31,7 @@ in {
   in lib.optional (builtins.pathExists statusBarImport) statusBarImport;
 
   # xdg.configFile."hypr/hyprland.conf".source = ./hyprland.conf;
-  xdg.configFile."hypr/hyprland.conf".text = ''
-      $status_bar = ${statusBar}
-      ${builtins.readFile ./hyprland.conf}
-    '';
-  xdg.configFile."hypr/hyprpaper.conf".source = ./hyprpaper.conf;
-  xdg.configFile."hypr/wallpaper.png".source = ./wallpaper.png;
+  xdg.configFile."hypr".source = hyprConfigDir;
 
   xdg.configFile."rofi".source = ./rofi;
 }
