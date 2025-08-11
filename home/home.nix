@@ -54,9 +54,9 @@
   imports = [
     ./modules/remote.nix
 
-    ./modules/media/media.nix
-    ./modules/terminal/terminal.nix
-    ./modules/graphic/graphic.nix
+    ./modules/media/main.nix
+    ./modules/terminal/main.nix
+    ./modules/graphic/main.nix
     ./modules/develop/main.nix
 
     ./hypr/hypr.nix

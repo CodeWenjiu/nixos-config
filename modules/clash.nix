@@ -1,8 +1,8 @@
 {
-  config,
   pkgs,
   ...
-}: {
+}:
+{
   environment.variables = {
     # proxy settings
     HTTPS_PROCY = "http://127.0.0.1:7897";

@@ -32,6 +32,8 @@
       };
 
       # Font fallbacks for Chinese support
+      buffer_font_size = 12;
+
       buffer_font_fallbacks = [
         "CaskaydiaCove Nerd Font Mono"
         "Source Han Sans SC"
