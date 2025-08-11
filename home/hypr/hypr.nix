@@ -11,6 +11,11 @@ in {
     hyprland
     rofi-wayland
     hyprpaper
+
+    # controler
+    brightnessctl
+    pamixer  
+    acpi    
   ];
 
   # status bar
