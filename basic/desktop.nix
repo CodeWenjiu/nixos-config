@@ -50,24 +50,26 @@ in {
         };
       };
       extraPackages = with pkgs; [
-      custom-sddm-astronaut
+        custom-sddm-astronaut
       ];
     };
   };
 
   # ACPI
-  services.acpid.enable = true;
   environment.systemPackages = with pkgs; [
     custom-sddm-astronaut
     kdePackages.qtmultimedia
 
-    acpi        
-    acpid       
+    # acpi        
   ];
 
+  # services.acpid = {
+  #   enable = true;
+  # };
+
   services.logind = {
-    lidSwitch = "suspend";                    
-    lidSwitchExternalPower = "suspend";       
+    lidSwitch = "suspend";
+    lidSwitchExternalPower = "suspend";
     powerKey = "suspend";                     
     powerKeyLongPress = "poweroff";            
 
@@ -81,6 +83,9 @@ in {
       IdleActionSec=30min
     '';
   };
+  services.udev.extraRules = ''
+    SUBSYSTEM=="input", KERNEL=="event*", ENV{ID_INPUT_SWITCH}=="1", ENV{SWITCH_STATE}=="1", RUN+="${pkgs.xorg.xset}/bin/xset dpms force off"
+  '';
 
   systemd.sleep.extraConfig = ''
     HibernateDelaySec=1800
