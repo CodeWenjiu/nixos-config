@@ -48,7 +48,7 @@ env = KITTY_ENABLE_WAYLAND,1
 # exec-once = $terminal
 # exec-once = nm-applet &
 exec-once = $status_bar
-exec-once = hyprpaper
+# exec-once = hyprpaper
 exec-once = fcitx5 --replace -d
 exec-once = clash-verge
 
