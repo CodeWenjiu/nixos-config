@@ -2,7 +2,7 @@
 {
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
-  services.xserver.enable = true;
+  # services.xserver.enable = true;
 
   # # Configure keymap in X11
   services.xserver.xkb = {
@@ -20,8 +20,14 @@
   # services.desktopManager.plasma6.enable = true;
 
   # Enable the hyprland Desktop Environment.
-  services.displayManager.gdm.enable = true;
+  services.displayManager.gdm.enable = false;
   services.desktopManager.gnome.enable = false;
+  
+  services.displayManager.sddm = {
+    enable = true;
+    wayland.enable = true;  
+    theme = "breeze";       
+  };
 
   # ACPI
   services.acpid.enable = true;
@@ -35,11 +41,22 @@
     lidSwitchExternalPower = "suspend";       
     powerKey = "suspend";                     
     powerKeyLongPress = "poweroff";            
+
+    extraConfig = ''
+      HandleLidSwitch=suspend
+      HandleLidSwitchExternalPower=suspend
+      HandleLidSwitchDocked=ignore
+      LidSwitchIgnoreInhibited=yes
+      HoldoffTimeoutSec=10
+      IdleAction=ignore
+      IdleActionSec=30min
+    '';
   };
 
   systemd.sleep.extraConfig = ''
     HibernateDelaySec=1800
     SuspendState=mem
+    SuspendMode=platform
   '';
 
   environment.variables = {
