@@ -9,7 +9,7 @@ let
   hyprlandConfigText = ''
     $status_bar = ${statusBar}
 
-    ${builtins.readFile ./hypr/hyprland.conf.template}
+    ${builtins.readFile ./hypr/hyprland_temp.conf}
     
     ${screenshotConfig}
   '';
@@ -18,7 +18,7 @@ let
     mkdir -p $out
     cp -r ${./hypr}/. $out/
     cp ${pkgs.writeText "hyprland.conf" hyprlandConfigText} $out/hyprland.conf
-    rm $out/hyprland.conf.template
+    rm $out/hyprland_temp.conf
   '';
 in {
 
