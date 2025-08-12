@@ -22,15 +22,23 @@
     packages = with pkgs; [
       # Already included by Stylix, but explicitly listed for clarity
       nerd-fonts.jetbrains-mono
+      nerd-fonts.caskaydia-cove
       source-han-sans
       source-han-serif
       noto-fonts-color-emoji
+
+      # other fonts
+      font-awesome
+      material-icons
+      comic-mono
+      icomoon-feather
     ];
 
     fontconfig = {
       defaultFonts = {
         monospace = [
           "JetBrainsMono Nerd Font"
+          "CaskaydiaCove Nerd Font Mono"
           "Source Han Sans SC"
         ];
         sansSerif = [

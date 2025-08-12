@@ -28,6 +28,10 @@
     '';
   };
 
+  programs.zsh.initContent = ''
+    bindkey "^H" backward-delete-word
+  '';
+
   imports = [
     ./editor.nix
     ./shell.nix

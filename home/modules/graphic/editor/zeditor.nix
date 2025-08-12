@@ -58,6 +58,15 @@
         show = "auto";
       };
     };
+
+    userKeymaps = [
+      {
+        # context = "Terminal";
+        # bindings = {
+        #   ctrl-c = "terminal::Copy"; # impact signal handler
+        # };
+      }
+    ];
   };
 
   programs.zsh.initContent = ''

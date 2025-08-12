@@ -38,8 +38,8 @@
 
   # fonts
   stylix.fonts.monospace = {
-    name = "CaskaydiaCove Nerd Font Mono";
-    package = pkgs.nerd-fonts.caskaydia-cove;
+    name = "JetBrainsMono Nerd Font";
+    package = pkgs.nerd-fonts.jetbrains-mono;
   };
 
   stylix.fonts.sansSerif = {
@@ -51,6 +51,14 @@
     name = "Source Han Serif SC";
     package = pkgs.source-han-serif;
   };
+
+  # Additional fonts for eww widgets
+  home.packages = with pkgs; [
+    font-awesome
+    material-icons
+    comic-mono
+    icomoon-feather
+  ];
 
   imports = [
     ./modules/remote.nix
