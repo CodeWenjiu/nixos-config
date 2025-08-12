@@ -6,6 +6,9 @@
   home.packages = with pkgs; [
     git
     lazygit
+
+    jujutsu
+    jjui
   ];
 
   programs.git = {
@@ -17,4 +20,6 @@
       pull.rebase = true;
     };
   };
+
+  xdg.configFile."jj".source = ./jj;
 }

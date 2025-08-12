@@ -1,16 +1,15 @@
 {
-  pkgs,
   ...
 }:
 {
-  home.packages = with pkgs; [
-    nil
-    nixd # Nix LSP
-    alejandra # Nix Formatter
-  ];
+  programs.direnv = {
+    enable = true;
+    enableZshIntegration = true;
+    nix-direnv.enable = true;
+    silent = true;
+  };
 
   imports = [
-    ./rust.nix
-    # ./rust-env.nix
+    ./vcs/main.nix
   ];
 }

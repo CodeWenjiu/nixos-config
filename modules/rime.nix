@@ -21,7 +21,7 @@
   fonts = {
     packages = with pkgs; [
       # Already included by Stylix, but explicitly listed for clarity
-      nerd-fonts.caskaydia-cove
+      nerd-fonts.jetbrains-mono
       source-han-sans
       source-han-serif
       noto-fonts-color-emoji
@@ -30,7 +30,7 @@
     fontconfig = {
       defaultFonts = {
         monospace = [
-          "CaskaydiaCove Nerd Font Mono"
+          "JetBrainsMono Nerd Font"
           "Source Han Sans SC"
         ];
         sansSerif = [

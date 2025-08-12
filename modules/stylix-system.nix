@@ -20,8 +20,8 @@
   # System-level font configuration that works with stylix
   stylix.fonts = {
     monospace = {
-      name = "CaskaydiaCove Nerd Font Mono";
-      package = pkgs.nerd-fonts.caskaydia-cove;
+      name = "JetBrainsMono Nerd Font";
+      package = pkgs.nerd-fonts.jetbrains-mono;
     };
     sansSerif = {
       name = "Source Han Sans SC";

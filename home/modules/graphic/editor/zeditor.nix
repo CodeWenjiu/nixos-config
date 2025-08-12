@@ -35,7 +35,7 @@
       buffer_font_size = 12;
 
       buffer_font_fallbacks = [
-        "CaskaydiaCove Nerd Font Mono"
+        "JetBrainsMono Nerd Font"
         "Source Han Sans SC"
       ];
 

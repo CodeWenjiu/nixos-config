@@ -31,7 +31,6 @@
   imports = [
     ./editor.nix
     ./shell.nix
-    ./vcs.nix
     ./fetch.nix
     ./file_manager.nix
   ];
