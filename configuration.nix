@@ -7,8 +7,8 @@
     ./basic/desktop.nix
     ./basic/boot.nix
 
-    ./modules/rime.nix
     ./modules/clash.nix
+    ./modules/rime.nix
     ./modules/game.nix
     ./modules/keyring.nix
   ];

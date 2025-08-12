@@ -33,7 +33,8 @@
   # Disable stylix targets for zed to avoid conflicts with manual configuration
   stylix.targets.zed.enable = false;
   # Enable stylix theming for fcitx5 to match system color scheme
-  stylix.targets.fcitx5.enable = true;
+  # Set to false if you want to use manual fcitx5 theme configuration
+  stylix.targets.fcitx5.enable = false;
 
   # fonts
   stylix.fonts.monospace = {
@@ -53,7 +54,7 @@
 
   imports = [
     ./modules/remote.nix
-    ./modules/keyring.nix
+    ./modules/essential/main.nix
 
     ./modules/media/main.nix
     ./modules/terminal/main.nix

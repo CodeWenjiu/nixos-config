@@ -37,7 +37,7 @@
         wenjiu = nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = {
-            inherit desktop_manager;
+            inherit desktop_manager inputs;
           };
           modules = [
             ./configuration.nix

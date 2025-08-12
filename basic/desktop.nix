@@ -34,6 +34,19 @@ in
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
+    withUWSM = true;
+  };
+
+  # UWSM configuration for proper session management
+  programs.uwsm = {
+    enable = true;
+    waylandCompositors = {
+      hyprland = {
+        prettyName = "Hyprland";
+        comment = "Hyprland compositor managed by UWSM";
+        binPath = "/run/current-system/sw/bin/Hyprland";
+      };
+    };
   };
   # services.desktopManager.cosmic = {
   #   enable = true;
@@ -43,7 +56,7 @@ in
 
   # https://github.com/Keyitdev/sddm-astronaut-theme/issues/51
   services.displayManager = {
-    defaultSession = desktop_manager;
+    defaultSession = "hyprland-uwsm";
     sddm = {
       enable = true;
       package = pkgs.kdePackages.sddm;
