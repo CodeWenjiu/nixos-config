@@ -78,14 +78,40 @@ in
       ];
     };
   };
-
   # ACPI
   environment.systemPackages = with pkgs; [
     custom-sddm-astronaut
     kdePackages.qtmultimedia
 
     acpi
+
+    xdg-desktop-portal-hyprland
+    xdg-desktop-portal-gtk
   ];
+
+  # XDG Portal configuration
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    # Use GTK portal for file dialogs and other general functions
+    # Use Hyprland portal for screenshots and screen sharing
+    config = {
+      common = {
+        default = [
+          "gtk"
+        ];
+      };
+      hyprland = {
+        default = [
+          "hyprland"
+          "gtk"
+        ];
+        # Hyprland-specific portals
+        "org.freedesktop.impl.portal.Screenshot" = [ "hyprland" ];
+        "org.freedesktop.impl.portal.ScreenCast" = [ "hyprland" ];
+      };
+    };
+  };
 
   services.acpid = {
     enable = true;

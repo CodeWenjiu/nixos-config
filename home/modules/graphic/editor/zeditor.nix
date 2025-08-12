@@ -59,4 +59,8 @@
       };
     };
   };
+
+  programs.zsh.initContent = ''
+    alias zed='zeditor' # convenient for me
+  '';
 }

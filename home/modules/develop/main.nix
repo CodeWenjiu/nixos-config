@@ -1,7 +1,12 @@
 {
+    pkgs,
   ...
 }:
 {
+    home.packages = with pkgs; [
+      nil
+    ];
+
   programs.direnv = {
     enable = true;
     enableZshIntegration = true;
