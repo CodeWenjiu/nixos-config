@@ -11,6 +11,7 @@
     ./modules/rime.nix
     ./modules/game.nix
     ./modules/keyring.nix
+    ./modules/data-mount.nix
   ];
 
   networking.hostName = "wenjiu"; # Define your hostname.
