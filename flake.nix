@@ -30,11 +30,15 @@
     }@inputs:
     let
       system = "x86_64-linux";
+      desktop_manager = "hyprland";
     in
     {
       nixosConfigurations = {
         wenjiu = nixpkgs.lib.nixosSystem {
           inherit system;
+          specialArgs = {
+            inherit desktop_manager;
+          };
           modules = [
             ./configuration.nix
             ./hosts/wenjiu_laptop/hardware-configuration.nix
@@ -62,7 +66,10 @@
                 ];
               };
 
-              home-manager.extraSpecialArgs = { inherit inputs; };
+              home-manager.extraSpecialArgs = {
+                inherit inputs;
+                inherit desktop_manager;
+              };
             }
           ];
         };

@@ -1,12 +1,11 @@
 {
   pkgs,
+  statusBar,
+  screenshot,
   ...
 }:
 let
-  statusBar = "waybar";
-
-  screenshot = "grim";
-  screenshotConfig = import ./screenshot/screenshot.nix { screenshot = screenshot; };
+  screenshotConfig = import ./config/screenshot.nix { screenshot = screenshot; };
 
   hyprlandConfigText = ''
     $status_bar = ${statusBar}
@@ -24,25 +23,9 @@ let
   '';
 in
 {
-  # status bar
-  imports = [
-    ./status_bar/${statusBar}.nix
-    ./screenshot/${screenshot}.nix
-  ];
-
   home.packages = with pkgs; [
-    hyprland
-    rofi-wayland
     hyprpaper
-
-    # controler
-    brightnessctl
-    pamixer
-
-    wl-clipboard
   ];
 
   xdg.configFile."hypr".source = hyprConfigDir;
-
-  xdg.configFile."rofi".source = ./rofi;
 }

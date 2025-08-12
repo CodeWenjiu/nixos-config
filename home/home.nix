@@ -15,7 +15,7 @@
   stylix.enable = true;
   stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
   stylix.polarity = "dark";
-  stylix.image = ./hypr/hypr/wallpaper.png;
+  # stylix.image = ./hypr/hypr/wallpaper.png;
 
   # opacity
   stylix.opacity.applications = 0.7;
@@ -59,6 +59,6 @@
     ./modules/graphic/main.nix
     ./modules/develop/main.nix
 
-    ./hypr/hypr.nix
+    ./desktop/main.nix
   ];
 }

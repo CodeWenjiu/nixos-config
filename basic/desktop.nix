@@ -1,5 +1,6 @@
 {
   pkgs,
+  desktop_manager,
   ...
 }:
 let
@@ -22,22 +23,27 @@ in
     variant = "";
   };
 
-  programs.hyprland = {
-    enable = true;
-    xwayland.enable = true;
-  };
-
   # # Enable the KDE Plasma Desktop Environment.
   # services.displayManager.sddm.enable = true;
   # services.desktopManager.plasma6.enable = true;
 
-  # Enable the hyprland Desktop Environment.
+  # Enable the waylane Desktop Environment.
   services.displayManager.gdm.enable = false;
   services.desktopManager.gnome.enable = false;
 
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
+  # services.desktopManager.cosmic = {
+  #   enable = true;
+  #   xwayland.enable = true;
+  # };
+  # services.displayManager.cosmic-greeter.enable = true;
+
   # https://github.com/Keyitdev/sddm-astronaut-theme/issues/51
   services.displayManager = {
-    defaultSession = "hyprland";
+    defaultSession = desktop_manager;
     sddm = {
       enable = true;
       package = pkgs.kdePackages.sddm;
