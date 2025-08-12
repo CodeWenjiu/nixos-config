@@ -10,6 +10,7 @@
     ./modules/rime.nix
     ./modules/clash.nix
     ./modules/game.nix
+    ./modules/keyring.nix
   ];
 
   networking.hostName = "wenjiu"; # Define your hostname.

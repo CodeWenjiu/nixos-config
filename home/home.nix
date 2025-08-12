@@ -53,6 +53,7 @@
 
   imports = [
     ./modules/remote.nix
+    ./modules/keyring.nix
 
     ./modules/media/main.nix
     ./modules/terminal/main.nix
