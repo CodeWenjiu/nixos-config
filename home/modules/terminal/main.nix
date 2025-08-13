@@ -20,6 +20,7 @@
 
     settings = {
       confirm_os_window_close = 0;
+      cursor_blink_interval = 0;
     };
 
     extraConfig = ''
@@ -30,6 +31,7 @@
 
   programs.zsh.initContent = ''
     bindkey "^H" backward-delete-word
+    alias rgl='rg --no-heading --line-number'
   '';
 
   imports = [

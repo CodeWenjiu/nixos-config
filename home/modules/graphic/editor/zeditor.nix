@@ -72,4 +72,8 @@
   programs.zsh.initContent = ''
     alias zed='zeditor' # convenient for me
   '';
+
+  home.packages = with pkgs; [
+    package-version-server # which zed required
+  ];
 }
