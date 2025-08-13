@@ -1,31 +1,25 @@
 {
-  pkgs,
   statusBar,
   screenshot,
+  wallpaper,
   ...
 }:
 let
   screenshotConfig = import ./config/screenshot.nix { screenshot = screenshot; };
+  wallpaperConfig = import ./config/wallpaper.nix { wallpaper = wallpaper; };
+  baseHyprConf = builtins.readFile ./hypr/hyprland_temp.conf;
 
   hyprlandConfigText = ''
     $status_bar = ${statusBar}
 
-    ${builtins.readFile ./hypr/hyprland_temp.conf}
+    ${baseHyprConf}
 
     ${screenshotConfig}
-  '';
 
-  hyprConfigDir = pkgs.runCommand "hypr-config" { } ''
-    mkdir -p $out
-    cp -r ${./hypr}/. $out/
-    cp ${pkgs.writeText "hyprland.conf" hyprlandConfigText} $out/hyprland.conf
-    rm $out/hyprland_temp.conf
+    ${wallpaperConfig}
   '';
 in
 {
-  home.packages = with pkgs; [
-    hyprpaper
-  ];
-
-  xdg.configFile."hypr".source = hyprConfigDir;
+  xdg.configFile."hypr/hyprland.conf".text = hyprlandConfigText;
+  xdg.configFile."hypr/scripts".source = ./hypr/scripts;
 }

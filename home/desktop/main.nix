@@ -4,13 +4,14 @@
   ...
 }:
 let
-  statusBar = "waybar";
-  screenshot = "grim";
+  statusBar = "waybar"; # could be `waybar`, `hyprpanel`, `eww`
+  screenshot = "grim"; # could be `grim`
+  wallpaper = "swww"; # could be `swww`, `hyprpaper`
 in
 {
   # Pass parameters to child modules via _module.args
   _module.args = {
-    inherit statusBar screenshot;
+    inherit statusBar screenshot wallpaper;
   };
 
   # status bar
@@ -19,6 +20,7 @@ in
     ./status_bar/eww.nix # Debug
     ./screenshot/${screenshot}.nix
     ./${desktop_manager}/main.nix
+    ./wallpaper/${wallpaper}/main.nix
   ];
 
   home.packages = with pkgs; [
