@@ -8,5 +8,7 @@
     discord
     telegram-desktop
     qq
+
+    guvcview
   ];
 }

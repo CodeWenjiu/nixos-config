@@ -5,7 +5,9 @@
 }:
 let
   custom-sddm-astronaut = pkgs.sddm-astronaut.override {
-    embeddedTheme = "purple_leaves";
+    # embeddedTheme = "purple_leaves";
+    # embeddedTheme = "pixel_sakura";
+    embeddedTheme = "hyprland_kath";
     themeConfig = {
       # see https://github.com/Keyitdev/sddm-astronaut-theme/tree/master/Themes
       AllowUppercaseLettersInUsernames = "true";

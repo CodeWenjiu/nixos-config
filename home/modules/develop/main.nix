@@ -17,5 +17,6 @@
   imports = [
     ./vcs/main.nix
     ./models.nix
+    ./meet.nix
   ];
 }
