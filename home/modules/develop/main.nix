@@ -1,11 +1,11 @@
 {
-    pkgs,
+  pkgs,
   ...
 }:
 {
-    home.packages = with pkgs; [
-      nil
-    ];
+  home.packages = with pkgs; [
+    nil
+  ];
 
   programs.direnv = {
     enable = true;
@@ -16,5 +16,6 @@
 
   imports = [
     ./vcs/main.nix
+    ./models.nix
   ];
 }

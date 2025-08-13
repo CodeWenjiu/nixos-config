@@ -21,23 +21,23 @@
     enable = true;
     enable32Bit = true;
 
-    # Intel Arc graphics optimizations
-    extraPackages = with pkgs; [
-      intel-media-driver
-      intel-vaapi-driver
-      libvdpau-va-gl
-      intel-compute-runtime
-      mesa
-      vulkan-loader
-      vulkan-validation-layers
-    ];
+    # # Intel Arc graphics optimizations
+    # extraPackages = with pkgs; [
+    #   intel-media-driver
+    #   intel-vaapi-driver
+    #   libvdpau-va-gl
+    #   intel-compute-runtime
+    #   mesa
+    #   vulkan-loader
+    #   vulkan-validation-layers
+    # ];
 
-    extraPackages32 = with pkgs.driversi686Linux; [
-      intel-media-driver
-      intel-vaapi-driver
-      libvdpau-va-gl
-      mesa
-    ];
+    # extraPackages32 = with pkgs.driversi686Linux; [
+    #   intel-media-driver
+    #   intel-vaapi-driver
+    #   libvdpau-va-gl
+    #   mesa
+    # ];
   };
 
   # Japanese fonts for visual novels

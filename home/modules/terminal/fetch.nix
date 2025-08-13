@@ -15,6 +15,7 @@ in
     # fetch
     macchina
     onefetch
+    bottom
   ];
 
   xdg.configFile."macchina" = {

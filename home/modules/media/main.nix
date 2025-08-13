@@ -1,4 +1,5 @@
 {
+  pkgs,
   ...
 }:
 {
@@ -8,5 +9,9 @@
     ./music.nix
     ./read.nix
     ./vedio.nix
+  ];
+
+  home.packages = with pkgs; [
+    ffmpeg
   ];
 }

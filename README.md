@@ -9,11 +9,11 @@ sudo nixos-generate-config --show-hardware-config | hosts/<your_host>/hardware-c
 
 - match
 ```zsh
-sudo nixos-rebuild switch --flake .#wenjiu
+sudo nixos-rebuild switch --flake .#<your_host>
 ```
 
 - vscode server
 ```bash
-systemctl --user enable auto-fix-vscode-server.service 
-systemctl --user start auto-fix-vscode-server.service 
+systemctl --user enable auto-fix-vscode-server.service
+systemctl --user start auto-fix-vscode-server.service
 ```
