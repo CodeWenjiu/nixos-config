@@ -27,4 +27,8 @@
   boot.kernel.sysctl = {
     "vm.swappiness" = 10; # Reduce swappiness to avoid excessive swapping.
   };
+
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  boot.kernelModules = [ "uvcvideo" ];
 }
