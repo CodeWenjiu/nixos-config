@@ -44,6 +44,8 @@
 
   services.getty.autologinUser = "wenjiu";
 
+  services.udisks2.enable = true;
+  services.gvfs.enable = true;
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   # environment.systemPackages = with pkgs; [ ];

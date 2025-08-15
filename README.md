@@ -6,6 +6,7 @@ sudo nixos-generate-config --show-hardware-config | hosts/<your_host>/hardware-c
 ```
 
 - add your own host in flake.nix like `wenjiu`
+    - better mount your data `/mnt/data`
 
 - match
 ```zsh
