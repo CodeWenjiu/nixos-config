@@ -20,7 +20,6 @@
   # Font configuration with fallback support
   fonts = {
     packages = with pkgs; [
-      # Already included by Stylix, but explicitly listed for clarity
       nerd-fonts.jetbrains-mono
       nerd-fonts.caskaydia-cove
       source-han-sans
