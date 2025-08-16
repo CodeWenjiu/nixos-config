@@ -10,6 +10,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     stylix = {
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -28,6 +29,7 @@
       # nur,
       vscode-server,
       home-manager,
+
       stylix,
       ...
     }@inputs:

@@ -3,7 +3,8 @@
 }:
 {
   imports = [
-    ./stylix.nix
+    # ./stylix.nix
+    ./matugen/main.nix
     ./cursor.nix
   ];
 }

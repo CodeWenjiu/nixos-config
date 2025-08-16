@@ -51,8 +51,8 @@ swww img "$RANDOM_WALLPAPER" \
   --transition-duration 2 \
   --transition-fps 120
 
-# matugen image $RANDOM_WALLPAPER
-
 echo "Fondo de pantalla cambiado a: $RANDOM_WALLPAPER"
 
 echo "$RANDOM_WALLPAPER" > "$CACHE_FILE"
+
+matugen image $RANDOM_WALLPAPER

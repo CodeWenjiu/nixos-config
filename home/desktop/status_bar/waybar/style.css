@@ -1,3 +1,5 @@
+@import "colors.css";
+
 * {
   font-family: "JetBrainsMono Nerd Font", "Font Awesome 6 Free", "Font Awesome 6 Free Solid";
   font-size: 9px;
@@ -8,22 +10,23 @@
 }
 
 #workspaces {
-  background-color: rgba(24, 24, 37, 0.6);
+  background-color: @surface_container;
   border: none;
   box-shadow: none;
 }
 
 #tray {
   margin: 6px 3px;
-  background-color: rgba(36, 36, 52, 1);
+  background-color: @surface_container_high;
   padding: 6px 9px; /* 保持内部间距 */
   border-radius: 6px;
   border-width: 0px;
 }
 
 #waybar {
-  background-color: #181825;
-  transition-property: background-color;
+  /* Semi-transparent bar background (0.7 opacity) */
+  background: alpha(@background, 0.5);
+  transition-property: background-color, background;
   transition-duration: 0.5s;
 }
 
@@ -43,48 +46,61 @@
   border-radius: 6px;
   margin: 6px 3px;
   padding: 6px 9px;
-  background-color: #1e1e2e;
-  color: #181825;
+  background-color: @surface_container_high;
+  color: @on_surface;
 }
 
 #clock {
-  background-color: #89b4fa;
+  background-color: @primary;
+  color: @on_primary;
 }
 #custom-power {
-  background-color: #f38ba8;
+  background-color: @error;
+  color: @on_error;
 }
 #custom-reboot {
-  background-color: #a6e3a1;
+  background-color: @tertiary;
+  color: @on_tertiary;
 }
 #bluetooth {
-  background-color: #f9e2af;
+  background-color: @secondary;
+  color: @on_secondary;
 }
 #battery {
-  background-color: #cba6f7;
+  background-color: @primary_container;
+  color: @on_primary_container;
 }
 #pulseaudio {
-  background-color: #89dceb;
+  background-color: @secondary_container;
+  color: @on_secondary_container;
 }
 #backlight {
-  background-color: #a6a3a1;
+  background-color: @surface_bright;
+  color: @on_surface;
 }
 #custom-temperature {
-  background-color: #74c7ec;
+  background-color: @tertiary_container;
+  color: @on_tertiary_container;
 }
 #memory {
-  background-color: #f7768e;
+  background-color: @tertiary_fixed_dim;
+  color: @on_tertiary_fixed_variant;
 }
 #cpu {
-  background-color: #f38ba8;
+  background-color: @primary_fixed_dim;
+  color: @on_primary_fixed_variant;
 }
 #network {
-  background-color: #fab387;
+  background-color: @secondary_fixed_dim;
+  color: @on_secondary_fixed_variant;
 }
 #custom-lock {
-  background-color: #94e2d5;
+  background-color: @inverse_primary;
+  color: @inverse_on_surface;
 }
 #window {
-  background-color: #74c7ec;
+  background-color: @surface_container_highest;
+  color: @on_surface;
 }
 
 #waybar.hidden {
@@ -101,31 +117,31 @@
   padding: 6px 18px;
   margin: 6px 3px;
   border-radius: 6px;
-  background-color: rgba(36, 36, 52, 1);
-  color: #cdd6f4;
+  background-color: @surface_container_high;
+  color: @on_surface_variant;
 }
 
 #workspaces button.active {
-  color: #1e1e2e;
-  background-color: #cdd6f4;
+  color: @on_primary;
+  background-color: @primary;
 }
 
 #workspaces button:hover {
   box-shadow: inherit;
   text-shadow: inherit;
-  color: #1e1e2e;
-  background-color: #cdd6f4;
+  color: @on_primary;
+  background-color: @primary;
 }
 
 tooltip {
   border-radius: 8px;
   padding: 9px;
-  background-color: #131822;
-  color: #c0c0c0;
+  background-color: @surface_container_high;
+  color: @on_surface;
 }
 
 tooltip label {
   padding: 5px;
-  background-color: #131822;
-  color: #c0c0c0;
+  background-color: @surface_container_high;
+  color: @on_surface;
 }

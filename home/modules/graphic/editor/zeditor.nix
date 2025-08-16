@@ -31,13 +31,12 @@
         always_allow_tool_actions = true;
       };
 
-      # Font fallbacks for Chinese support
-      buffer_font_size = 12;
-
       buffer_font_fallbacks = [
         "JetBrainsMono Nerd Font"
         "Source Han Sans SC"
       ];
+
+      theme = "Catppuccin Mocha";
 
       # Text processing
       preferred_line_length = 100;

@@ -1,3 +1,5 @@
+# Mark: No maintain
+
 {
   pkgs,
   ...
@@ -9,25 +11,23 @@
   stylix.polarity = "dark";
 
   # opacity
-  stylix.opacity.applications = 0.7;
-  stylix.opacity.desktop = 0.7;
-  stylix.opacity.popups = 0.7;
-  stylix.opacity.terminal = 0.7;
-
-  # cursor
-  # stylix.cursor.size = 10;
-  # stylix.cursor.package = inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default;
-  # stylix.cursor.name = "BreezX-RosePine-Linux";
+  # stylix.opacity.applications = 0.7;
+  # stylix.opacity.desktop = 0.7;
+  # stylix.opacity.popups = 0.7;
+  # stylix.opacity.terminal = 0.7;
 
   stylix.overlays.enable = false;
   stylix.targets.firefox.profileNames = [ "default" ];
   # Disable stylix targets for zed to avoid conflicts with manual configuration
-  stylix.targets.zed.enable = false;
+  # stylix.targets.zed.enable = false;
   # Enable stylix theming for fcitx5 to match system color scheme
-  # Set to false if you want to use manual fcitx5 theme configuration
   stylix.targets.fcitx5.enable = false;
 
   # fonts
+  stylix.fonts.sizes.desktop = 8;
+  stylix.fonts.sizes.popups = 8;
+  stylix.fonts.sizes.terminal = 8;
+
   stylix.fonts.monospace = {
     name = "JetBrainsMono Nerd Font";
     package = pkgs.nerd-fonts.jetbrains-mono;
