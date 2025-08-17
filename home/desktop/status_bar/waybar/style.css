@@ -25,7 +25,7 @@
 
 #waybar {
   /* Semi-transparent bar background (0.7 opacity) */
-  background: alpha(@background, 0.5);
+  background: alpha(@background, 0.7);
   transition-property: background-color, background;
   transition-duration: 0.5s;
 }

@@ -18,5 +18,6 @@
     ./vcs/main.nix
     ./models.nix
     ./meet.nix
+    ./paint.nix
   ];
 }
