@@ -15,12 +15,18 @@
       enable = true;
       efiSupport = true;
       device = "nodev";
-      theme = (
-        pkgs.sleek-grub-theme.override {
-          withStyle = "dark";
-          withBanner = "Hello WenJiu!";
-        }
-      );
+      # theme = (
+      #   pkgs.sleek-grub-theme.override {
+      #     withStyle = "dark";
+      #     withBanner = "Hello WenJiu!";
+      #   }
+      # );
+      minegrub-theme = {
+        enable = true;
+        splash = "Hello Wenjiu!";
+        background = "background_options/1.8  - [Classic Minecraft].png";
+        boot-options-count = 4;
+      };
     };
   };
 

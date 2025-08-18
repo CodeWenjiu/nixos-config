@@ -4,6 +4,9 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
 
+    # boot
+    minegrub-theme.url = "github:Lxtharia/minegrub-theme";
+
     # nur.url = "github:nix-community/NUR";
     vscode-server.url = "github:nix-community/nixos-vscode-server";
     home-manager = {
@@ -25,6 +28,9 @@
   outputs =
     {
       self,
+
+      minegrub-theme,
+
       nixpkgs,
       # nur,
       vscode-server,
@@ -45,6 +51,8 @@
             inherit desktop_manager inputs;
           };
           modules = [
+            minegrub-theme.nixosModules.default
+
             ./configuration.nix
             ./hosts/wenjiu_laptop/hardware-configuration.nix
 
@@ -62,14 +70,17 @@
 
             home-manager.nixosModules.home-manager
             {
-              home-manager.useGlobalPkgs = true;
+              home-manager.useGlobalPkgs = false;
               home-manager.useUserPackages = true;
-              home-manager.users.wenjiu = {
-                imports = [
-                  stylix.homeModules.stylix
-                  (import ./home/home.nix)
-                ];
-              };
+              home-manager.users.wenjiu =
+                { ... }:
+                {
+                  nixpkgs.config.allowUnfree = true;
+                  imports = [
+                    stylix.homeModules.stylix
+                    (import ./home/home.nix)
+                  ];
+                };
 
               home-manager.extraSpecialArgs = {
                 inherit inputs;

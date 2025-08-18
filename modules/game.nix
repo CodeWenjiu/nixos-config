@@ -20,39 +20,21 @@
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
-
-    # # Intel Arc graphics optimizations
-    # extraPackages = with pkgs; [
-    #   intel-media-driver
-    #   intel-vaapi-driver
-    #   libvdpau-va-gl
-    #   intel-compute-runtime
-    #   mesa
-    #   vulkan-loader
-    #   vulkan-validation-layers
-    # ];
-
-    # extraPackages32 = with pkgs.driversi686Linux; [
-    #   intel-media-driver
-    #   intel-vaapi-driver
-    #   libvdpau-va-gl
-    #   mesa
-    # ];
   };
 
   # Japanese fonts for visual novels
   fonts.packages = with pkgs; [
-    noto-fonts
-    noto-fonts-cjk-sans
-    noto-fonts-cjk-serif
-    noto-fonts-color-emoji
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.caskaydia-cove
     source-han-sans
     source-han-serif
-    ipafont
-    kochi-substitute
-    source-code-pro
-    dejavu_fonts
-    liberation_ttf
+    noto-fonts-color-emoji
+
+    # other fonts
+    font-awesome
+    material-icons
+    comic-mono
+    icomoon-feather
   ];
 
   # Gaming-related packages
