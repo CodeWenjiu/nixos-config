@@ -23,6 +23,7 @@
     ./modules/essential/main.nix
 
     ./modules/media/main.nix
+    ./modules/game/main.nix
     ./modules/terminal/main.nix
     ./modules/graphic/main.nix
     ./modules/develop/main.nix

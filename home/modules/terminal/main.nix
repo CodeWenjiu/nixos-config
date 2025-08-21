@@ -6,9 +6,6 @@
   home.packages = with pkgs; [
     ripgrep
 
-    dust
-    duf
-
     wget
     nettools
   ];
