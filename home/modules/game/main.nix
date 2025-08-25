@@ -17,9 +17,12 @@ in
 {
   home.packages = with pkgs; [
     # minecraft
-    modrinth-app
+    modrinth-app # detect jdk path in settings
     cacert # TLS
     jdk21_warp
     jdk17_warp
+
+    wineWowPackages.stable
+    lutris-unwrapped
   ];
 }

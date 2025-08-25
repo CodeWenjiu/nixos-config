@@ -8,6 +8,8 @@
 
     wget
     nettools
+
+    tree
   ];
 
   # see also https://discourse.nixos.org/t/configure-kitty-with-home-manager/57505/2

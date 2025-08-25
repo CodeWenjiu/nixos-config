@@ -50,6 +50,8 @@
     vulkan-tools
     mesa-demos
     intel-gpu-tools
+
+    waydroid-helper
   ];
 
   # Environment variables for gaming optimization
@@ -92,4 +94,9 @@
       };
     };
   };
+
+  # android container, see https://nixos.wiki/wiki/WayDroid
+  # To use ARM software, see https://github.com/casualsnek/waydroid_script
+  # To use Google Plat, see TODO
+  virtualisation.waydroid.enable = true;
 }
