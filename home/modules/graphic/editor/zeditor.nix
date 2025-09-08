@@ -18,6 +18,8 @@
       git # Version control
 
       github-mcp-server
+
+      tinymist # docs
     ];
 
     # Main configuration
@@ -101,5 +103,6 @@
 
   home.packages = with pkgs; [
     package-version-server # which zed required
+    tinymist
   ];
 }

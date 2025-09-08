@@ -7,5 +7,6 @@
     readest
     obsidian
     feishu
+    wpsoffice-cn
   ];
 }

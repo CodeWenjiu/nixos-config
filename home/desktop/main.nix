@@ -4,7 +4,7 @@
   ...
 }:
 let
-  statusBar = "waybar"; # could be `waybar`, `hyprpanel`, `eww`
+  statusBar = "waybar"; # could be `waybar`, `hyprpanel`, `eww`, `polybar`(can't use for now)
   screenshot = "grim"; # could be `grim`
   wallpaper = "swww"; # could be `swww`, `hyprpaper`
 in

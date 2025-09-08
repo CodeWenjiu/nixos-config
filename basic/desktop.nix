@@ -121,19 +121,24 @@ in
 
   services.logind = {
     lidSwitch = "suspend";
-    lidSwitchExternalPower = "suspend";
-    powerKey = "suspend";
-    powerKeyLongPress = "poweroff";
+    settings = {
+      Login = {
+        HandleLidSwitch = "suspend";
+        HandleLidSwitchExternalPower = "suspend";
+        HandlePowerKey = "poweroff";
+        HandlePowerKeyLongPress = "poweroff";
+      };
+    };
 
-    extraConfig = ''
-      HandleLidSwitch=suspend
-      HandleLidSwitchExternalPower=suspend
-      HandleLidSwitchDocked=ignore
-      LidSwitchIgnoreInhibited=yes
-      HoldoffTimeoutSec=10
-      IdleAction=ignore
-      IdleActionSec=30min
-    '';
+    # extraConfig = ''
+    #   HandleLidSwitch=suspend
+    #   HandleLidSwitchExternalPower=suspend
+    #   HandleLidSwitchDocked=ignore
+    #   LidSwitchIgnoreInhibited=yes
+    #   HoldoffTimeoutSec=10
+    #   IdleAction=ignore
+    #   IdleActionSec=30min
+    # '';
   };
   services.udev.extraRules = ''
     SUBSYSTEM=="input", KERNEL=="event*", ENV{ID_INPUT_SWITCH}=="1", ENV{SWITCH_STATE}=="1", RUN+="${pkgs.xorg.xset}/bin/xset dpms force off"

@@ -7,7 +7,7 @@
     ./browser.nix
     ./chat.nix
     ./music.nix
-    ./read.nix
+    ./doc.nix
     ./vedio.nix
   ];
 
