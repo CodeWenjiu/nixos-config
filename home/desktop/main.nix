@@ -24,7 +24,7 @@ in
   ];
 
   home.packages = with pkgs; [
-    rofi-wayland
+    rofi
 
     # controler
     brightnessctl

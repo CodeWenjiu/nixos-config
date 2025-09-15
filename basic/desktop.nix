@@ -46,7 +46,7 @@ in
       hyprland = {
         prettyName = "Hyprland";
         comment = "Hyprland compositor managed by UWSM";
-        binPath = "/run/current-system/sw/bin/Hyprland";
+        # binPath = "/run/current-system/sw/bin/Hyprland";
       };
     };
   };
@@ -58,7 +58,6 @@ in
 
   # https://github.com/Keyitdev/sddm-astronaut-theme/issues/51
   services.displayManager = {
-    defaultSession = "hyprland-uwsm";
     sddm = {
       enable = true;
       package = pkgs.kdePackages.sddm;
@@ -120,7 +119,6 @@ in
   };
 
   services.logind = {
-    lidSwitch = "suspend";
     settings = {
       Login = {
         HandleLidSwitch = "suspend";
