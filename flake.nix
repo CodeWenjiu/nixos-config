@@ -14,11 +14,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    stylix = {
-      url = "github:danth/stylix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     rose-pine-hyprcursor = {
       url = "github:ndom91/rose-pine-hyprcursor";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -35,8 +30,6 @@
       # nur,
       vscode-server,
       home-manager,
-
-      stylix,
       ...
     }@inputs:
     let
@@ -77,7 +70,6 @@
                 {
                   nixpkgs.config.allowUnfree = true;
                   imports = [
-                    stylix.homeModules.stylix
                     (import ./home/home.nix)
                   ];
                 };

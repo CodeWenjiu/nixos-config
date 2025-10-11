@@ -1,12 +1,9 @@
 {
   pkgs,
-  desktop_manager,
   ...
 }:
 let
   custom-sddm-astronaut = pkgs.sddm-astronaut.override {
-    # embeddedTheme = "purple_leaves";
-    # embeddedTheme = "pixel_sakura";
     embeddedTheme = "hyprland_kath";
     themeConfig = {
       # see https://github.com/Keyitdev/sddm-astronaut-theme/tree/master/Themes
@@ -50,11 +47,6 @@ in
       };
     };
   };
-  # services.desktopManager.cosmic = {
-  #   enable = true;
-  #   xwayland.enable = true;
-  # };
-  # services.displayManager.cosmic-greeter.enable = true;
 
   # https://github.com/Keyitdev/sddm-astronaut-theme/issues/51
   services.displayManager = {
@@ -127,16 +119,6 @@ in
         HandlePowerKeyLongPress = "poweroff";
       };
     };
-
-    # extraConfig = ''
-    #   HandleLidSwitch=suspend
-    #   HandleLidSwitchExternalPower=suspend
-    #   HandleLidSwitchDocked=ignore
-    #   LidSwitchIgnoreInhibited=yes
-    #   HoldoffTimeoutSec=10
-    #   IdleAction=ignore
-    #   IdleActionSec=30min
-    # '';
   };
   services.udev.extraRules = ''
     SUBSYSTEM=="input", KERNEL=="event*", ENV{ID_INPUT_SWITCH}=="1", ENV{SWITCH_STATE}=="1", RUN+="${pkgs.xorg.xset}/bin/xset dpms force off"
