@@ -21,13 +21,10 @@
     enable = true;
     package = pkgs.niri-unstable;
     settings = {
-      spawn-at-startup = [
-        # { command = [ "noctalia-shell" ]; }
-      ];
-
       binds = with config.lib.niri.actions; {
         "Mod+T".action = spawn "kitty";
         "Mod+R".action = spawn "rofi" "-show" "drun";
+        "Mod+Shift+Q".action = quit;
       };
     };
   };
@@ -38,12 +35,12 @@
     settings = {
       settingsVersion = 15;
       bar = {
-        position = "left";
+        position = "top";
         backgroundOpacity = 0.5;
         monitors = [ ];
         density = "default";
         showCapsule = true;
-        floating = false;
+        floating = true;
         marginVertical = 0.25;
         marginHorizontal = 0.25;
         widgets = {
@@ -71,6 +68,12 @@
               id = "Tray";
             }
             {
+              id = "Bluetooth";
+            }
+            {
+              id = "WiFi";
+            }
+            {
               id = "NotificationHistory";
             }
             {
@@ -92,7 +95,7 @@
         };
       };
       general = {
-        avatarImage = "";
+        avatarImage = "/mnt/data/AvatarImage/avatar.gif";
         dimDesktop = true;
         showScreenCorners = false;
         forceBlackScreenCorners = false;

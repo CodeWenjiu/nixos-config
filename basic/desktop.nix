@@ -80,6 +80,11 @@ in
     enable = true;
   };
 
+  # Enable UPower for battery management
+  services.upower = {
+    enable = true;
+  };
+
   services.logind = {
     settings = {
       Login = {
@@ -125,7 +130,7 @@ in
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  services.blueman.enable = true;
+  # services.blueman.enable = true;
   hardware.bluetooth.enable = true;
   services.dbus.enable = true;
 }
