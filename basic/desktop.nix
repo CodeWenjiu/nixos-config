@@ -1,4 +1,5 @@
 {
+  inputs,
   pkgs,
   ...
 }:
@@ -30,21 +31,17 @@ in
   services.displayManager.gdm.enable = false;
   services.desktopManager.gnome.enable = false;
 
-  programs.hyprland = {
-    enable = true;
-    xwayland.enable = true;
-    withUWSM = true;
-  };
+  programs.niri.enable = true;
 
   # UWSM configuration for proper session management
   programs.uwsm = {
     enable = true;
     waylandCompositors = {
-      hyprland = {
-        prettyName = "Hyprland";
-        comment = "Hyprland compositor managed by UWSM";
-        # binPath = "/run/current-system/sw/bin/Hyprland";
-      };
+      # hyprland = {
+      #   prettyName = "Hyprland";
+      #   comment = "Hyprland compositor managed by UWSM";
+      #   # binPath = "/run/current-system/sw/bin/Hyprland";
+      # };
     };
   };
 
@@ -77,8 +74,6 @@ in
     kdePackages.qtmultimedia
 
     acpi
-
-    xdg-desktop-portal-hyprland
     xdg-desktop-portal-gtk
   ];
 
@@ -93,15 +88,6 @@ in
         default = [
           "gtk"
         ];
-      };
-      hyprland = {
-        default = [
-          "hyprland"
-          "gtk"
-        ];
-        # Hyprland-specific portals
-        "org.freedesktop.impl.portal.Screenshot" = [ "hyprland" ];
-        "org.freedesktop.impl.portal.ScreenCast" = [ "hyprland" ];
       };
     };
   };

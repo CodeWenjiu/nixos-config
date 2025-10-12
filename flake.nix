@@ -18,6 +18,21 @@
       url = "github:ndom91/rose-pine-hyprcursor";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    niri = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    quickshell = {
+      url = "github:outfoxxed/quickshell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.quickshell.follows = "quickshell"; # Use same quickshell version
+    };
   };
 
   outputs =
@@ -30,11 +45,13 @@
       # nur,
       vscode-server,
       home-manager,
+
+      niri,
       ...
     }@inputs:
     let
       system = "x86_64-linux";
-      desktop_manager = "hyprland";
+      desktop_manager = "noctalia";
     in
     {
       nixosConfigurations = {
@@ -65,6 +82,12 @@
             {
               home-manager.useGlobalPkgs = false;
               home-manager.useUserPackages = true;
+
+              home-manager.extraSpecialArgs = {
+                inherit inputs;
+                inherit desktop_manager;
+              };
+
               home-manager.users.wenjiu =
                 { ... }:
                 {
@@ -73,11 +96,6 @@
                     (import ./home/home.nix)
                   ];
                 };
-
-              home-manager.extraSpecialArgs = {
-                inherit inputs;
-                inherit desktop_manager;
-              };
             }
           ];
         };

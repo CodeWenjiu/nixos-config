@@ -17,7 +17,6 @@ in
   # status bar
   imports = [
     ./status_bar/${statusBar}.nix
-    ./status_bar/eww.nix # Debug
     ./screenshot/${screenshot}.nix
     ./${desktop_manager}/main.nix
     ./wallpaper/${wallpaper}/main.nix
