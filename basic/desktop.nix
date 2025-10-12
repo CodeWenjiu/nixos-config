@@ -66,7 +66,6 @@ in
     enable = true;
     wlr.enable = true;
     # Use GTK portal for file dialogs and other general functions
-    # Use Hyprland portal for screenshots and screen sharing
     config = {
       common = {
         default = [

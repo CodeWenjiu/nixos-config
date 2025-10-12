@@ -105,13 +105,13 @@
         animationDisabled = false;
       };
       location = {
-        name = "Tokyo";
+        name = "GuangDong";
         useFahrenheit = false;
         use12hourFormat = false;
-        showWeekNumberInCalendar = false;
+        showWeekNumberInCalendar = true;
       };
       screenRecorder = {
-        directory = "";
+        directory = "/mnt/data/recordings";
         frameRate = 60;
         audioCodec = "opus";
         videoCodec = "h264";
