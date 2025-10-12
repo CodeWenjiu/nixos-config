@@ -1,24 +1,21 @@
 {
   pkgs,
-  desktop_manager,
   ...
 }:
 let
-  statusBar = "waybar"; # could be `waybar`, `hyprpanel`, `eww`, `polybar`(can't use for now)
   screenshot = "grim"; # could be `grim`
   wallpaper = "swww"; # could be `swww`, `hyprpaper`
 in
 {
   # Pass parameters to child modules via _module.args
   _module.args = {
-    inherit statusBar screenshot wallpaper;
+    inherit screenshot wallpaper;
   };
 
   # status bar
   imports = [
-    ./status_bar/${statusBar}.nix
     ./screenshot/${screenshot}.nix
-    ./${desktop_manager}/main.nix
+    ./noctalia/main.nix
     ./wallpaper/${wallpaper}/main.nix
   ];
 

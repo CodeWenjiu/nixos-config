@@ -14,11 +14,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    rose-pine-hyprcursor = {
-      url = "github:ndom91/rose-pine-hyprcursor";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     niri = {
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -51,14 +46,13 @@
     }@inputs:
     let
       system = "x86_64-linux";
-      desktop_manager = "noctalia";
     in
     {
       nixosConfigurations = {
         wenjiu = nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = {
-            inherit desktop_manager inputs;
+            inherit inputs;
           };
           modules = [
             minegrub-theme.nixosModules.default
@@ -85,7 +79,6 @@
 
               home-manager.extraSpecialArgs = {
                 inherit inputs;
-                inherit desktop_manager;
               };
 
               home-manager.users.wenjiu =

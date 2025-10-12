@@ -1,5 +1,4 @@
 {
-  inputs,
   pkgs,
   ...
 }:
@@ -23,27 +22,11 @@ in
     variant = "";
   };
 
-  # # Enable the KDE Plasma Desktop Environment.
-  # services.displayManager.sddm.enable = true;
-  # services.desktopManager.plasma6.enable = true;
-
   # Enable the waylane Desktop Environment.
   services.displayManager.gdm.enable = false;
   services.desktopManager.gnome.enable = false;
 
   programs.niri.enable = true;
-
-  # UWSM configuration for proper session management
-  programs.uwsm = {
-    enable = true;
-    waylandCompositors = {
-      # hyprland = {
-      #   prettyName = "Hyprland";
-      #   comment = "Hyprland compositor managed by UWSM";
-      #   # binPath = "/run/current-system/sw/bin/Hyprland";
-      # };
-    };
-  };
 
   # https://github.com/Keyitdev/sddm-astronaut-theme/issues/51
   services.displayManager = {
