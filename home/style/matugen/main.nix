@@ -9,7 +9,7 @@
 
   xdg.configFile."matugen".source = ./config;
 
-  programs.kitty.extraConfig = ''
+  xdg.configFile."ghostty/config".text = ''
     include current-theme.conf
   '';
 

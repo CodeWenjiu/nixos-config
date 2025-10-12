@@ -7,8 +7,10 @@
     nushell = {
       enable = true;
 
-      plugins = with pkgs; [
-        nushellPlugins.gstat
+      plugins = with pkgs.nushellPlugins; [
+        gstat
+        polars
+        highlight
       ];
 
       extraConfig = ''
