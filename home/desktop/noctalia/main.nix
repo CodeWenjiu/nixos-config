@@ -19,6 +19,8 @@
     cava
 
     bibata-cursors
+
+    xwayland-satellite
   ];
 
   nixpkgs.overlays = [ inputs.niri.overlays.niri ];
@@ -27,8 +29,6 @@
     enable = true;
     package = pkgs.niri-unstable;
     settings = {
-      xwayland-satellite.enable = true;
-
       window-rules = [
         {
           draw-border-with-background = false;

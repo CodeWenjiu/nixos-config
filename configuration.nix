@@ -51,11 +51,11 @@
   # environment.systemPackages = with pkgs; [ ];
 
   # gc
-  # nix.gc = {
-  #   automatic = true;
-  #   dates = "weekly";
-  #   options = "--delete-older-than 7d";
-  # };
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 7d";
+  };
 
   # flake
   nix.settings.experimental-features = [

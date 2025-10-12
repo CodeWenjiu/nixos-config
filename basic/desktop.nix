@@ -15,6 +15,7 @@ in
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
   # services.xserver.enable = true;
+  programs.xwayland.enable = true;
 
   # # Configure keymap in X11
   services.xserver.xkb = {
@@ -107,7 +108,6 @@ in
 
   environment.variables = {
     NIXOS_OZONE_WL = "1"; # cause vsc warn for https://github.com/NixOS/nixpkgs/issues/271461
-    KITTY_ENABLE_WAYLAND = "1";
     ELECTRON_OZONE_PLATFORM_HINT = "wayland";
     ELECTRON_ENABLE_WAYLAND = "1";
   };
