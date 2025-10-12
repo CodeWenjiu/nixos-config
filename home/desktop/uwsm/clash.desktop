@@ -1,7 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Calsh
-Comment=Input Method
-Exec=clash-verge
-OnlyShowIn=Hyprland;GNOME;KDE;LXQt;XFCE;
-X-GNOME-Autostart-enabled=true

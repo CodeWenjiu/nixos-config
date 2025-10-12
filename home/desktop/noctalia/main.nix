@@ -39,7 +39,7 @@
       settingsVersion = 15;
       bar = {
         position = "left";
-        backgroundOpacity = 1;
+        backgroundOpacity = 0.5;
         monitors = [ ];
         density = "default";
         showCapsule = true;
