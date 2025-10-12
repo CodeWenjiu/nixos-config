@@ -6,7 +6,6 @@
     fcitx5.waylandFrontend = true;
     fcitx5.addons = with pkgs; [
       fcitx5-rime
-      fcitx5-chinese-addons
       librime
     ];
   };
@@ -50,7 +49,6 @@
   };
 
   environment.variables = {
-    GTK_IM_MODULE = "fcitx";
     QT_IM_MODULE = "fcitx";
     XMODIFIERS = "@im=fcitx";
   };

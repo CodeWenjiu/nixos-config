@@ -62,6 +62,7 @@
 
             { nixpkgs.config.allowUnfree = true; }
 
+            inputs.noctalia.nixosModules.default
             vscode-server.nixosModules.default
             (
               {

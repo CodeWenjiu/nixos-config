@@ -27,6 +27,7 @@ in
   services.desktopManager.gnome.enable = false;
 
   programs.niri.enable = true;
+  services.noctalia-shell.enable = true;
 
   # https://github.com/Keyitdev/sddm-astronaut-theme/issues/51
   services.displayManager = {
