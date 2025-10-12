@@ -37,10 +37,8 @@
       "video"
       "audio"
     ];
-    # packages = with pkgs; [ ];
-    shell = pkgs.zsh;
+    shell = pkgs.nushell;
   };
-  programs.zsh.enable = true;
 
   services.getty.autologinUser = "wenjiu";
 

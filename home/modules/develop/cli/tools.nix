@@ -33,18 +33,11 @@ in
     recursive = true;
   };
 
-  programs.zsh.initContent = ''
-    alias sysfetch='macchina'
-    alias gitfetch='onefetch'
-
-    function yy() {
-      local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-      yazi "$@" --cwd-file="$tmp"
-      IFS= read -r -d ''' cwd < "$tmp"
-      [ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
-      rm -f -- "$tmp"
-    }
-  '';
+  programs.nushell.shellAliases = {
+    sysfetch = "macchina";
+    gitfetch = "onefetch";
+    systop = "btm";
+  };
 
   home.sessionVariables = {
     EDITOR = "vim";

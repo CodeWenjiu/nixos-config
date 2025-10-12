@@ -49,7 +49,10 @@
 
       binds = with config.lib.niri.actions; {
         "Mod+T".action = spawn "ghostty";
-        "Mod+R".action = spawn "noctalia-shell" "ipc" "call" "launcher" "toggle";
+        "Mod+E".action = spawn "zeditor";
+        "Mod+B".action = spawn "firefox";
+        "Mod+F".action = spawn "nautilus";
+        "Mod+A".action = spawn "noctalia-shell" "ipc" "call" "launcher" "toggle";
         "Mod+W".action = spawn "noctalia-shell" "ipc" "call" "wallpaper" "random";
         "Mod+Shift+Q".action = quit;
         "Mod+Shift+slash".action = show-hotkey-overlay;
@@ -248,8 +251,8 @@
         preferredPlayer = "";
       };
       ui = {
-        fontDefault = "Roboto";
-        fontFixed = "DejaVu Sans Mono";
+        fontDefault = "Inter";
+        fontFixed = "JetBrains Mono";
         fontDefaultScale = 1;
         fontFixedScale = 1;
         monitorsScaling = [ ];

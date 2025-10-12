@@ -1,5 +1,5 @@
 - pull and generate
-```zsh
+```nushell
 git pull git@github.com:CodeWenjiu/nixos-config.git
 mkdir hosts/<your_host>
 sudo nixos-generate-config --show-hardware-config | hosts/<your_host>/hardware-configuration.nix
@@ -9,7 +9,7 @@ sudo nixos-generate-config --show-hardware-config | hosts/<your_host>/hardware-c
     - better mount your data `/mnt/data`
 
 - match
-```zsh
+```nushell
 sudo nixos-rebuild switch --flake .#<your_host>
 ```
 
@@ -17,13 +17,13 @@ sudo nixos-rebuild switch --flake .#<your_host>
 nixos can not modify boot order
 if you want to use grub which is configuated by this repository
 try
-```zsh
+```nushell
 nix-shell -p efibootmgr --run "efibootmgr -v" # get the NixOS-boot num which direct to grub
 nix-shell -p efibootmgr --run "sudo efibootmgr -o <NixOS-boot num>,<other_boot_sequence>"
 ```
 
 - vscode server
-```zsh
+```nushell
 systemctl --user enable auto-fix-vscode-server.service
 systemctl --user start auto-fix-vscode-server.service
 ```

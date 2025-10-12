@@ -12,6 +12,6 @@
   imports = [
     ./keyring.nix
     ./disk.nix
-    ./rime.nix
+    ./font.nix
   ];
 }

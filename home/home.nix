@@ -1,5 +1,4 @@
 {
-  pkgs,
   ...
 }:
 {
@@ -9,14 +8,6 @@
   home.stateVersion = "25.05";
 
   xdg.enable = true;
-
-  # Additional fonts for eww widgets
-  home.packages = with pkgs; [
-    font-awesome
-    material-icons
-    comic-mono
-    icomoon-feather
-  ];
 
   imports = [
     ./modules/remote.nix

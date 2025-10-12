@@ -34,8 +34,41 @@
       };
 
       buffer_font_fallbacks = [
-        "JetBrainsMono Nerd Font"
+        # Core programming fonts (already set as main font)
+        "JetBrains Mono"
+        "Fira Code"
+        "Source Code Pro"
+
+        # UI Sans for mixed content
+        "Inter"
+        "Source Sans 3"
+
+        # CJK coverage (region-specific)
         "Source Han Sans SC"
+        "Source Han Sans TC"
+        "Source Han Sans JP"
+        "Source Han Sans KR"
+
+        # Broad Unicode coverage
+        "Noto Sans"
+        "Noto Sans Mono"
+
+        # Script-specific fonts
+        "Noto Sans Arabic"
+        "Noto Sans Hebrew"
+        "Noto Sans Devanagari"
+        "Noto Sans Thai"
+
+        # Math symbols
+        "STIX Two Math"
+
+        # Color emoji
+        "Noto Color Emoji"
+        "Twemoji Color Emoji"
+
+        # System fallbacks
+        "DejaVu Sans Mono"
+        "Liberation Mono"
       ];
 
       theme = "Catppuccin Mocha";
@@ -70,8 +103,9 @@
     ];
   };
 
-  programs.zsh.initContent = ''
-    alias zed='zeditor' # convenient for me
+  programs.nushell.extraConfig = ''
+    $env.config.buffer_editor = "zed"
+    $env.config.buffer_editor = "vim"
   '';
 
   home.packages = with pkgs; [
