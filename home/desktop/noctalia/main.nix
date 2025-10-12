@@ -138,7 +138,7 @@
         };
       };
       general = {
-        avatarImage = "/mnt/data/AvatarImage/avatar.gif";
+        avatarImage = "/mnt/data/AvatarImage/avatar.png";
         dimDesktop = true;
         showScreenCorners = false;
         forceBlackScreenCorners = false;
