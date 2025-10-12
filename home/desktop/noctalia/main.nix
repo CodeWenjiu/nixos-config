@@ -13,6 +13,10 @@
 
   home.packages = with pkgs; [
     inputs.noctalia.packages.${system}.default
+
+    swww
+
+    bibata-cursors
   ];
 
   nixpkgs.overlays = [ inputs.niri.overlays.niri ];
@@ -21,10 +25,41 @@
     enable = true;
     package = pkgs.niri-unstable;
     settings = {
+      window-rules = [
+        {
+          draw-border-with-background = false;
+          clip-to-geometry = true;
+          geometry-corner-radius = {
+            bottom-left = 12.0;
+            bottom-right = 12.0;
+            top-left = 12.0;
+            top-right = 12.0;
+          };
+        }
+      ];
+
+      cursor = {
+        theme = "Bibata-Modern-Classic";
+        size = 24;
+      };
+
       binds = with config.lib.niri.actions; {
-        "Mod+T".action = spawn "kitty";
-        "Mod+R".action = spawn "rofi" "-show" "drun";
+        "Mod+T".action = spawn "ghostty";
+        "Mod+R".action = spawn "noctalia-shell" "ipc" "call" "launcher" "toggle";
+        "Mod+W".action = spawn "noctalia-shell" "ipc" "call" "wallpaper" "random";
         "Mod+Shift+Q".action = quit;
+        "Mod+Shift+slash".action = show-hotkey-overlay;
+        "Mod+C".action = close-window;
+
+        # Volume control
+        "XF86AudioRaiseVolume".action = spawn "noctalia-shell" "ipc" "call" "volume" "increase";
+        "XF86AudioLowerVolume".action = spawn "noctalia-shell" "ipc" "call" "volume" "decrease";
+        "XF86AudioMute".action = spawn "noctalia-shell" "ipc" "call" "volume" "muteOutput";
+        "XF86AudioMicMute".action = spawn "noctalia-shell" "ipc" "call" "volume" "muteInput";
+
+        # Brightness control
+        "XF86MonBrightnessUp".action = spawn "noctalia-shell" "ipc" "call" "brightness" "increase";
+        "XF86MonBrightnessDown".action = spawn "noctalia-shell" "ipc" "call" "brightness" "decrease";
       };
     };
   };
@@ -130,20 +165,20 @@
         fillMode = "crop";
         fillColor = "#000000";
         randomEnabled = false;
-        randomIntervalSec = 300;
+        randomIntervalSec = 60;
         transitionDuration = 1500;
         transitionType = "random";
         transitionEdgeSmoothness = 0.05;
         monitors = [ ];
       };
       appLauncher = {
-        enableClipboardHistory = false;
-        position = "center";
+        enableClipboardHistory = true;
+        position = "top";
         backgroundOpacity = 1;
         pinnedExecs = [ ];
         useApp2Unit = false;
         sortByMostUsed = true;
-        terminalCommand = "xterm -e";
+        terminalCommand = "kitty -e";
       };
       controlCenter = {
         position = "close_to_bar_button";
@@ -220,26 +255,26 @@
         brightnessStep = 5;
       };
       colorSchemes = {
-        useWallpaperColors = false;
+        useWallpaperColors = true;
         predefinedScheme = "Noctalia (default)";
         darkMode = true;
         matugenSchemeType = "scheme-fruit-salad";
         generateTemplatesForPredefined = true;
       };
       templates = {
-        gtk = false;
-        qt = false;
+        gtk = true;
+        qt = true;
         kitty = false;
-        ghostty = false;
+        ghostty = true;
         foot = false;
         fuzzel = false;
-        discord = false;
-        discord_vesktop = false;
-        discord_webcord = false;
-        discord_armcord = false;
-        discord_equibop = false;
-        discord_lightcord = false;
-        discord_dorion = false;
+        discord = true;
+        discord_vesktop = true;
+        discord_webcord = true;
+        discord_armcord = true;
+        discord_equibop = true;
+        discord_lightcord = true;
+        discord_dorion = true;
         pywalfox = false;
         enableUserTemplates = false;
       };

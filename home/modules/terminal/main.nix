@@ -12,23 +12,17 @@
     tree
   ];
 
-  # see also https://discourse.nixos.org/t/configure-kitty-with-home-manager/57505/2
-  programs.kitty = {
+  programs.ghostty = {
     enable = true;
-    package = pkgs.kitty;
-
-    settings = {
-      confirm_os_window_close = 0;
-      cursor_blink_interval = 0;
-
-      background_opacity = "0.7";
-    };
-
-    extraConfig = ''
-      map ctrl+c copy_and_clear_or_interrupt
-      map ctrl+v paste_from_clipboard
-    '';
   };
+
+  xdg.configFile."ghostty/config".text = ''
+    cursor-style-blink = false
+    background-opacity = 0.5
+    background-opacity-cells = true
+    background-blur = true
+    theme = noctalia
+  '';
 
   programs.zsh.initContent = ''
     bindkey "^H" backward-delete-word

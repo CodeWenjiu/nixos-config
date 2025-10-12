@@ -69,6 +69,7 @@ in
     config = {
       common = {
         default = [
+          "wlr"
           "gtk"
         ];
       };
