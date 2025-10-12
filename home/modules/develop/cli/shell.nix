@@ -1,6 +1,7 @@
 {
   ...
-}: {
+}:
+{
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -13,6 +14,8 @@
     initContent = ''
       alias c='clear'
       alias cd..='cd ..'
+      bindkey "^H" backward-delete-word
+      alias rgl='rg --no-heading --line-number'
     '';
   };
 }

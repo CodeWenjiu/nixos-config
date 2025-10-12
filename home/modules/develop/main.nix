@@ -19,5 +19,7 @@
     ./models.nix
     ./meet.nix
     ./paint.nix
+    ./cli/main.nix
+    ./editor/main.nix
   ];
 }

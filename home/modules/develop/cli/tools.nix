@@ -12,10 +12,20 @@ let
 in
 {
   home.packages = with pkgs; [
+    ripgrep
+
+    wget
+    nettools
+
+    tree
+
+    vim
     # fetch
     macchina
     onefetch
     bottom
+
+    yazi
   ];
 
   xdg.configFile."macchina" = {
@@ -26,5 +36,17 @@ in
   programs.zsh.initContent = ''
     alias sysfetch='macchina'
     alias gitfetch='onefetch'
+
+    function yy() {
+      local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+      yazi "$@" --cwd-file="$tmp"
+      IFS= read -r -d ''' cwd < "$tmp"
+      [ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+      rm -f -- "$tmp"
+    }
   '';
+
+  home.sessionVariables = {
+    EDITOR = "vim";
+  };
 }

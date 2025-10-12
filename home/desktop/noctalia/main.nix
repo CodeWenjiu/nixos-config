@@ -15,6 +15,8 @@
     inputs.noctalia.packages.${system}.default
 
     swww
+    gpu-screen-recorder
+    cava
 
     bibata-cursors
   ];
@@ -25,6 +27,8 @@
     enable = true;
     package = pkgs.niri-unstable;
     settings = {
+      xwayland-satellite.enable = true;
+
       window-rules = [
         {
           draw-border-with-background = false;
@@ -50,6 +54,7 @@
         "Mod+Shift+Q".action = quit;
         "Mod+Shift+slash".action = show-hotkey-overlay;
         "Mod+C".action = close-window;
+        "Mod+O".action = open-overview;
 
         # Volume control
         "XF86AudioRaiseVolume".action = spawn "noctalia-shell" "ipc" "call" "volume" "increase";
@@ -161,7 +166,7 @@
         directory = "/mnt/data/wallpapers";
         enableMultiMonitorDirectories = false;
         setWallpaperOnAllMonitors = true;
-        defaultWallpaper = "";
+        defaultWallpaper = "/mnt/data/wallpapers/1.png";
         fillMode = "crop";
         fillColor = "#000000";
         randomEnabled = false;
@@ -178,7 +183,7 @@
         pinnedExecs = [ ];
         useApp2Unit = false;
         sortByMostUsed = true;
-        terminalCommand = "kitty -e";
+        terminalCommand = "ghostty -e";
       };
       controlCenter = {
         position = "close_to_bar_button";
@@ -236,7 +241,7 @@
       };
       audio = {
         volumeStep = 5;
-        volumeOverdrive = false;
+        volumeOverdrive = true;
         cavaFrameRate = 60;
         visualizerType = "linear";
         mprisBlacklist = [ ];

@@ -22,21 +22,6 @@
     enable32Bit = true;
   };
 
-  # Japanese fonts for visual novels
-  fonts.packages = with pkgs; [
-    nerd-fonts.jetbrains-mono
-    nerd-fonts.caskaydia-cove
-    source-han-sans
-    source-han-serif
-    noto-fonts-color-emoji
-
-    # other fonts
-    font-awesome
-    material-icons
-    comic-mono
-    icomoon-feather
-  ];
-
   # Gaming-related packages
   environment.systemPackages = with pkgs; [
     gamescope
