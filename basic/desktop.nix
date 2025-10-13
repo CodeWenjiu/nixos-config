@@ -4,7 +4,7 @@
 }:
 let
   custom-sddm-astronaut = pkgs.sddm-astronaut.override {
-    embeddedTheme = "hyprland_kath";
+    embeddedTheme = "purple_leaves";
     themeConfig = {
       # see https://github.com/Keyitdev/sddm-astronaut-theme/tree/master/Themes
       AllowUppercaseLettersInUsernames = "true";
@@ -29,6 +29,7 @@ in
 
   programs.niri.enable = true;
   services.noctalia-shell.enable = true;
+  programs.gpu-screen-recorder.enable = true;
 
   # https://github.com/Keyitdev/sddm-astronaut-theme/issues/51
   services.displayManager = {
@@ -44,7 +45,7 @@ in
       settings = {
         Theme = {
           Current = "sddm-astronaut-theme";
-          CursorTheme = "Bibata-Modern-Ice";
+          CursorTheme = "Bibata-Modern";
           CursorSize = 24;
         };
       };
@@ -60,19 +61,29 @@ in
 
     acpi
     xdg-desktop-portal-gtk
+    xdg-desktop-portal-gnome
   ];
 
   # XDG Portal configuration
   xdg.portal = {
     enable = true;
     wlr.enable = true;
-    # Use GTK portal for file dialogs and other general functions
+    extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
+    # Use GNOME portal for niri screencasting, GTK for file dialogs
     config = {
       common = {
         default = [
-          "wlr"
+          "gnome"
           "gtk"
         ];
+      };
+      niri = {
+        default = [
+          "gnome"
+          "gtk"
+        ];
+        "org.freedesktop.impl.portal.ScreenCast" = "gnome";
+        "org.freedesktop.impl.portal.Screenshot" = "gnome";
       };
     };
   };
