@@ -104,8 +104,7 @@
   };
 
   programs.nushell.extraConfig = ''
-    $env.config.buffer_editor = "zed"
-    $env.config.buffer_editor = "vim"
+    $env.config.buffer_editor = "zeditor"
   '';
 
   home.packages = with pkgs; [
