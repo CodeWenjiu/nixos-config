@@ -68,18 +68,17 @@ in
   xdg.portal = {
     enable = true;
     wlr.enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
-    # Use GNOME portal for niri screencasting, GTK for file dialogs
+    extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
     config = {
       common = {
         default = [
-          "gnome"
+          "wls"
           "gtk"
         ];
       };
       niri = {
         default = [
-          "gnome"
+          "wls"
           "gtk"
         ];
         "org.freedesktop.impl.portal.ScreenCast" = "gnome";

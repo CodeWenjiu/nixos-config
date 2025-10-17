@@ -17,11 +17,18 @@
     gpu-screen-recorder
     wf-recorder
     cava
+    cliphist
+    wlsunset
 
     bibata-cursors
 
     xwayland-satellite
   ];
+
+  home.sessionVariables = {
+    QT_QPA_PLATFORMTHEME = "qt6ct";
+    QS_ICON_THEME = "youricontheme";
+  };
 
   # configure options
   programs.noctalia-shell = {

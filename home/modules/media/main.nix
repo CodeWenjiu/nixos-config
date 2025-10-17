@@ -9,6 +9,7 @@
     ./music.nix
     ./doc.nix
     ./vedio.nix
+    ./obs.nix
   ];
 
   home.packages = with pkgs; [

@@ -16,6 +16,7 @@
 
   nixpkgs.overlays = [ inputs.niri.overlays.niri ];
 
+  # see niri flake documentation: https://github.com/sodiboo/niri-flake/blob/main/docs.md
   programs.niri = {
     enable = true;
     package = pkgs.niri-unstable;
@@ -25,11 +26,22 @@
           draw-border-with-background = false;
           clip-to-geometry = true;
           geometry-corner-radius = {
-            bottom-left = 12.0;
-            bottom-right = 12.0;
-            top-left = 12.0;
-            top-right = 12.0;
+            bottom-left = 20.0;
+            bottom-right = 20.0;
+            top-left = 20.0;
+            top-right = 20.0;
           };
+        }
+      ];
+
+      layer-rules = [
+        {
+          matches = [
+            {
+              namespace = "^quickshell-overview$";
+            }
+          ];
+          place-within-backdrop = true;
         }
       ];
 
@@ -60,6 +72,8 @@
         "XF86MonBrightnessUp".action = spawn "noctalia-shell" "ipc" "call" "brightness" "increase";
         "XF86MonBrightnessDown".action = spawn "noctalia-shell" "ipc" "call" "brightness" "decrease";
       };
+
+      hotkey-overlay.skip-at-startup = true;
     };
   };
 
