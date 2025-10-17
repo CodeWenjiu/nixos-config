@@ -46,8 +46,6 @@
         # CJK coverage (region-specific)
         "Source Han Sans SC"
         "Source Han Sans TC"
-        "Source Han Sans JP"
-        "Source Han Sans KR"
 
         # Broad Unicode coverage
         "Noto Sans"
@@ -64,7 +62,6 @@
 
         # Color emoji
         "Noto Color Emoji"
-        "Twemoji Color Emoji"
 
         # System fallbacks
         "DejaVu Sans Mono"

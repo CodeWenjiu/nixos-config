@@ -14,6 +14,9 @@
       ];
 
       extraConfig = ''
+        mkdir ($nu.data-dir | path join "vendor/autoload")
+        starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
+
         let carapace_completer = {|spans|
             carapace $spans.0 nushell ...$spans | from json
         }
@@ -65,15 +68,9 @@
     carapace.enable = true;
     carapace.enableNushellIntegration = true;
 
+    # see https://github.com/starship/starship
     starship = {
       enable = true;
-      settings = {
-        add_newline = true;
-        character = {
-          success_symbol = "[➜](bold green)";
-          error_symbol = "[➜](bold red)";
-        };
-      };
     };
   };
 }

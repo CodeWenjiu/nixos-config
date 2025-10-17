@@ -228,21 +228,21 @@
         generateTemplatesForPredefined = true;
       };
       templates = {
-        gtk = true;
-        qt = true;
+        gtk = false;
+        qt = false;
         kitty = false;
-        ghostty = true;
+        ghostty = false;
         foot = false;
         fuzzel = false;
-        discord = true;
-        discord_vesktop = true;
-        discord_webcord = true;
-        discord_armcord = true;
-        discord_equibop = true;
-        discord_lightcord = true;
-        discord_dorion = true;
+        discord = false;
+        discord_vesktop = false;
+        discord_webcord = false;
+        discord_armcord = false;
+        discord_equibop = false;
+        discord_lightcord = false;
+        discord_dorion = false;
         pywalfox = false;
-        enableUserTemplates = false;
+        enableUserTemplates = true;
       };
       nightLight = {
         enabled = false;
