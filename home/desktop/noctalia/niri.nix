@@ -51,16 +51,38 @@
       };
 
       binds = with config.lib.niri.actions; {
+        # section control
+        "Mod+L".action = focus-column-right;
+        "Mod+H".action = focus-column-left;
+        "Mod+J".action = focus-window-or-workspace-down;
+        "Mod+K".action = focus-window-or-workspace-up;
+
+        "Mod+Shift+L".action = move-column-right;
+        "Mod+Shift+H".action = move-column-left;
+        "Mod+Shift+J".action = move-window-down-or-to-workspace-down;
+        "Mod+Shift+K".action = move-window-up-or-to-workspace-up;
+
+        "Mod+M".action = maximize-column;
+
+        "Mod+C".action = close-window;
+
+        "Mod+O".action = toggle-overview;
+
+        # Screen Shot
+        "Mod+S".action = screenshot { show-pointer = false; };
+
+        # Others
+
+        "Mod+Shift+Q".action = quit;
+        "Mod+Shift+slash".action = show-hotkey-overlay;
+
+        # open applications
         "Mod+T".action = spawn "ghostty";
         "Mod+E".action = spawn "zeditor";
         "Mod+B".action = spawn "firefox";
         "Mod+F".action = spawn "nautilus";
         "Mod+A".action = spawn "noctalia-shell" "ipc" "call" "launcher" "toggle";
         "Mod+W".action = spawn "noctalia-shell" "ipc" "call" "wallpaper" "random";
-        "Mod+Shift+Q".action = quit;
-        "Mod+Shift+slash".action = show-hotkey-overlay;
-        "Mod+C".action = close-window;
-        "Mod+O".action = open-overview;
 
         # Volume control
         "XF86AudioRaiseVolume".action = spawn "noctalia-shell" "ipc" "call" "volume" "increase";
