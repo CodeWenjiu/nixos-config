@@ -60,7 +60,11 @@
             ./configuration.nix
             ./hosts/wenjiu_laptop/hardware-configuration.nix
 
-            { nixpkgs.config.allowUnfree = true; }
+            {
+              nixpkgs.config = {
+                allowUnfree = true;
+              };
+            }
 
             inputs.noctalia.nixosModules.default
             vscode-server.nixosModules.default

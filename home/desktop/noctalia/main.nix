@@ -21,13 +21,14 @@
     wlsunset
 
     bibata-cursors
+    papirus-icon-theme
 
     xwayland-satellite
   ];
 
   home.sessionVariables = {
-    QT_QPA_PLATFORMTHEME = "qt6ct";
-    QS_ICON_THEME = "youricontheme";
+    QT_QPA_PLATFORMTHEME = "gtk3";
+    QS_ICON_THEME = "Papirus";
   };
 
   # configure options
@@ -216,6 +217,7 @@
         monitorsScaling = [ ];
         idleInhibitorEnabled = false;
         tooltipsEnabled = true;
+        iconTheme = "Papirus";
       };
       brightness = {
         brightnessStep = 5;

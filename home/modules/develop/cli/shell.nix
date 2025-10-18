@@ -10,7 +10,6 @@
       plugins = with pkgs.nushellPlugins; [
         gstat
         polars
-        highlight
       ];
 
       extraConfig = ''
