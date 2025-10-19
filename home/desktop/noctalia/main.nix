@@ -211,7 +211,7 @@
       };
       ui = {
         fontDefault = "Inter";
-        fontFixed = "JetBrains Mono";
+        fontFixed = "Roboto";
         fontDefaultScale = 1;
         fontFixedScale = 1;
         monitorsScaling = [ ];

@@ -27,6 +27,7 @@
   home.packages = with pkgs; [
     # Core UI / Latin
     inter
+    roboto
     source-sans
     source-serif
 
