@@ -20,6 +20,8 @@
       github-mcp-server
 
       tinymist # docs
+
+      metals # Scala LSP
     ];
 
     # Main configuration

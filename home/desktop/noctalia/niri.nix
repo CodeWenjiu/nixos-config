@@ -72,7 +72,7 @@
         "Mod+S".action = screenshot { show-pointer = false; };
 
         # Others
-
+        "Mod+Shift+S".action = suspend;
         "Mod+Shift+Q".action = quit;
         "Mod+Shift+slash".action = show-hotkey-overlay;
 

@@ -21,5 +21,6 @@
     ./paint.nix
     ./cli/main.nix
     ./editor/main.nix
+    ./langs/main.nix
   ];
 }

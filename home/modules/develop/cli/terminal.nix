@@ -12,5 +12,7 @@
     background-opacity = 0.5
     background-opacity-cells = true
     background-blur = true
+
+    keybind = ctrl+backspace=text:\x17
   '';
 }
