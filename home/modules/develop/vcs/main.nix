@@ -13,9 +13,11 @@
 
   programs.git = {
     enable = true;
-    userName = "wenjiu";
-    userEmail = "2784307979@qq.com";
-    extraConfig = {
+    settings = {
+      user = {
+        name = "wenjiu";
+        email = "2784307979@qq.com";
+      };
       init.defaultBranch = "main";
       pull.rebase = true;
     };

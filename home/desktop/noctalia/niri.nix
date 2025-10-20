@@ -14,12 +14,9 @@
     xwayland-satellite
   ];
 
-  nixpkgs.overlays = [ inputs.niri.overlays.niri ];
-
   # see niri flake documentation: https://github.com/sodiboo/niri-flake/blob/main/docs.md
   programs.niri = {
     enable = true;
-    package = pkgs.niri-unstable;
     settings = {
       window-rules = [
         {
@@ -69,7 +66,11 @@
         "Mod+O".action = toggle-overview;
 
         # Screen Shot
-        "Mod+S".action = screenshot { show-pointer = false; };
+        "Mod+S".action = {
+          screenshot = {
+            show-pointer = false;
+          };
+        };
 
         # Others
         "Mod+Shift+S".action = suspend;
@@ -98,5 +99,4 @@
       hotkey-overlay.skip-at-startup = true;
     };
   };
-
 }
