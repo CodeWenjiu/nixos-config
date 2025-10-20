@@ -13,6 +13,7 @@
 
   environment.systemPackages = with pkgs; [
     clash-verge-rev
+    keybinder # for global hotkeys
   ];
 
   programs.clash-verge = {

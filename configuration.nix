@@ -6,6 +6,7 @@
   imports = [
     ./basic/desktop.nix
     ./basic/boot.nix
+    ./basic/io.nix
 
     ./modules/clash.nix
     ./modules/rime.nix
@@ -14,7 +15,7 @@
     ./modules/data-mount.nix
   ];
 
-  networking.hostName = "wenjiu"; # Define your hostname.
+  networking.hostName = "wenjiu"; # embedded your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -36,6 +37,8 @@
       "wheel"
       "video"
       "audio"
+      "dialout"
+      "embedded"
     ];
     shell = pkgs.nushell;
   };
