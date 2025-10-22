@@ -27,3 +27,9 @@ nix-shell -p efibootmgr --run "sudo efibootmgr -o <NixOS-boot num>,<other_boot_s
 systemctl --user enable auto-fix-vscode-server.service
 systemctl --user start auto-fix-vscode-server.service
 ```
+
+- Bump Duty Recommendation
+month at once
+
+## FlatPak List
+- flathub cn.lceda.LCEDAPro

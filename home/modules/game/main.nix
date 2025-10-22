@@ -17,7 +17,7 @@ in
 {
   home.packages = with pkgs; [
     # minecraft
-    # modrinth-app # detect jdk path in settings
+    modrinth-app # detect jdk path in settings
     prismlauncher-unwrapped
     cacert # TLS
     jdk21_warp
