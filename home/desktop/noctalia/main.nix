@@ -38,11 +38,11 @@
       settingsVersion = 15;
       bar = {
         position = "left";
-        backgroundOpacity = 1.0;
+        backgroundOpacity = 0.5;
         monitors = [ ];
         density = "comfortable";
         showCapsule = true;
-        floating = true;
+        floating = false;
         marginVertical = 0.05;
         marginHorizontal = 0.05;
         widgets = {
@@ -74,6 +74,9 @@
           right = [
             {
               id = "Tray";
+              blacklist = [
+                "Fcitx"
+              ];
               colorizeIcons = false;
             }
             {
