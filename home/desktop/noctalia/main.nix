@@ -37,24 +37,33 @@
     settings = {
       settingsVersion = 15;
       bar = {
-        position = "top";
-        backgroundOpacity = 0.5;
+        position = "left";
+        backgroundOpacity = 1.0;
         monitors = [ ];
-        density = "default";
+        density = "comfortable";
         showCapsule = true;
         floating = true;
-        marginVertical = 0.25;
-        marginHorizontal = 0.25;
+        marginVertical = 0.05;
+        marginHorizontal = 0.05;
         widgets = {
           left = [
             {
               id = "SystemMonitor";
             }
+            # {
+            #   id = "ActiveWindow";
+            # }
             {
-              id = "ActiveWindow";
+              id = "Bluetooth";
             }
             {
-              id = "MediaMini";
+              id = "WiFi";
+            }
+            {
+              id = "ScreenRecorder";
+            }
+            {
+              id = "NotificationHistory";
             }
           ];
           center = [
@@ -64,19 +73,11 @@
           ];
           right = [
             {
-              id = "ScreenRecorder";
-            }
-            {
               id = "Tray";
+              colorizeIcons = false;
             }
             {
-              id = "Bluetooth";
-            }
-            {
-              id = "WiFi";
-            }
-            {
-              id = "NotificationHistory";
+              id = "MediaMini";
             }
             {
               id = "Battery";
@@ -99,7 +100,7 @@
       general = {
         avatarImage = "/mnt/data/AvatarImage/avatar.png";
         dimDesktop = true;
-        showScreenCorners = false;
+        showScreenCorners = true;
         forceBlackScreenCorners = false;
         radiusRatio = 1;
         screenRadiusRatio = 1;
@@ -140,8 +141,8 @@
       };
       appLauncher = {
         enableClipboardHistory = true;
-        position = "top";
-        backgroundOpacity = 1;
+        position = "left";
+        backgroundOpacity = 0.5;
         pinnedExecs = [ ];
         useApp2Unit = false;
         sortByMostUsed = true;
@@ -230,10 +231,10 @@
         generateTemplatesForPredefined = true;
       };
       templates = {
-        gtk = false;
-        qt = false;
+        gtk = true;
+        qt = true;
         kitty = false;
-        ghostty = false;
+        ghostty = true;
         foot = false;
         fuzzel = false;
         discord = false;
@@ -262,4 +263,9 @@
       };
     };
   };
+
+  # there is some rediculus bug
+  # xdg.configFile."ghostty/config".text = ''
+  #   theme = noctalia
+  # '';
 }
