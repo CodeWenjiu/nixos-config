@@ -1,7 +1,10 @@
 { ... }:
+let
+  terminals = "neovim";
+in
 {
   imports = [
-    ./helix.nix
+    ./terminals/${terminals}.nix
     ./zeditor.nix
   ];
 }

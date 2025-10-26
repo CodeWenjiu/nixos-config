@@ -84,6 +84,7 @@
         "Mod+F".action = spawn "nautilus";
         "Mod+A".action = spawn "noctalia-shell" "ipc" "call" "launcher" "toggle";
         "Mod+W".action = spawn "noctalia-shell" "ipc" "call" "wallpaper" "random";
+        "Mod+Shift+W".action = spawn "noctalia-shell" "ipc" "call" "wallpaper" "toggle";
 
         # Volume control
         "XF86AudioRaiseVolume".action = spawn "noctalia-shell" "ipc" "call" "volume" "increase";

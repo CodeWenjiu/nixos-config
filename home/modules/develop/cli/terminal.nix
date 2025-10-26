@@ -9,7 +9,7 @@
   xdg.configFile."ghostty/config".text = ''
     window-decoration = none
     cursor-style-blink = false
-    background-opacity = 0.5
+    background-opacity = 0.7
     background-opacity-cells = true
     background-blur = true
 
