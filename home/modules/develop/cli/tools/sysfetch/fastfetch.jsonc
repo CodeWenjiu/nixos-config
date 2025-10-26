@@ -31,12 +31,12 @@
         "break",
         "colors",
     ],
-    "logo": {
-        "source": "~/Pictures/avatar.png",
-        "type": "auto",
-        "padding": {
-            "top": 1,
-            "left": 3,
-        },
-    },
+    // "logo": {
+    //     "source": "~/Pictures/avatar_wobg.jpg",
+    //     "type": "auto",
+    //     "padding": {
+    //         "top": 1,
+    //         "left": 3,
+    //     },
+    // },
 }
