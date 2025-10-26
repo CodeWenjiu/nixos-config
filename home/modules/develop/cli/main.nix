@@ -5,6 +5,6 @@
   imports = [
     ./tools/main.nix
     ./shell.nix
-    ./terminal.nix
+    ./terminal/main.nix
   ];
 }

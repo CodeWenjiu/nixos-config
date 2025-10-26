@@ -14,5 +14,10 @@
     background-blur = true
 
     keybind = ctrl+backspace=text:\x17
+
+    custom-shader = ~/.config/ghostty/shaders/shader.glsl
+    custom-shader-animation = true
   '';
+
+  xdg.configFile."ghostty/shaders".source = ./shaders;
 }

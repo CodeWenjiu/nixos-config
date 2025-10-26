@@ -55,6 +55,9 @@
               id = "WiFi";
             }
             {
+              id = "MediaMini";
+            }
+            {
               id = "ScreenRecorder";
             }
             {
@@ -73,9 +76,6 @@
                 "Fcitx"
               ];
               colorizeIcons = false;
-            }
-            {
-              id = "MediaMini";
             }
             {
               id = "Battery";
