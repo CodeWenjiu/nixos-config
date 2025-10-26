@@ -262,8 +262,7 @@
     };
   };
 
-  # there is some rediculus bug
-  # xdg.configFile."ghostty/config".text = ''
-  #   theme = noctalia
-  # '';
+  xdg.configFile."ghostty/config".text = ''
+    theme = noctalia
+  '';
 }
