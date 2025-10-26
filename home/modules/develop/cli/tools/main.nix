@@ -5,6 +5,7 @@
 {
   imports = [
     ./fetch.nix
+    ./sysfetch/main.nix
     ./yazi/main.nix
   ];
 
