@@ -4,19 +4,9 @@
 }:
 {
   home.packages = with pkgs; [
-    ripgrep
-
-    wget
-    nettools
-
-    tree
-
-    # fetch
     macchina
     onefetch
     bottom
-
-    yazi
   ];
 
   xdg.configFile."macchina/themes/myt.toml".text = ''

@@ -3,7 +3,7 @@
 }:
 {
   imports = [
-    ./tools.nix
+    ./tools/main.nix
     ./shell.nix
     ./terminal.nix
   ];

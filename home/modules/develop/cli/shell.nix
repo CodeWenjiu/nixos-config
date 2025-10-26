@@ -43,16 +43,6 @@
             append /usr/bin/env
         )
 
-        def --env yy [...args] {
-           	let tmp = (mktemp -t "yazi-cwd.XXXXXX")
-           	yazi ...$args --cwd-file $tmp
-           	let cwd = (open $tmp)
-           	if $cwd != "" and $cwd != $env.PWD {
-          		cd $cwd
-           	}
-           	rm -fp $tmp
-        }
-
         def --env sysrebuild [name] {
           sudo nixos-rebuild switch --flake .#($name);
         }
@@ -67,9 +57,23 @@
     carapace.enable = true;
     carapace.enableNushellIntegration = true;
 
-    # see https://github.com/starship/starship
+    # see https://starship.rs/config/#prompt
     starship = {
       enable = true;
+      settings = {
+        add_newline = true;
+
+        format = ''
+          $directory$git_branch$rust$python
+          $character
+        '';
+
+        character = {
+          success_symbol = "[➜](color9 bold)";
+          error_symbol = "[➜](@{error})";
+          vicmd_symbol = "[➜](#f9e2af)";
+        };
+      };
     };
   };
 }

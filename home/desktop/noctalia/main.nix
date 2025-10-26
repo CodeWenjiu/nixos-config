@@ -33,7 +33,7 @@
       settingsVersion = 15;
       bar = {
         position = "left";
-        backgroundOpacity = 0.5;
+        backgroundOpacity = 0.7;
         monitors = [ ];
         density = "comfortable";
         showCapsule = true;
@@ -231,10 +231,14 @@
       templates = {
         gtk = true;
         qt = true;
+        kcolorscheme = true;
+
         kitty = false;
         ghostty = true;
         foot = false;
+
         fuzzel = true;
+
         discord = true;
         discord_vesktop = true;
         discord_webcord = true;
@@ -242,7 +246,9 @@
         discord_equibop = true;
         discord_lightcord = true;
         discord_dorion = true;
+
         pywalfox = false;
+
         enableUserTemplates = true;
       };
       nightLight = {
