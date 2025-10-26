@@ -26,11 +26,6 @@
     xwayland-satellite
   ];
 
-  home.sessionVariables = {
-    QT_QPA_PLATFORMTHEME = "gtk3";
-    QS_ICON_THEME = "Papirus";
-  };
-
   # configure options
   programs.noctalia-shell = {
     enable = true;
@@ -239,14 +234,14 @@
         kitty = false;
         ghostty = true;
         foot = false;
-        fuzzel = false;
-        discord = false;
-        discord_vesktop = false;
-        discord_webcord = false;
-        discord_armcord = false;
-        discord_equibop = false;
-        discord_lightcord = false;
-        discord_dorion = false;
+        fuzzel = true;
+        discord = true;
+        discord_vesktop = true;
+        discord_webcord = true;
+        discord_armcord = true;
+        discord_equibop = true;
+        discord_lightcord = true;
+        discord_dorion = true;
         pywalfox = false;
         enableUserTemplates = true;
       };
@@ -260,7 +255,7 @@
         manualSunset = "18:30";
       };
       hooks = {
-        enabled = false;
+        enabled = true;
         wallpaperChange = "";
         darkModeChange = "";
       };

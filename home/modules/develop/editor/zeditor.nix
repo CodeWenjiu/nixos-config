@@ -70,7 +70,7 @@
         "Liberation Mono"
       ];
 
-      theme = "Catppuccin Mocha";
+      theme = "Ayu Dark";
 
       # Text processing
       preferred_line_length = 100;

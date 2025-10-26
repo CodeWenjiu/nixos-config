@@ -16,4 +16,8 @@
     [tasks]
     image_alloc = 0
   '';
+
+  xdg.configFile."helix/config.toml".text = ''
+    theme = "matugen"
+  '';
 }

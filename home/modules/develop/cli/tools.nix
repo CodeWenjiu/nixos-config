@@ -11,7 +11,6 @@
 
     tree
 
-    vim
     # fetch
     macchina
     onefetch
@@ -84,9 +83,5 @@
     sysfetch = "macchina";
     gitfetch = "onefetch";
     systop = "btm";
-  };
-
-  home.sessionVariables = {
-    EDITOR = "vim";
   };
 }
