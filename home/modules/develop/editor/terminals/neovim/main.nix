@@ -21,6 +21,7 @@
             nix
             python
             rust
+            glsl
           ]
         );
       in

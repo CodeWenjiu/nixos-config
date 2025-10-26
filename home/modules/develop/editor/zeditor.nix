@@ -22,6 +22,8 @@
       tinymist # docs
 
       metals # Scala LSP
+
+      glsl_analyzer # OpenGL Shader Script
     ];
 
     # Main configuration

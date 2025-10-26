@@ -8,5 +8,6 @@
     obsidian
     feishu
     wpsoffice-cn
+    onlyoffice-desktopeditors
   ];
 }

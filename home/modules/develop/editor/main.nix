@@ -4,7 +4,7 @@ let
 in
 {
   imports = [
-    ./terminals/${terminals}.nix
+    ./terminals/${terminals}/main.nix
     ./zeditor.nix
   ];
 }
