@@ -1,6 +1,6 @@
 { ... }:
 let
-  terminals = "neovim";
+  terminals = "helix";
 in
 {
   imports = [

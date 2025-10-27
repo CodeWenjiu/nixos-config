@@ -5,6 +5,7 @@
 {
   home.packages = with pkgs; [
     matugen
+    gsettings-qt
   ];
 
   xdg.configFile."matugen".source = ./config;
