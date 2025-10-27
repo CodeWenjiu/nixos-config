@@ -13,7 +13,6 @@
   home.packages = with pkgs; [
     inputs.noctalia.packages.${system}.default
 
-    swww
     gpu-screen-recorder
     wf-recorder
     cava
@@ -44,10 +43,9 @@
           left = [
             {
               id = "SystemMonitor";
+              showMemoryAsPercent = true;
+              showNetworkStats = true;
             }
-            # {
-            #   id = "ActiveWindow";
-            # }
             {
               id = "Bluetooth";
             }
@@ -78,13 +76,16 @@
               colorizeIcons = false;
             }
             {
-              id = "Battery";
-            }
-            {
               id = "Volume";
             }
             {
+              id = "Microphone";
+            }
+            {
               id = "Brightness";
+            }
+            {
+              id = "Battery";
             }
             {
               id = "Clock";
@@ -123,7 +124,7 @@
         videoSource = "portal";
       };
       wallpaper = {
-        enabled = true;
+        enabled = false; # 禁用 noctalia 壁纸，使用 swww
         directory = "/mnt/data/wallpapers";
         enableMultiMonitorDirectories = true;
         setWallpaperOnAllMonitors = true;
@@ -267,8 +268,4 @@
       };
     };
   };
-
-  xdg.configFile."ghostty/config".text = ''
-    theme = noctalia
-  '';
 }

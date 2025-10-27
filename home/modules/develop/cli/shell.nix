@@ -60,20 +60,6 @@
     # see https://starship.rs/config/#prompt
     starship = {
       enable = true;
-      settings = {
-        add_newline = true;
-
-        format = ''
-          $directory$git_branch$rust$python
-          $character
-        '';
-
-        character = {
-          success_symbol = "[➜](color9 bold)";
-          error_symbol = "[➜](@{error})";
-          vicmd_symbol = "[➜](#f9e2af)";
-        };
-      };
     };
   };
 }

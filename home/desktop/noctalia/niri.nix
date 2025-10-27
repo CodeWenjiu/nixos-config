@@ -4,6 +4,9 @@
   config,
   ...
 }:
+let
+  randomWallpaperScript = "~/.config/niri/scripts/random-wallpaper.nu";
+in
 {
 
   imports = [
@@ -12,12 +15,26 @@
 
   home.packages = with pkgs; [
     xwayland-satellite
+    swww
   ];
+
+  xdg.configFile."niri/scripts".source = ./scripts;
 
   # see niri flake documentation: https://github.com/sodiboo/niri-flake/blob/main/docs.md
   programs.niri = {
     enable = true;
     settings = {
+      # 启动时运行 swww daemon 和设置初始壁纸
+      spawn-at-startup = [
+        {
+          command = [ "swww-daemon" ];
+        }
+        {
+          command = [
+            "${randomWallpaperScript}"
+          ];
+        }
+      ];
       window-rules = [
         {
           draw-border-with-background = false;
@@ -83,8 +100,8 @@
         "Mod+B".action = spawn "firefox";
         "Mod+F".action = spawn "nautilus";
         "Mod+A".action = spawn "noctalia-shell" "ipc" "call" "launcher" "toggle";
-        "Mod+W".action = spawn "noctalia-shell" "ipc" "call" "wallpaper" "random";
-        "Mod+Shift+W".action = spawn "noctalia-shell" "ipc" "call" "wallpaper" "toggle";
+        "Mod+W".action = spawn "${randomWallpaperScript}";
+        "Mod+Shift+W".action = spawn "${pkgs.swww}/bin/swww" "kill";
 
         # Volume control
         "XF86AudioRaiseVolume".action = spawn "noctalia-shell" "ipc" "call" "volume" "increase";

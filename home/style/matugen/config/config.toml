@@ -1,5 +1,18 @@
 [config]
 
+[config.custom_colors.yellow]
+color = "#FFFF00"
+blend = true
+
+[templates.noctalia]
+input_path = './template/noctalia.json'
+output_path = '~/.config/noctalia/colors.json'
+
+[templates.ghostty]
+input_path = './template/ghostty.toml'
+output_path = '~/.config/ghostty/themes/matugen'
+post_hook = "pkill -SIGUSR2 ghostty"
+
 [templates.yazi]
 input_path = './template/yazi-theme.toml'
 output_path = '~/.config/yazi/theme.toml'
