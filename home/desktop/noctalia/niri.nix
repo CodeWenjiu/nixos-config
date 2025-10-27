@@ -24,7 +24,6 @@ in
   programs.niri = {
     enable = true;
     settings = {
-      # 启动时运行 swww daemon 和设置初始壁纸
       spawn-at-startup = [
         {
           command = [ "swww-daemon" ];
@@ -101,7 +100,7 @@ in
         "Mod+F".action = spawn "nautilus";
         "Mod+A".action = spawn "noctalia-shell" "ipc" "call" "launcher" "toggle";
         "Mod+W".action = spawn "${randomWallpaperScript}";
-        "Mod+Shift+W".action = spawn "${pkgs.swww}/bin/swww" "kill";
+        "Mod+Shift+W".action = spawn "${randomWallpaperScript}" "-g";
 
         # Volume control
         "XF86AudioRaiseVolume".action = spawn "noctalia-shell" "ipc" "call" "volume" "increase";
