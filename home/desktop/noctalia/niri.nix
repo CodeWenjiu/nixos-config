@@ -31,6 +31,7 @@ in
         {
           command = [
             "${randomWallpaperScript}"
+            "--restore"
           ];
         }
       ];
