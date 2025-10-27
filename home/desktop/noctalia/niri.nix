@@ -51,12 +51,14 @@ in
         {
           matches = [
             {
-              namespace = "^quickshell-overview$";
+              namespace = "^wallpaper$";
             }
           ];
           place-within-backdrop = true;
         }
       ];
+
+      layout.background-color = "transparent";
 
       cursor = {
         theme = "Bibata-Modern-Classic";

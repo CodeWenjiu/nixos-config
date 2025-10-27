@@ -37,6 +37,11 @@
         always_allow_tool_actions = true;
       };
 
+      buffer_font_family = "JetBrains Mono";
+      terminal = {
+        font_family = "JetBrains Mono";
+      };
+
       buffer_font_fallbacks = [
         # Core programming fonts (already set as main font)
         "JetBrains Mono"
@@ -73,6 +78,34 @@
       ];
 
       theme = "Ayu Dark";
+
+      "experimental.theme_overrides" = {
+        "background.appearance" = "blurred";
+        "background" = "#09090bBB";
+        "panel.background" = "#11111111";
+        "editor.background" = "#00000000";
+        "tab_bar.background" = "#00000000";
+        "terminal.background" = "#00000000";
+        "toolbar.background" = "#00000000";
+        "tab.inactive_background" = "#00000000";
+        "tab.active_background" = "#3f3f4650";
+        "border" = "#00000000";
+        "status_bar.background" = "#00000000";
+        "title_bar.background" = "#00000000";
+        "border.variant" = "#00000000";
+        "scrollbar.track.background" = "#52525b20";
+        "scrollbar.track.border" = "#00000000";
+        "scrollbar.thumb.background" = "#52525b30";
+        "scrollbar.thumb.border" = "#00000000";
+        "elevated_surface.background" = "#00000090";
+        "surface.background" = "#00000090";
+        "editor.active_line_number" = "#ffffffcc";
+        "editor.gutter.background" = "#00000000";
+        "editor.indent_guide" = "#ffffff30";
+        "editor.indent_guide_active" = "#ffffff80";
+        "editor.line_number" = "#ffffff80";
+        "editor.active_line.background" = "#3f3f4640";
+      };
 
       # Text processing
       preferred_line_length = 100;
