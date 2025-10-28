@@ -44,3 +44,7 @@ output_path = '~/.config/starship.toml'
 [templates.helix]
 input_path = './template/helix.toml'
 output_path = '~/.config/helix/themes/matugen.toml'
+
+[templates.zed]
+input_path = './template/zed.json'
+output_path = '~/.config/zed/themes/matugen.json'
