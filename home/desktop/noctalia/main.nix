@@ -29,7 +29,7 @@
   programs.noctalia-shell = {
     enable = true;
     settings = {
-      settingsVersion = 15;
+      settingsVersion = 16;
       bar = {
         position = "left";
         backgroundOpacity = 0.7;
@@ -175,9 +175,11 @@
       };
       dock = {
         displayMode = "always_visible";
-        backgroundOpacity = 1;
-        floatingRatio = 1;
+        backgroundOpacity = 0.3;
+        floatingRatio = 0;
+        size = 0.7;
         onlySameOutput = true;
+        colorizeIcons = true;
         monitors = [ ];
         pinnedApps = [ ];
       };
