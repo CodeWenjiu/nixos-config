@@ -17,5 +17,8 @@ in
     pamixer
 
     wl-clipboard
+
+    # wallpaper
+    swww
   ];
 }

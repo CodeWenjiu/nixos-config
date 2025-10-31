@@ -11,6 +11,7 @@ output_path = '~/.config/noctalia/colors.json'
 [templates.gtk3]
 input_path = './template/gtk.css'
 output_path = '~/.config/gtk-3.0/colors.css'
+post_hook = 'dconf write /org/gnome/desktop/interface/gtk-theme "\"adw-gtk3-{{mode}}\""'
 
 [templates.gtk4]
 input_path = './template/gtk.css'

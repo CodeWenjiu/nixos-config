@@ -15,7 +15,6 @@ in
 
   home.packages = with pkgs; [
     xwayland-satellite
-    swww
   ];
 
   xdg.configFile."niri/scripts".source = ./scripts;
