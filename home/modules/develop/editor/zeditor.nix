@@ -24,6 +24,8 @@
       metals # Scala LSP
 
       glsl_analyzer # OpenGL Shader Script
+
+      ruff
     ];
 
     # Main configuration
@@ -114,5 +116,6 @@
   home.packages = with pkgs; [
     package-version-server # which zed required
     tinymist
+    ruff
   ];
 }
