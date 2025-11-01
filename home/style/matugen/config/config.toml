@@ -34,9 +34,10 @@ input_path = './template/ghostty.toml'
 output_path = '~/.config/ghostty/themes/matugen'
 post_hook = "pkill -SIGUSR2 ghostty"
 
-[templates.yazi]
-input_path = './template/yazi-theme.toml'
-output_path = '~/.config/yazi/theme.toml'
+# nonetheless all the terminal simulator have been configured, yazi are not necessary to be so.
+# [templates.yazi]
+# input_path = './template/yazi-theme.toml'
+# output_path = '~/.config/yazi/theme.toml'
 
 [templates.starship]
 input_path = './template/starship.toml'

@@ -50,7 +50,7 @@
       shellAliases = {
         c = "clear";
         "cd.." = "cd ..";
-        rgl = "rg --no-heading --line-number";
+        rg = "rg --no-heading --line-number";
         zed = "zeditor";
       };
     };

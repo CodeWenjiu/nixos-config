@@ -1,40 +1,56 @@
-// Based on https://gist.github.com/chardskarth/95874c54e29da6b5a36ab7b50ae2d088
+// based on https://gist.github.com/chardskarth/95874c54e29da6b5a36ab7b50ae2d088
+
+// Pre-calculated constants
+const float INV_10 = 0.1;
+const vec2 GLOW_STEP_BASE = vec2(1.414);
+const float GLOW_CONTRIBUTION = 0.08;
+const float GLOW_THRESHOLD = 0.4;
+const vec2 OFFSET_FACTOR = vec2(-0.5, 0.5);
+const float AA_WIDTH = 2.0;
+
+// Trail configuration constants
+const vec4 TRAIL_COLOR = vec4(1.0, 1.0, 1.0, 1.0);
+const vec4 CURRENT_CURSOR_COLOR = TRAIL_COLOR;
+const vec4 PREVIOUS_CURSOR_COLOR = TRAIL_COLOR;
+const vec4 TRAIL_COLOR_ACCENT = vec4(0.0, 0.0, 0.0, 1.0);
+const float DURATION = 0.5;
+const float OPACITY = 0.2;
+const float DRAW_THRESHOLD = 1.5;
+const bool HIDE_TRAILS_ON_THE_SAME_LINE = false;
+
 float ease(float x) {
-    return pow(1.0 - x, 10.0);
+    float inv_x = 1.0 - x;
+    float inv_x2 = inv_x * inv_x;
+    float inv_x4 = inv_x2 * inv_x2;
+    return inv_x4 * inv_x4 * inv_x2; // pow(1-x, 10) optimized
 }
 
-float sdBox(in vec2 p, in vec2 xy, in vec2 b)
-{
-    vec2 d = abs(p - xy) - b;
+float getSdfRectangle(vec2 p, vec2 center, vec2 halfSize) {
+    vec2 d = abs(p - center) - halfSize;
     return length(max(d, 0.0)) + min(max(d.x, d.y), 0.0);
 }
 
-float getSdfRectangle(in vec2 p, in vec2 xy, in vec2 b)
-{
-    vec2 d = abs(p - xy) - b;
-    return length(max(d, 0.0)) + min(max(d.x, d.y), 0.0);
-}
-
-// Based on Inigo Quilez's 2D distance functions article: https://iquilezles.org/articles/distfunctions2d/
-// Potencially optimized by eliminating conditionals and loops to enhance performance and reduce branching
-float seg(in vec2 p, in vec2 a, in vec2 b, inout float s, float d) {
+float seg(vec2 p, vec2 a, vec2 b, inout float s, float d) {
     vec2 e = b - a;
     vec2 w = p - a;
-    vec2 proj = a + e * clamp(dot(w, e) / dot(e, e), 0.0, 1.0);
+    float dot_ee = dot(e, e);
+    vec2 proj = a + e * clamp(dot(w, e) / dot_ee, 0.0, 1.0);
     float segd = dot(p - proj, p - proj);
     d = min(d, segd);
 
+    float cross_product = e.x * w.y - e.y * w.x;
     float c0 = step(0.0, p.y - a.y);
-    float c1 = 1.0 - step(0.0, p.y - b.y);
-    float c2 = 1.0 - step(0.0, e.x * w.y - e.y * w.x);
-    float allCond = c0 * c1 * c2;
-    float noneCond = (1.0 - c0) * (1.0 - c1) * (1.0 - c2);
-    float flip = mix(1.0, -1.0, step(0.5, allCond + noneCond));
-    s *= flip;
+    float c1 = step(p.y, b.y);
+    float c2 = step(0.0, cross_product);
+
+    float condition = c0 * c1 * c2;
+    float inv_condition = (1.0 - c0) * (1.0 - c1) * (1.0 - c2);
+    s *= mix(1.0, -1.0, step(0.5, condition + inv_condition));
+
     return d;
 }
 
-float getSdfParallelogram(in vec2 p, in vec2 v0, in vec2 v1, in vec2 v2, in vec2 v3) {
+float getSdfParallelogram(vec2 p, vec2 v0, vec2 v1, vec2 v2, vec2 v3) {
     float s = 1.0;
     float d = dot(p - v0, p - v0);
 
@@ -46,36 +62,32 @@ float getSdfParallelogram(in vec2 p, in vec2 v0, in vec2 v1, in vec2 v2, in vec2
     return s * sqrt(d);
 }
 
-vec2 normalize(vec2 value, float isPosition) {
-    return (value * 2.0 - (iResolution.xy * isPosition)) / iResolution.y;
+vec2 normalize_coord(vec2 value, float isPosition) {
+    return (value * 2.0 - iResolution.xy * isPosition) / iResolution.y;
 }
 
-float blend(float t)
-{
+float blend(float t) {
     float sqr = t * t;
     return sqr / (2.0 * (sqr - t) + 1.0);
 }
 
 float antialising(float distance) {
-    return 1. - smoothstep(0., normalize(vec2(2., 2.), 0.).x, distance);
+    return 1.0 - smoothstep(0.0, AA_WIDTH / iResolution.y, distance);
 }
 
 float determineStartVertexFactor(vec2 a, vec2 b) {
-    // Conditions using step
-    float condition1 = step(b.x, a.x) * step(a.y, b.y); // a.x < b.x && a.y > b.y
-    float condition2 = step(a.x, b.x) * step(b.y, a.y); // a.x > b.x && a.y < b.y
-
-    // If neither condition is met, return 1 (else case)
+    float condition1 = step(b.x, a.x) * step(a.y, b.y);
+    float condition2 = step(a.x, b.x) * step(b.y, a.y);
     return 1.0 - max(condition1, condition2);
 }
 
 vec2 getRectangleCenter(vec4 rectangle) {
-    return vec2(rectangle.x + (rectangle.z / 2.), rectangle.y - (rectangle.w / 2.));
+    return rectangle.xy + vec2(rectangle.z * 0.5, -rectangle.w * 0.5);
 }
 
-// Glow effect sample points
-const vec3[24] samples = vec3[24](
-        vec3(0.1693761725038636, 0.9855514761735895, 1),
+// Reduced sample count for glow effect (from 24 to 16 for better performance)
+const vec3[16] samples = vec3[16](
+        vec3(0.1693761725038636, 0.9855514761735895, 1.0),
         vec3(-1.333070830962943, 0.4721463328627773, 0.7071067811865475),
         vec3(-0.8464394909806497, -1.51113870578065, 0.5773502691896258),
         vec3(1.554155680728463, -1.2588090085709776, 0.5),
@@ -90,111 +102,85 @@ const vec3[24] samples = vec3[24](
         vec3(2.888202648340422, -2.1583061557896213, 0.2773500981126146),
         vec3(2.7150778983300325, 2.5745586041105715, 0.2672612419124244),
         vec3(-2.1504069972377464, 3.2211410627650165, 0.2581988897471611),
-        vec3(-3.6548858794907493, -1.6253643308191343, 0.25),
-        vec3(1.0130775986052671, -3.9967078676335834, 0.24253562503633297),
-        vec3(4.229723673607257, 0.33081361055181563, 0.23570226039551587),
-        vec3(0.40107790291173834, 4.340407413572593, 0.22941573387056174),
-        vec3(-4.319124570236028, 1.159811599693438, 0.22360679774997896),
-        vec3(-1.9209044802827355, -4.160543952132907, 0.2182178902359924),
-        vec3(3.8639122286635708, -2.6589814382925123, 0.21320071635561041),
-        vec3(3.3486228404946234, 3.4331800232609, 0.20851441405707477),
-        vec3(-2.8769733643574344, 3.9652268864187157, 0.20412414523193154)
+        vec3(-3.6548858794907493, -1.6253643308191343, 0.25)
     );
 
-// Luminance function for glow effect
 float lum(vec4 c) {
-    return 0.299 * c.r + 0.587 * c.g + 0.114 * c.b;
+    return dot(c.rgb, vec3(0.299, 0.587, 0.114));
 }
 
-// Apply glow effect to the input color
 vec4 applyGlow(vec4 baseColor, vec2 uv) {
     vec4 color = baseColor;
-    vec2 step = vec2(1.414) / iResolution.xy;
+    vec2 step_size = GLOW_STEP_BASE / iResolution.xy;
 
-    for (int i = 0; i < 24; i++) {
+    for (int i = 0; i < 16; i++) {
         vec3 s = samples[i];
-        vec4 c = texture(iChannel0, uv + s.xy * step);
+        vec4 c = texture(iChannel0, uv + s.xy * step_size);
         float l = lum(c);
-        if (l > 0.4) {
-            color += l * s.z * c * 0.08;
-        }
+
+        float contribution = step(GLOW_THRESHOLD, l) * l * s.z * GLOW_CONTRIBUTION;
+        color += contribution * c;
     }
 
     return color;
 }
 
-const vec4 TRAIL_COLOR = vec4(1.0, 1.0, 1.0, 1.0);
-const vec4 CURRENT_CURSOR_COLOR = TRAIL_COLOR;
-const vec4 PREVIOUS_CURSOR_COLOR = TRAIL_COLOR;
-const vec4 TRAIL_COLOR_ACCENT = vec4(0., 0., 0., 1.0);
-const float DURATION = .5;
-const float OPACITY = .2;
-// Don't draw trail within that distance * cursor size.
-// This prevents trails from appearing when typing.
-const float DRAW_THRESHOLD = 1.5;
-// Don't draw trails within the same line: same line jumps are usually where
-// people expect them.
-const bool HIDE_TRAILS_ON_THE_SAME_LINE = false;
-
-void mainImage(out vec4 fragColor, in vec2 fragCoord)
-{
-    vec2 uv = fragCoord.xy / iResolution.xy;
+void mainImage(out vec4 fragColor, in vec2 fragCoord) {
+    vec2 uv = fragCoord / iResolution.xy;
 
     #if !defined(WEB)
     fragColor = texture(iChannel0, uv);
     #endif
 
-    // Apply glow effect to the base texture
     fragColor = applyGlow(fragColor, uv);
 
-    //Normalization for fragCoord to a space of -1 to 1;
-    vec2 vu = normalize(fragCoord, 1.);
-    vec2 offsetFactor = vec2(-.5, 0.5);
+    vec2 vu = normalize_coord(fragCoord, 1.0);
 
-    //Normalization for cursor position and size;
-    //cursor xy has the postion in a space of -1 to 1;
-    //zw has the width and height
-    vec4 currentCursor = vec4(normalize(iCurrentCursor.xy, 1.), normalize(iCurrentCursor.zw, 0.));
-    vec4 previousCursor = vec4(normalize(iPreviousCursor.xy, 1.), normalize(iPreviousCursor.zw, 0.));
+    // Normalize cursor positions and sizes
+    vec4 currentCursor = vec4(normalize_coord(iCurrentCursor.xy, 1.0), normalize_coord(iCurrentCursor.zw, 0.0));
+    vec4 previousCursor = vec4(normalize_coord(iPreviousCursor.xy, 1.0), normalize_coord(iPreviousCursor.zw, 0.0));
 
-    //When drawing a parellelogram between cursors for the trail i need to determine where to start at the top-left or top-right vertex of the cursor
+    // Pre-calculate vertex factors
     float vertexFactor = determineStartVertexFactor(currentCursor.xy, previousCursor.xy);
     float invertedVertexFactor = 1.0 - vertexFactor;
 
-    //Set every vertex of my parellogram
+    // Calculate parallelogram vertices
     vec2 v0 = vec2(currentCursor.x + currentCursor.z * vertexFactor, currentCursor.y - currentCursor.w);
     vec2 v1 = vec2(currentCursor.x + currentCursor.z * invertedVertexFactor, currentCursor.y);
     vec2 v2 = vec2(previousCursor.x + currentCursor.z * invertedVertexFactor, previousCursor.y);
     vec2 v3 = vec2(previousCursor.x + currentCursor.z * vertexFactor, previousCursor.y - previousCursor.w);
 
-    vec4 newColor = vec4(fragColor);
-
-    float progress = blend(clamp((iTime - iTimeCursorChange) / DURATION, 0.0, 1));
+    // Calculate animation progress
+    float progress = blend(clamp((iTime - iTimeCursorChange) / DURATION, 0.0, 1.0));
     float easedProgress = ease(progress);
 
-    //Distance between cursors determine the total length of the parallelogram;
+    // Pre-calculate centers and distances
     vec2 centerCC = getRectangleCenter(currentCursor);
     vec2 centerCP = getRectangleCenter(previousCursor);
     float cursorSize = max(currentCursor.z, currentCursor.w);
     float trailThreshold = DRAW_THRESHOLD * cursorSize;
     float lineLength = distance(centerCC, centerCP);
-    //
+
+    // Optimized trail conditions
     bool isFarEnough = lineLength > trailThreshold;
-    bool isOnSeparateLine = HIDE_TRAILS_ON_THE_SAME_LINE ? currentCursor.y != previousCursor.y : true;
+    bool isOnSeparateLine = HIDE_TRAILS_ON_THE_SAME_LINE ? (currentCursor.y != previousCursor.y) : true;
+
     if (isFarEnough && isOnSeparateLine) {
-        float distanceToEnd = distance(vu.xy, centerCC);
-        float alphaModifier = distanceToEnd / (lineLength * (easedProgress));
+        float distanceToEnd = distance(vu, centerCC);
+        float alphaModifier = clamp(distanceToEnd / (lineLength * easedProgress), 0.0, 1.0);
 
-        if (alphaModifier > 1.0) { // this change fixed it for me.
-            alphaModifier = 1.0;
-        }
-
-        float sdfCursor = getSdfRectangle(vu, currentCursor.xy - (currentCursor.zw * offsetFactor), currentCursor.zw * 0.5);
+        // Calculate SDFs
+        vec2 cursorCenter = currentCursor.xy - currentCursor.zw * OFFSET_FACTOR;
+        vec2 cursorHalfSize = currentCursor.zw * 0.5;
+        float sdfCursor = getSdfRectangle(vu, cursorCenter, cursorHalfSize);
         float sdfTrail = getSdfParallelogram(vu, v0, v1, v2, v3);
 
-        newColor = mix(newColor, TRAIL_COLOR_ACCENT, 1.0 - smoothstep(sdfTrail, -0.01, 0.001));
+        // Apply trail effects
+        vec4 newColor = mix(fragColor, TRAIL_COLOR_ACCENT, 1.0 - smoothstep(-0.01, 0.001, sdfTrail));
         newColor = mix(newColor, TRAIL_COLOR, antialising(sdfTrail));
         newColor = mix(fragColor, newColor, 1.0 - alphaModifier);
-        fragColor = mix(newColor, fragColor, step(sdfCursor, 0));
+
+        // Final color mixing with cursor mask
+        fragColor = mix(newColor, fragColor, step(sdfCursor, 0.0));
     }
 }

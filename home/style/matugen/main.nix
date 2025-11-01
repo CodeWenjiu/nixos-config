@@ -35,4 +35,6 @@
   xdg.configFile."helix/config.toml".text = ''
     theme = "matugen"
   '';
+
+  programs.zed-editor.userSettings.theme = "matugen";
 }

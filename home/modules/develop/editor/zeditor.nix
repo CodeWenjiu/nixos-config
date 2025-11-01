@@ -77,8 +77,6 @@
         "Liberation Mono"
       ];
 
-      theme = "matugen";
-
       # Text processing
       preferred_line_length = 100;
       soft_wrap = "preferred_line_length";

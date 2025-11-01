@@ -77,7 +77,8 @@ in
         "Mod+Shift+J".action = move-window-down-or-to-workspace-down;
         "Mod+Shift+K".action = move-window-up-or-to-workspace-up;
 
-        "Mod+M".action = maximize-column;
+        "Mod+M".action = set-column-width "-10%";
+        "Mod+Shift+M".action = set-column-width "+10%";
 
         "Mod+C".action = close-window;
 
