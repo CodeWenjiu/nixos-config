@@ -51,7 +51,6 @@
         c = "clear";
         "cd.." = "cd ..";
         rg = "rg --no-heading --line-number";
-        zed = "zeditor";
       };
     };
     carapace.enable = true;
