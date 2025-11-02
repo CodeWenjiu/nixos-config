@@ -37,4 +37,6 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   boot.kernelModules = [ "uvcvideo" ];
+
+  programs.nix-ld.enable = true;
 }
