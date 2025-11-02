@@ -4,15 +4,8 @@
 { pkgs, ... }:
 {
   imports = [
-    ./basic/desktop.nix
     ./basic/boot.nix
     ./basic/io.nix
-
-    ./modules/clash.nix
-    ./modules/rime.nix
-    ./modules/game.nix
-    ./modules/keyring.nix
-    ./modules/data-mount.nix
   ];
 
   networking.hostName = "wenjiu"; # embedded your hostname.
@@ -45,14 +38,8 @@
 
   services.getty.autologinUser = "wenjiu";
 
-  # see https://flatpak.org/setup/NixOS
-  services.flatpak.enable = true;
-
   services.udisks2.enable = true;
   services.gvfs.enable = true;
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  # environment.systemPackages = with pkgs; [ ];
 
   # gc
   nix.gc = {

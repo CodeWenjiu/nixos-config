@@ -2,46 +2,20 @@
   description = "wenjiu's NixOS configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-
-    # boot
-    minegrub-theme.url = "github:Lxtharia/minegrub-theme";
-
-    # nur.url = "github:nix-community/NUR";
-    vscode-server.url = "github:nix-community/nixos-vscode-server";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    niri = {
-      url = "github:sodiboo/niri-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    quickshell = {
-      url = "github:outfoxxed/quickshell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    noctalia = {
-      url = "github:noctalia-dev/noctalia-shell";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.quickshell.follows = "quickshell"; # Use same quickshell version
     };
   };
 
   outputs =
     {
       self,
-
-      minegrub-theme,
-
       nixpkgs,
-      # nur,
-      vscode-server,
+      nixos-wsl,
       home-manager,
-
-      niri,
       ...
     }@inputs:
     let
@@ -55,10 +29,16 @@
             inherit inputs;
           };
           modules = [
-            minegrub-theme.nixosModules.default
-
             ./configuration.nix
-            ./hosts/wenjiu_laptop/hardware-configuration.nix
+            ./hosts/wenjiu_wsl/hardware-configuration.nix
+
+            nixos-wsl.nixosModules.default {
+              system.stateVersion = "25.05";
+              wsl = {
+                enable = true;
+                defaultUser = "wenjiu";
+              };
+            }
 
             {
               nixpkgs.config = {
@@ -66,20 +46,9 @@
               };
             }
 
-            inputs.noctalia.nixosModules.default
-            vscode-server.nixosModules.default
-            (
-              {
-                ...
-              }:
-              {
-                services.vscode-server.enable = true;
-              }
-            )
-
             home-manager.nixosModules.home-manager
             {
-              home-manager.useGlobalPkgs = false;
+              home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
 
               home-manager.extraSpecialArgs = {

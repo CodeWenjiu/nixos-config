@@ -10,15 +10,7 @@
   xdg.enable = true;
 
   imports = [
-    ./modules/remote.nix
     ./modules/essential/main.nix
-
-    ./modules/media/main.nix
-    ./modules/game/main.nix
     ./modules/develop/main.nix
-
-    ./desktop/main.nix
-
-    ./style/main.nix
   ];
 }

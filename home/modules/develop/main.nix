@@ -15,14 +15,10 @@
   };
 
   imports = [
-    ./vcs/main.nix
-    ./models.nix
-    ./circuit.nix
-    ./meet.nix
-    ./paint.nix
     ./cli/main.nix
     ./editor/main.nix
     ./langs/main.nix
+    ./vcs/main.nix
     ./debug.nix
   ];
 }
