@@ -3,9 +3,14 @@
 }:
 {
   imports = [
-    ./debugger.nix
+    ./c.nix
+    ./nix.nix
+    ./opengl.nix
+    ./python.nix
     ./rust.nix
     ./scala.nix
+    ./typescript.nix
+    ./typst.nix
     ./verilog.nix
   ];
 }

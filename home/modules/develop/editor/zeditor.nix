@@ -6,26 +6,7 @@
 
     # Language servers and tools that Zed needs
     extraPackages = with pkgs; [
-      # Language servers
-      nixd # Nix LSP
-      rust-analyzer # Rust LSP
-
-      # Formatters
-      nixpkgs-fmt # Nix formatter
-      prettierd # JavaScript/TypeScript formatter
-
-      # Other tools
-      git # Version control
-
       github-mcp-server
-
-      tinymist # docs
-
-      metals # Scala LSP
-
-      glsl_analyzer # OpenGL Shader Script
-
-      ruff
     ];
 
     # Main configuration
@@ -115,7 +96,5 @@
 
   home.packages = with pkgs; [
     package-version-server # which zed required
-    tinymist
-    ruff
   ];
 }
