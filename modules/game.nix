@@ -42,7 +42,7 @@
     winetricks
     lutris
     mangohud
-    glxinfo
+    mesa-demos
     vulkan-tools
     mesa-demos
     intel-gpu-tools

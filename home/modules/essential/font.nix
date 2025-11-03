@@ -38,10 +38,9 @@
 
     # Broad Unicode coverage (Noto core & extras)
     noto-fonts
-    noto-fonts-extra
 
     # Emoji (Color)
-    noto-fonts-emoji
+    noto-fonts-color-emoji
     twemoji-color-font
 
     # Math

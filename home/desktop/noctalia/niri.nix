@@ -15,6 +15,7 @@ in
 
   home.packages = with pkgs; [
     xwayland-satellite
+    libdisplay-info
   ];
 
   xdg.configFile."niri/scripts".source = ./scripts;
