@@ -4,6 +4,7 @@
 {
   imports = [
     ./c.nix
+    ./just.nix
     ./nix.nix
     ./opengl.nix
     ./python.nix
