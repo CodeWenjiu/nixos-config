@@ -174,7 +174,7 @@
         };
       };
       dock = {
-        displayMode = "always_visible";
+        displayMode = "auto_hide";
         backgroundOpacity = 0.3;
         floatingRatio = 0;
         size = 0.7;
