@@ -11,10 +11,10 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/lib/modules/6.6.87.1-microsoft-standard-WSL2" =
-    { device = "none";
-      fsType = "overlay";
-    };
+  # fileSystems."/lib/modules/6.6.87.1-microsoft-standard-WSL2" =
+  #   { device = "none";
+  #     fsType = "overlay";
+  #   };
 
   fileSystems."/mnt/wsl" =
     { device = "none";
