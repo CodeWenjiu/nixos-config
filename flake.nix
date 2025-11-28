@@ -58,7 +58,7 @@
             minegrub-theme.nixosModules.default
 
             ./configuration.nix
-            ./hosts/wenjiu_laptop/hardware-configuration.nix
+            ./hosts/hardware-configuration.nix
 
             {
               nixpkgs.config = {

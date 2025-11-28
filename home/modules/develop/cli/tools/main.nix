@@ -16,5 +16,7 @@
     nettools
 
     tree
+
+    outfieldr
   ];
 }
