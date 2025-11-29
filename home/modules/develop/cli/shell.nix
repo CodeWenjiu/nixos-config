@@ -14,11 +14,6 @@
   programs = {
     bash = {
       enable = true;
-      initExtra = ''
-        if [[ $- == *i* ]]; then
-          exec ${pkgs.nushell}/bin/nu
-        fi
-      '';
     };
 
     nushell = {
