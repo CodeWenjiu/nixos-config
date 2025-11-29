@@ -77,6 +77,10 @@
     # see https://starship.rs/config/#prompt
     starship = {
       enable = true;
+      settings = {
+        scan_timeout = 300;
+        command_timeout = 1000;
+      };
     };
   };
 }
