@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   ...
 }:
@@ -37,11 +38,15 @@
             }
         }
 
-        $env.PATH = ($env.PATH |
-            split row (char esep) |
-            prepend /home/myuser/.apps |
-            append /usr/bin/env
-        )
+        let nixos_paths = [
+          "/run/wrappers/bin",  # <--- 关键！必须放在第一位
+          "/home/${config.home.username}/.nix-profile/bin",
+          "/etc/profiles/per-user/${config.home.username}/bin",
+          "/nix/var/nix/profiles/default/bin",
+          "/run/current-system/sw/bin"
+        ]
+
+        $env.PATH = ($env.PATH | split row (char esep) | prepend $nixos_paths | uniq)
 
         def --env sysrebuild [name] {
           sudo nixos-rebuild switch --flake .#($name);

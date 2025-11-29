@@ -1,0 +1,14 @@
+{
+    "lsp": {
+        "nil": {
+            "binary": {
+                "path": "/etc/profiles/per-user/wenjiu/bin/nil"
+            }
+        },
+        "nixd": {
+            "binary": {
+                "path": "/etc/profiles/per-user/wenjiu/bin/nixd"
+            }
+        }
+    }
+}
