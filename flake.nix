@@ -8,6 +8,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -16,10 +20,14 @@
       nixpkgs,
       nixos-wsl,
       home-manager,
+      rust-overlay,
       ...
     }@inputs:
     let
       system = "x86_64-linux";
+      overlays = [
+        (import rust-overlay)
+      ];
     in
     {
       nixosConfigurations = {
@@ -32,21 +40,31 @@
             ./configuration.nix
             ./hosts/wenjiu_wsl/hardware-configuration.nix
 
-            nixos-wsl.nixosModules.default {
+            nixos-wsl.nixosModules.default
+
+            ({ pkgs, ... }: {
               system.stateVersion = "25.05";
               wsl = {
                 enable = true;
                 defaultUser = "wenjiu";
 
-                usbip = {
-                  enable = true;
-                };
+                usbip.enable = true;
+
+                # see https://github.com/zed-industries/zed/issues/39710
+                extraBin = [
+                  { src = "${pkgs.coreutils}/bin/uname"; }
+                  { src = "${pkgs.coreutils}/bin/mkdir"; }
+                  { src = "${pkgs.coreutils}/bin/cp"; }
+                ];
               };
-            }
+            })
 
             {
-              nixpkgs.config = {
-                allowUnfree = true;
+              nixpkgs = {
+                config = {
+                  allowUnfree = true;
+                };
+                overlays = overlays;
               };
             }
 
@@ -56,13 +74,16 @@
               home-manager.useUserPackages = true;
 
               home-manager.extraSpecialArgs = {
-                inherit inputs;
+                inherit inputs overlays;
               };
 
               home-manager.users.wenjiu =
                 { ... }:
                 {
-                  nixpkgs.config.allowUnfree = true;
+                  nixpkgs = {
+                    config.allowUnfree = true;
+                    overlays = overlays;
+                  };
                   imports = [
                     (import ./home/home.nix)
                   ];
