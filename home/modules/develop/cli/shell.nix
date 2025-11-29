@@ -4,7 +4,23 @@
   ...
 }:
 {
+  home.sessionPath = [
+    "/run/wrappers/bin"
+    "/home/${config.home.username}/.nix-profile/bin"
+    "/nix/var/nix/profiles/default/bin"
+    "/run/current-system/sw/bin"
+  ];
+
   programs = {
+    bash = {
+      enable = true;
+      initExtra = ''
+        if [[ $- == *i* ]]; then
+          exec ${pkgs.nushell}/bin/nu
+        fi
+      '';
+    };
+
     nushell = {
       enable = true;
 
@@ -39,7 +55,7 @@
         }
 
         let nixos_paths = [
-          "/run/wrappers/bin",  # <--- 关键！必须放在第一位
+          "/run/wrappers/bin",
           "/home/${config.home.username}/.nix-profile/bin",
           "/etc/profiles/per-user/${config.home.username}/bin",
           "/nix/var/nix/profiles/default/bin",
@@ -51,6 +67,8 @@
         def --env sysrebuild [name] {
           sudo nixos-rebuild switch --flake .#($name);
         }
+
+        $env.config.show_banner = false
       '';
       shellAliases = {
         c = "clear";

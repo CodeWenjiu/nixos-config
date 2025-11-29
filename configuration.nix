@@ -33,7 +33,7 @@
       "dialout"
       "embedded"
     ];
-    shell = pkgs.nushell;
+    shell = pkgs.bash;
   };
 
   services.getty.autologinUser = "wenjiu";
