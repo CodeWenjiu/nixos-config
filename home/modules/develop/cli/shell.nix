@@ -57,7 +57,7 @@
           "/run/current-system/sw/bin"
         ]
 
-        $env.PATH = ($env.PATH | split row (char esep) | prepend $nixos_paths | uniq)
+        $env.PATH = ($env.PATH | split row (char esep) | uniq)
 
         def --env sysrebuild [name] {
           sudo nixos-rebuild switch --flake .#($name);

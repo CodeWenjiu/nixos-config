@@ -42,22 +42,26 @@
 
             nixos-wsl.nixosModules.default
 
-            ({ pkgs, ... }: {
-              system.stateVersion = "25.05";
-              wsl = {
-                enable = true;
-                defaultUser = "wenjiu";
+            (
+              { pkgs, ... }:
+              {
+                system.stateVersion = "25.05";
+                wsl = {
+                  enable = true;
+                  defaultUser = "wenjiu";
 
-                usbip.enable = true;
+                  usbip.enable = true;
+                  interop.includePath = true;
 
-                # see https://github.com/zed-industries/zed/issues/39710
-                extraBin = [
-                  { src = "${pkgs.coreutils}/bin/uname"; }
-                  { src = "${pkgs.coreutils}/bin/mkdir"; }
-                  { src = "${pkgs.coreutils}/bin/cp"; }
-                ];
-              };
-            })
+                  # see https://github.com/zed-industries/zed/issues/39710
+                  extraBin = [
+                    { src = "${pkgs.coreutils}/bin/uname"; }
+                    { src = "${pkgs.coreutils}/bin/mkdir"; }
+                    { src = "${pkgs.coreutils}/bin/cp"; }
+                  ];
+                };
+              }
+            )
 
             {
               nixpkgs = {
