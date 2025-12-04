@@ -24,6 +24,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.wenjiu = {
     isNormalUser = true;
+    uid = pkgs.lib.mkForce 1001;
     description = "wenjiu";
     extraGroups = [
       "networkmanager"

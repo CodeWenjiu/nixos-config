@@ -4,8 +4,12 @@
 }:
 {
   home.packages = with pkgs; [
-    cargo
+    (rust-bin.stable.latest.default.override {
+      extensions = [
+        "rust-src"
+        "rust-analyzer"
+      ];
+    })
     cargo-generate
-    rust-analyzer # Rust LSP
   ];
 }
