@@ -8,6 +8,8 @@
     ./basic/io.nix
   ];
 
+  i18n.defaultLocale = "zh_CN.UTF-8";
+
   networking.hostName = "wenjiu"; # embedded your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 

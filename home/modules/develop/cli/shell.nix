@@ -64,6 +64,15 @@
         }
 
         $env.config.show_banner = false
+
+        pay-respects nushell --alias ...[fuck] | save -f ~/.config/pay-respects.nu
+        source ~/.config/pay-respects.nu
+
+        # where this f**k come from???
+        hide-env http_proxy
+        hide-env https_proxy
+        hide-env HTTP_PROXY
+        hide-env HTTPS_PROXY
       '';
       shellAliases = {
         c = "clear";
