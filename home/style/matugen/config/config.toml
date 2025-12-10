@@ -8,6 +8,10 @@ blend = true
 input_path = './template/noctalia.json'
 output_path = '~/.config/noctalia/colors.json'
 
+[templates.niri]
+input_path = './template/niri.kdl'
+output_path = '~/.config/niri/colors.kdl'
+
 [templates.gtk3]
 input_path = './template/gtk.css'
 output_path = '~/.config/gtk-3.0/colors.css'

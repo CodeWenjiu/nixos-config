@@ -13,6 +13,8 @@
     ./modules/game.nix
     ./modules/keyring.nix
     ./modules/data-mount.nix
+
+    ./platform/main.nix
   ];
 
   networking.hostName = "wenjiu"; # embedded your hostname.
