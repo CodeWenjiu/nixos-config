@@ -23,6 +23,7 @@ in
   # see niri flake documentation: https://github.com/sodiboo/niri-flake/blob/main/docs.md
   programs.niri = {
     enable = true;
+    package = pkgs.niri;
     settings = {
       spawn-at-startup = [
         {

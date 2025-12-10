@@ -15,7 +15,7 @@
     };
 
     niri = {
-      url = "github:sodiboo/niri-flake";
+      url = "github:sodiboo/niri-flake"; # wait for https://github.com/sodiboo/niri-flake/issues/1365 fixed
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -72,7 +72,7 @@
               }
             )
 
-            home-manager.nixosModules.home-manager
+            inputs.home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = false;
               home-manager.useUserPackages = true;
