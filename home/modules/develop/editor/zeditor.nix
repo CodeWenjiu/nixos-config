@@ -11,6 +11,10 @@
 
     # Main configuration
     userSettings = {
+      colorize_brackets = true;
+      always_treat_brackets_as_autoclosed = true;
+      show_signature_help_after_edits = true;
+
       # Agent configuration
       agent = {
         default_model = {
