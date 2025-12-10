@@ -81,6 +81,7 @@ in
 
         "Mod+M".action = set-column-width "-10%";
         "Mod+Shift+M".action = set-column-width "+10%";
+        "Mod+Alt+M".action = maximize-window-to-edges;
 
         "Mod+C".action = close-window;
 

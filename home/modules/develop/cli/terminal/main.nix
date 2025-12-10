@@ -6,6 +6,8 @@
     enable = true;
   };
 
+  programs.kitty.enable = true; # for instead
+
   xdg.configFile."ghostty/config".text = ''
     window-decoration = none
     cursor-style-blink = false

@@ -46,6 +46,9 @@
         def --env sysrebuild [name] {
           sudo nixos-rebuild switch --flake .#($name);
         }
+
+        pay-respects nushell --alias ...[fuck] | save -f ~/.config/pay-respects.nu
+        source ~/.config/pay-respects.nu
       '';
       shellAliases = {
         c = "clear";
