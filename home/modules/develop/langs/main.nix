@@ -13,5 +13,6 @@
     ./typescript.nix
     ./typst.nix
     ./verilog.nix
+    ./zig.nix
   ];
 }

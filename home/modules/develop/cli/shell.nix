@@ -69,10 +69,10 @@
         source ~/.config/pay-respects.nu
 
         # where this f**k come from???
-        hide-env http_proxy
-        hide-env https_proxy
-        hide-env HTTP_PROXY
-        hide-env HTTPS_PROXY
+        hide-env -i http_proxy
+        hide-env -i https_proxy
+        hide-env -i HTTP_PROXY
+        hide-env -i HTTPS_PROXY
       '';
       shellAliases = {
         c = "clear";
