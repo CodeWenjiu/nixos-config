@@ -81,7 +81,7 @@ in
       };
       niri = {
         default = [
-          "wls"
+          "gnome"
           "gtk"
         ];
         "org.freedesktop.impl.portal.ScreenCast" = "gnome";
