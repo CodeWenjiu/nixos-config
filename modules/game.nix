@@ -49,6 +49,9 @@
     libva-utils # provides vainfo command for debugging
     vdpauinfo
 
+    lutris
+    protonplus
+
     waydroid-helper
   ];
 
