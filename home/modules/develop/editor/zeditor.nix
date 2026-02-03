@@ -24,46 +24,6 @@
         always_allow_tool_actions = true;
       };
 
-      buffer_font_family = "JetBrains Mono";
-      terminal = {
-        font_family = "JetBrains Mono";
-      };
-
-      buffer_font_fallbacks = [
-        # Core programming fonts (already set as main font)
-        "JetBrains Mono"
-        "Fira Code"
-        "Source Code Pro"
-
-        # UI Sans for mixed content
-        "Inter"
-        "Source Sans 3"
-
-        # CJK coverage (region-specific)
-        "Source Han Sans SC"
-        "Source Han Sans TC"
-
-        # Broad Unicode coverage
-        "Noto Sans"
-        "Noto Sans Mono"
-
-        # Script-specific fonts
-        "Noto Sans Arabic"
-        "Noto Sans Hebrew"
-        "Noto Sans Devanagari"
-        "Noto Sans Thai"
-
-        # Math symbols
-        "STIX Two Math"
-
-        # Color emoji
-        "Noto Color Emoji"
-
-        # System fallbacks
-        "DejaVu Sans Mono"
-        "Liberation Mono"
-      ];
-
       # Text processing
       preferred_line_length = 100;
       soft_wrap = "preferred_line_length";
@@ -78,7 +38,7 @@
       # Editor enhancements
       show_whitespaces = "selection";
       cursor_blink = false;
-      relative_line_numbers = false;
+      relative_line_numbers = "disabled";
       scrollbar = {
         show = "auto";
       };

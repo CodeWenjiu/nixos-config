@@ -82,14 +82,14 @@ in
 
         "Mod+M".action = set-column-width "-10%";
         "Mod+Shift+M".action = set-column-width "+10%";
-        "Mod+Alt+M".action = maximize-window-to-edges;
+        "F11".action = maximize-window-to-edges;
 
         "Mod+C".action = close-window;
 
         "Mod+O".action = toggle-overview;
 
         # Screen Shot
-        "Mod+S".action = {
+        "Mod+F8".action = {
           screenshot = {
             show-pointer = false;
           };
@@ -114,6 +114,12 @@ in
         "XF86AudioLowerVolume".action = spawn "noctalia-shell" "ipc" "call" "volume" "decrease";
         "XF86AudioMute".action = spawn "noctalia-shell" "ipc" "call" "volume" "muteOutput";
         "XF86AudioMicMute".action = spawn "noctalia-shell" "ipc" "call" "volume" "muteInput";
+
+        # Media control (music widget / MPRIS)
+        # Laptop-friendly: Mod+P = play/pause, Mod+[ = prev, Mod+] = next
+        "Mod+P".action = spawn "noctalia-shell" "ipc" "call" "media" "playPause";
+        "Mod+bracketleft".action = spawn "noctalia-shell" "ipc" "call" "media" "previous";
+        "Mod+bracketright".action = spawn "noctalia-shell" "ipc" "call" "media" "next";
 
         # Brightness control
         "XF86MonBrightnessUp".action = spawn "noctalia-shell" "ipc" "call" "brightness" "increase";

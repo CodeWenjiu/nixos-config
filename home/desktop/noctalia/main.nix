@@ -66,6 +66,8 @@
                         }
                         {
                             id = "MediaMini";
+                            showVisualizer = true;
+                            visualizerType = "wave";
                         }
                         {
                             id = "ScreenRecorder";
@@ -267,7 +269,7 @@
                             id = "Bluetooth";
                         }
                         {
-                        id = "Network";
+                            id = "Network";
                         }
                     ];
                 };
@@ -393,6 +395,37 @@
                 enabled = true;
                 wallpaperChange = "";
                 darkModeChange = "";
+            };
+            desktopWidgets = {
+                enabled = true;
+                gridSnap = false;
+                monitorWidgets = [
+                    {
+                        name = "eDP-1";
+                        widgets = [
+                            {
+                                hideMode = "visible";
+                                id = "MediaPlayer";
+                                roundedCorners = true;
+                                scale = 1;
+                                showAlbumArt = true;
+                                showBackground = true;
+                                showButtons = false;
+                                showVisualizer = true;
+                                visualizerType = "linear";
+                                x = 1224;
+                                y = 918;
+                            }
+                            {
+                                id = "Weather";
+                                scale = 1;
+                                showBackground = true;
+                                x = 1360;
+                                y = 816;
+                            }
+                        ];
+                    }
+                ];
             };
         };
     };
