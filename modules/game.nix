@@ -52,8 +52,12 @@
     lutris
     protonplus
 
-    waydroid-helper
+    android-tools
+    qtscrcpy
   ];
+
+  boot.kernelModules = [ "binder_linux" "ashmem_linux" ];
+  virtualisation.docker.enable = true;
 
   # Environment variables for gaming optimization
   environment.variables = {
@@ -95,9 +99,4 @@
       };
     };
   };
-
-  # android container, see https://nixos.wiki/wiki/WayDroid
-  # To use ARM software, see https://github.com/casualsnek/waydroid_script
-  # To use Google Plat, see TODO
-  virtualisation.waydroid.enable = true;
 }
