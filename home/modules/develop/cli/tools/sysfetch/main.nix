@@ -1,5 +1,6 @@
 {
-  ...
+    pkgs,
+    ...
 }:
 let
   sysfetch = "fastfetch";
@@ -12,4 +13,8 @@ in
   programs.nushell.shellAliases = {
     sysfetch = sysfetch;
   };
+
+  home.packages = with pkgs; [
+      hardinfo2
+  ];
 }

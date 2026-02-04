@@ -20,6 +20,9 @@ in
 
     # wallpaper
     swww
+
+    # gtk2
+    gtk-engine-murrine
   ];
 
   gtk = {
@@ -32,6 +35,7 @@ in
       name = "Adwaita";
       package = pkgs.gnome-themes-extra;
     };
+
     gtk4.extraConfig = {
       gtk-application-prefer-dark-theme = 1;
     };

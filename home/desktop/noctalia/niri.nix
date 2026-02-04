@@ -16,6 +16,7 @@ in
   home.packages = with pkgs; [
     xwayland-satellite
     libdisplay-info
+    waylyrics
   ];
 
   xdg.configFile."niri/scripts".source = ./scripts;
@@ -37,16 +38,23 @@ in
         }
       ];
       window-rules = [
-        {
-          draw-border-with-background = false;
-          clip-to-geometry = true;
-          geometry-corner-radius = {
-            bottom-left = 10.0;
-            bottom-right = 10.0;
-            top-left = 10.0;
-            top-right = 10.0;
-          };
-        }
+            {
+                draw-border-with-background = false;
+                clip-to-geometry = true;
+                geometry-corner-radius = {
+                bottom-left = 10.0;
+                bottom-right = 10.0;
+                top-left = 10.0;
+                top-right = 10.0;
+                };
+            }
+
+            {
+                matches = [
+                    { app-id = "io.github.waylyrics.Waylyrics"; }
+                ];
+                open-floating = true;
+            }
       ];
 
       layer-rules = [
@@ -82,7 +90,7 @@ in
 
         "Mod+M".action = set-column-width "-10%";
         "Mod+Shift+M".action = set-column-width "+10%";
-        "F11".action = maximize-window-to-edges;
+        "Mod+Alt+M".action = maximize-window-to-edges;
 
         "Mod+C".action = close-window;
 
