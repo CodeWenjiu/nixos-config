@@ -39,4 +39,6 @@
   boot.kernelModules = [ "uvcvideo" ];
 
   programs.nix-ld.enable = true;
+
+  zramSwap.enable = true;
 }

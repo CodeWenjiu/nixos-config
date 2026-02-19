@@ -57,11 +57,12 @@ in
             }
       ];
 
+      # swww 的 layer surface namespace 是 "swww-daemon"，需匹配它才能让 overview 里显示壁纸
       layer-rules = [
         {
           matches = [
             {
-              namespace = "^wallpaper$";
+              namespace = "^swww-daemon$";
             }
           ];
           place-within-backdrop = true;
