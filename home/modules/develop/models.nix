@@ -4,7 +4,7 @@
 }:
 {
   home.packages = with pkgs; [
-    freecad-wayland
+    # freecad-wayland
     bambu-studio
   ];
 }

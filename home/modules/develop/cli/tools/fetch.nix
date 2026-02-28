@@ -5,7 +5,6 @@
 {
   home.packages = with pkgs; [
     onefetch
-    gource
     bottom
     intel-gpu-tools
   ];

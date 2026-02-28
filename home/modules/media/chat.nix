@@ -5,7 +5,7 @@
 {
   home.packages = with pkgs; [
     wechat-uos
-    discord
+    # discord
     telegram-desktop
     qq
 

@@ -110,7 +110,7 @@ in
     };
   };
   services.udev.extraRules = ''
-    SUBSYSTEM=="input", KERNEL=="event*", ENV{ID_INPUT_SWITCH}=="1", ENV{SWITCH_STATE}=="1", RUN+="${pkgs.xorg.xset}/bin/xset dpms force off"
+    SUBSYSTEM=="input", KERNEL=="event*", ENV{ID_INPUT_SWITCH}=="1", ENV{SWITCH_STATE}=="1", RUN+="${pkgs.xset}/bin/xset dpms force off"
   '';
 
   systemd.sleep.extraConfig = ''

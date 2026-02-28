@@ -47,7 +47,6 @@
     stix-two
 
     # Programming mono
-    jetbrains-mono
     fira-code
     source-code-pro
 
