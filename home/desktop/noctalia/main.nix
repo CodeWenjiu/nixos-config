@@ -55,10 +55,11 @@
                         }
                         {
                             id = "SystemMonitor";
-                            showCpuFreq = false;
-                            showCpuTemp = false;
-                            showCpuUsage = false;
-                            showMemoryUsage = false;
+                            # showCpuFreq = false;
+                            # showCpuTemp = false;
+                            # showCpuUsage = false;
+                            # showMemoryUsage = false;
+                            showMemoryAsPercent = true;
                             showNetworkStats = true;
                         }
                         {
@@ -425,27 +426,6 @@
                                 showBackground = true;
                                 x = 1360;
                                 y = 816;
-                            }
-                            {
-                                diskPath = "/";
-                                id = "SystemStat";
-                                layout = "bottom";
-                                roundedCorners = true;
-                                showBackground = true;
-                                statType = "CPU";
-                                x = 68;
-                                y = 34;
-                            }
-                            {
-                                diskPath = "/";
-                                id = "SystemStat";
-                                layout = "bottom";
-                                roundedCorners = true;
-                                scale = 1;
-                                showBackground = true;
-                                statType = "Memory";
-                                x = 68;
-                                y = 170;
                             }
                         ];
                     }
