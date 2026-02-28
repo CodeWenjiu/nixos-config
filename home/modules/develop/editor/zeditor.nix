@@ -24,10 +24,6 @@
         always_allow_tool_actions = true;
       };
 
-      # Text processing
-      preferred_line_length = 100;
-      soft_wrap = "preferred_line_length";
-
       # Tab settings
       tab_size = 4;
       hard_tabs = false;
@@ -55,7 +51,7 @@
   };
 
   programs.nushell.extraConfig = ''
-    $env.config.buffer_editor = "zeditor"
+    $env.config.buffer_editor = "zeditor";
   '';
 
   home.packages = with pkgs; [
