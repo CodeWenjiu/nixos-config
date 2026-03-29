@@ -113,11 +113,11 @@ in
     SUBSYSTEM=="input", KERNEL=="event*", ENV{ID_INPUT_SWITCH}=="1", ENV{SWITCH_STATE}=="1", RUN+="${pkgs.xset}/bin/xset dpms force off"
   '';
 
-  systemd.sleep.extraConfig = ''
-    HibernateDelaySec=1800
-    SuspendState=mem
-    SuspendMode=platform
-  '';
+  systemd.sleep.settings.Sleep = {
+    HibernateDelaySec = "1800";
+    SuspendState = "mem";
+    SuspendMode = "platform";
+  };
 
   environment.variables = {
     NIXOS_OZONE_WL = "1"; # cause vsc warn for https://github.com/NixOS/nixpkgs/issues/271461
