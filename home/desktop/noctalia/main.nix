@@ -160,7 +160,6 @@
                 boxBorderEnabled = false;
             };
             location = {
-                name = "GuangDong";
                 weatherEnabled = true;
                 weatherShowEffects = true;
                 useFahrenheit = false;
