@@ -19,7 +19,7 @@ in
     wl-clipboard
 
     # wallpaper
-    swww
+    awww
 
     # gtk2
     gtk-engine-murrine

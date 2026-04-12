@@ -28,7 +28,7 @@ in
     settings = {
       spawn-at-startup = [
         {
-          command = [ "swww-daemon" ];
+          command = [ "awww-daemon" ];
         }
         {
           command = [
@@ -38,31 +38,31 @@ in
         }
       ];
       window-rules = [
-            {
-                draw-border-with-background = false;
-                clip-to-geometry = true;
-                geometry-corner-radius = {
-                bottom-left = 10.0;
-                bottom-right = 10.0;
-                top-left = 10.0;
-                top-right = 10.0;
-                };
-            }
+        {
+          draw-border-with-background = false;
+          clip-to-geometry = true;
+          geometry-corner-radius = {
+            bottom-left = 10.0;
+            bottom-right = 10.0;
+            top-left = 10.0;
+            top-right = 10.0;
+          };
+        }
 
-            {
-                matches = [
-                    { app-id = "io.github.waylyrics.Waylyrics"; }
-                ];
-                open-floating = true;
-            }
+        {
+          matches = [
+            { app-id = "io.github.waylyrics.Waylyrics"; }
+          ];
+          open-floating = true;
+        }
       ];
 
-      # swww 的 layer surface namespace 是 "swww-daemon"，需匹配它才能让 overview 里显示壁纸
+      # awww 的 layer surface namespace 是 "awww-daemon"，需匹配它才能让 overview 里显示壁纸
       layer-rules = [
         {
           matches = [
             {
-              namespace = "^swww-daemon$";
+              namespace = "^awww-daemon$";
             }
           ];
           place-within-backdrop = true;

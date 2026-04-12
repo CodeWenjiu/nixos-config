@@ -116,8 +116,8 @@ def main [
     # 保存新选择的壁纸到缓存
     save_current_wallpaper $selected_wallpaper
 
-    # 使用 swww 设置壁纸，带过渡效果
-    swww img $selected_wallpaper --transition-type random --transition-fps 60 --transition-step 60
+    # 使用 awww 设置壁纸，带过渡效果
+    awww img $selected_wallpaper --transition-type random --transition-fps 60 --transition-step 60
 
     # 生成主题
     matugen image $selected_wallpaper
