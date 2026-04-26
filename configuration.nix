@@ -27,6 +27,9 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
+  security.sudo.enable = false;
+  security.sudo-rs.enable = true;
+
   # Set your time zone.
   time.timeZone = "Asia/Hong_Kong";
 

@@ -40,7 +40,7 @@
     steam-run
     protontricks
     winetricks
-    lutris
+    # lutris
     mangohud
     mesa-demos
     vulkan-tools
@@ -49,14 +49,16 @@
     libva-utils # provides vainfo command for debugging
     vdpauinfo
 
-    lutris
     protonplus
 
     android-tools
     qtscrcpy
   ];
 
-  boot.kernelModules = [ "binder_linux" "ashmem_linux" ];
+  boot.kernelModules = [
+    "binder_linux"
+    "ashmem_linux"
+  ];
   virtualisation.docker.enable = true;
 
   # Environment variables for gaming optimization

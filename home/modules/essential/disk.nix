@@ -8,5 +8,7 @@
     duf
 
     qdiskinfo # sudo -E qdiskinfo
+
+    caligula
   ];
 }
