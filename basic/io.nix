@@ -14,11 +14,9 @@
     SUBSYSTEM=="usb", ATTR{idVendor}=="1366", ATTR{idProduct}=="1015", MODE="0660", GROUP="embedded"
     SUBSYSTEM=="usb", ATTR{idVendor}=="1366", ATTR{idProduct}=="1051", MODE="0660", GROUP="embedded"
 
-    # Raspberry Pi Pico / RP2040 / RP2350 devices
-    SUBSYSTEM=="usb", ATTR{idVendor}=="2e8a", ATTR{idProduct}=="0003", MODE="0660", GROUP="embedded"
-    SUBSYSTEM=="usb", ATTR{idVendor}=="2e8a", ATTR{idProduct}=="0004", MODE="0660", GROUP="embedded"
-    SUBSYSTEM=="usb", ATTR{idVendor}=="2e8a", ATTR{idProduct}=="000a", MODE="0660", GROUP="embedded"
-    SUBSYSTEM=="usb", ATTR{idVendor}=="2e8a", ATTR{idProduct}=="000c", MODE="0660", GROUP="embedded"
+    # Raspberry Pi Pico / RP2040 / RP2350 devices (including BOOTSEL variants)
+    # Match the full Raspberry Pi USB vendor ID to avoid missing new product IDs.
+    SUBSYSTEM=="usb", ATTR{idVendor}=="2e8a", MODE="0660", GROUP="embedded", TAG+="uaccess"
 
     # CMSIS-DAP compatible devices (ARM Debug Interface)
     SUBSYSTEM=="usb", ATTR{idVendor}=="0d28", ATTR{idProduct}=="0204", MODE="0660", GROUP="embedded"
@@ -53,6 +51,10 @@
     # Additional common USB-UART bridges
     SUBSYSTEM=="usb", ATTR{idVendor}=="0403", ATTR{idProduct}=="6001", MODE="0660", GROUP="dialout"
     SUBSYSTEM=="usb", ATTR{idVendor}=="067b", ATTR{idProduct}=="2303", MODE="0660", GROUP="dialout"
+
+    # Generic fallback: allow active local user and embedded group to access
+    # newly attached USB devices (useful for new MCU bootloaders/debug probes).
+    SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", MODE="0660", GROUP="embedded", TAG+="uaccess"
   '';
 
   # Enable access to USB devices without root
