@@ -6,6 +6,7 @@
     ./debugger.nix
     ./just.nix
     ./nix.nix
+    ./web.nix
     ./opengl.nix
     ./python.nix
     ./rust.nix
