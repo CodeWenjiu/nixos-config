@@ -313,9 +313,11 @@
         size = 0.7;
         onlySameOutput = true;
         monitors = [ ];
-        pinnedApps = [ ];
+        pinnedApps = [
+          "clash-verge"
+        ];
+        pinnedStatic = true;
         colorizeIcons = true;
-        pinnedStatic = false;
         inactiveIndicators = false;
         deadOpacity = 0.6;
         animationSpeed = 1;
