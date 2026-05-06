@@ -11,7 +11,7 @@
   ];
 
   home.packages = with pkgs; [
-    inputs.noctalia.packages.${system}.default
+    inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
 
     gpu-screen-recorder
     wf-recorder

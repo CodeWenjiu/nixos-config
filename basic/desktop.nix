@@ -2,33 +2,18 @@
   pkgs,
   ...
 }:
-let
-  custom-sddm-astronaut = pkgs.sddm-astronaut.override {
-    embeddedTheme = "purple_leaves";
-    themeConfig = {
-      # see https://github.com/Keyitdev/sddm-astronaut-theme/tree/master/Themes
-      AllowUppercaseLettersInUsernames = "true";
-    };
-  };
-in
 {
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
   # services.xserver.enable = true;
   programs.xwayland.enable = true;
 
-  # # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "cn";
-    variant = "";
-  };
-
   # Enable the waylane Desktop Environment.
   services.displayManager.gdm.enable = false;
   services.desktopManager.gnome.enable = false;
 
   programs.niri.enable = true;
-  services.noctalia-shell.enable = true;
+  # noctalia-shell systemd service is deprecated — now spawned from niri's spawn-at-startup
   programs.gpu-screen-recorder.enable = true;
 
   # https://github.com/Keyitdev/sddm-astronaut-theme/issues/51
@@ -41,22 +26,23 @@ in
       };
       autoNumlock = true;
       enableHidpi = true;
-      theme = "sddm-astronaut-theme";
+      theme = "where_is_my_sddm_theme";
       settings = {
         Theme = {
-          Current = "sddm-astronaut-theme";
+          Current = "where_is_my_sddm_theme";
           CursorTheme = "Bibata-Modern";
           CursorSize = 24;
         };
       };
       extraPackages = [
-        custom-sddm-astronaut
+        pkgs.where-is-my-sddm-theme
       ];
     };
   };
   # ACPI
   environment.systemPackages = with pkgs; [
     kdePackages.qtmultimedia
+    where-is-my-sddm-theme
 
     acpi
     xdg-desktop-portal-gtk
@@ -142,7 +128,5 @@ in
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  # services.blueman.enable = true;
-  hardware.bluetooth.enable = true;
   services.dbus.enable = true;
 }

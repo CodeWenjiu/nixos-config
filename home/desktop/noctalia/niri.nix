@@ -31,6 +31,9 @@ in
           command = [ "awww-daemon" ];
         }
         {
+          command = [ "noctalia-shell" ];
+        }
+        {
           command = [
             "${randomWallpaperScript}"
             "--restore"

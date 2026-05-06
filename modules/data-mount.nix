@@ -1,8 +1,4 @@
-{
-  pkgs,
-  lib,
-  ...
-}:
+{ ... }:
 
 {
   # Ensure /mnt/data has correct permissions for the user
@@ -14,12 +10,5 @@
 
   # Permissions handled above by systemd.tmpfiles.rules
 
-  # Enable ACL support for better file permissions
   boot.kernelModules = [ "ext4" ];
-
-  # Ensure the user has access to necessary groups for gaming
-  users.users.wenjiu.extraGroups = lib.mkAfter [
-    "disk"
-    "storage"
-  ];
 }
