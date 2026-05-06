@@ -21,7 +21,6 @@
           provider = "copilot_chat";
           model = "claude-sonnet-4";
         };
-        always_allow_tool_actions = true;
       };
 
       # Tab settings
