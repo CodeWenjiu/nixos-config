@@ -1,8 +1,5 @@
 { pkgs, ... }:
 {
-  # Enable polkit for authentication
-  security.polkit.enable = true;
-
   # Enable gnome-keyring for credential storage
   services.gnome.gnome-keyring.enable = true;
 
@@ -14,11 +11,10 @@
   security.pam.services.sddm.enableGnomeKeyring = true;
   security.pam.services.gdm.enableGnomeKeyring = true;
 
-  # Install necessary packages
+  # Install gnome-keyring at system level (needed for D-Bus service)
+  # libsecret and seahorse are installed at user level via home/modules/essential/keyring.nix
   environment.systemPackages = with pkgs; [
     gnome-keyring
-    seahorse # GUI for keyring management
-    libsecret # Required for many applications
   ];
 
   # Enable D-Bus session services
@@ -26,10 +22,10 @@
     gnome-keyring
   ];
 
-  # Configure environment variables for keyring
+  # GNOME_KEYRING_CONTROL and SSH_AUTH_SOCK are automatically set
+  # by PAM when gnome-keyring is enabled (see security.pam.services above).
+  # No need to hardcode UID-based paths here.
   environment.variables = {
-    GNOME_KEYRING_CONTROL = "/run/user/1000/keyring";
-    # Ensure apps know about the secret service
     SECRET_BACKEND = "gnome-keyring";
   };
 

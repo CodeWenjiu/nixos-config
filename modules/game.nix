@@ -1,5 +1,6 @@
 {
   pkgs,
+  config,
   ...
 }:
 {
@@ -44,7 +45,6 @@
     mangohud
     mesa-demos
     vulkan-tools
-    mesa-demos
     intel-gpu-tools
     libva-utils # provides vainfo command for debugging
     vdpauinfo
@@ -72,7 +72,7 @@
     VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/intel_icd.x86_64.json";
 
     # Steam optimizations
-    STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/home/wenjiu/.steam/root/compatibilitytools.d";
+    STEAM_EXTRA_COMPAT_TOOLS_PATHS = "${config.users.users.wenjiu.home}/.steam/root/compatibilitytools.d";
 
     # Gaming performance
     __GL_THREADED_OPTIMIZATIONS = "1";

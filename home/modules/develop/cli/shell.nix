@@ -1,5 +1,6 @@
 {
   pkgs,
+  config,
   ...
 }:
 {
@@ -39,7 +40,7 @@
 
         $env.PATH = ($env.PATH |
             split row (char esep) |
-            prepend /home/myuser/.apps |
+            prepend ${config.home.homeDirectory}/.apps |
             append /usr/bin/env
         )
 

@@ -56,7 +56,6 @@ in
   };
   # ACPI
   environment.systemPackages = with pkgs; [
-    custom-sddm-astronaut
     kdePackages.qtmultimedia
 
     acpi

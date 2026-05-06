@@ -15,10 +15,10 @@
     seahorse # GUI keyring manager (optional)
   ];
 
-  # Set up environment variables for applications
+  # GNOME_KEYRING_CONTROL and SSH_AUTH_SOCK are automatically set
+  # by the gnome-keyring PAM module (services.gnome-keyring at home level).
+  # Hardcoding /run/user/<uid>/keyring is fragile — UID is not guaranteed to be 1000.
   home.sessionVariables = {
-    GNOME_KEYRING_CONTROL = "/run/user/1000/keyring";
-    SSH_AUTH_SOCK = "/run/user/1000/keyring/ssh";
     SECRET_BACKEND = "gnome-keyring";
   };
 

@@ -1,6 +1,11 @@
 {
   description = "wenjiu's NixOS configuration";
 
+  nixConfig = {
+    extra-substituters = [ "https://nix-community.cachix.org" ];
+    extra-trusted-public-keys = [ "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=" ];
+  };
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
 
@@ -43,6 +48,8 @@
       system = "x86_64-linux";
     in
     {
+      checks.${system}.wenjiu = self.nixosConfigurations.wenjiu.config.system.build.toplevel;
+
       nixosConfigurations = {
         wenjiu = nixpkgs.lib.nixosSystem {
           inherit system;
