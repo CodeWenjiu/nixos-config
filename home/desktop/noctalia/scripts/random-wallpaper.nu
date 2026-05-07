@@ -119,6 +119,6 @@ def main [
     # 使用 awww 设置壁纸，带过渡效果
     awww img $selected_wallpaper --transition-type random --transition-fps 60 --transition-step 60
 
-    # 生成主题
-    matugen image $selected_wallpaper
+    # 生成主题 (--source-color-index 0 跳过 matugen 4.0 的交互式选色)
+    matugen image $selected_wallpaper --source-color-index 0
 }

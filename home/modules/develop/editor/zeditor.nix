@@ -41,10 +41,12 @@
 
     userKeymaps = [
       {
-        # context = "Terminal";
-        # bindings = {
-        #   ctrl-c = "terminal::Copy"; # impact signal handler
-        # };
+        bindings = {
+          "alt-left" = [ "workspace::ActivatePaneInDirection" "Left" ];
+          "alt-right" = [ "workspace::ActivatePaneInDirection" "Right" ];
+          "alt-up" = [ "workspace::ActivatePaneInDirection" "Up" ];
+          "alt-down" = [ "workspace::ActivatePaneInDirection" "Down" ];
+        };
       }
     ];
   };
