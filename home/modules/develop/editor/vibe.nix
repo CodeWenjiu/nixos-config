@@ -11,11 +11,9 @@
     opencode
   ];
 
-  xdg.configFile."opencode/opencode.jsonc".text = ''
-    {
-      "plugin": ["oh-my-openagent"]
-    }
-  '';
+  # opencode.jsonc needs to be writable by opencode's plugin manager,
+  # so it is NOT managed by xdg.configFile (which creates read-only Nix store symlinks).
+  # Instead, let opencode's `plugin -g` command create and manage it at runtime.
 
   xdg.configFile."opencode/oh-my-opencode.jsonc".text = ''
     {
@@ -60,5 +58,14 @@
         "task_system": true
       }
     }
+  '';
+
+  home.activation.installOhMyOpencode = ''
+    if [ ! -f "$HOME/.config/opencode/opencode.jsonc" ]; then
+      echo '{"plugin":["oh-my-opencode"]}' > "$HOME/.config/opencode/opencode.jsonc"
+    fi
+    if [ ! -d "$HOME/.cache/opencode/packages/oh-my-opencode@latest/node_modules/oh-my-opencode" ]; then
+      run ${pkgs.opencode}/bin/opencode plugin -g oh-my-opencode
+    fi
   '';
 }
