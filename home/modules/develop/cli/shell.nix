@@ -14,13 +14,18 @@
 
   home.activation = {
     pay-respects-init = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      ${lib.getExe pkgs.pay-respects} nushell --alias ...[fuck] > $HOME/.config/pay-respects.nu
+      ${lib.getExe pkgs.pay-respects} nushell --alias fuck > $HOME/.config/pay-respects.nu
     '';
   };
 
   programs = {
     bash = {
       enable = true;
+      bashrcExtra = ''
+        if [[ $- == *i* ]]; then
+          exec ${lib.getExe pkgs.nushell}
+        fi
+      '';
     };
 
     nushell = {
