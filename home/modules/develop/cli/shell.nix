@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }:
 {
@@ -10,6 +11,12 @@
     "/nix/var/nix/profiles/default/bin"
     "/run/current-system/sw/bin"
   ];
+
+  home.activation = {
+    pay-respects-init = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      ${lib.getExe pkgs.pay-respects} nushell --alias ...[fuck] > $HOME/.config/pay-respects.nu
+    '';
+  };
 
   programs = {
     bash = {
@@ -32,20 +39,16 @@
             carapace $spans.0 nushell ...$spans | from json
         }
 
-        $env.config = {
-            show_banner: false,
-            completions: {
-                case_sensitive: false # case-sensitive completions
-                quick: true    # set to false to prevent auto-selecting completions
-                partial: true    # set to false to prevent partial filling of the prompt
-                algorithm: "fuzzy"    # prefix or fuzzy
-                external: {
-                    # set to false to prevent nushell looking into $env.PATH to find more suggestions
-                    enable: true
-                    # set to lower can improve completion performance at the cost of omitting some options
-                    max_results: 100
-                    completer: $carapace_completer # check 'carapace_completer'
-                }
+        $env.config.show_banner = false
+        $env.config.completions = {
+            case_sensitive: false
+            quick: true
+            partial: true
+            algorithm: "fuzzy"
+            external: {
+                enable: true
+                max_results: 100
+                completer: $carapace_completer
             }
         }
 
@@ -65,7 +68,6 @@
 
         $env.config.show_banner = false
 
-        pay-respects nushell --alias ...[fuck] | save -f ~/.config/pay-respects.nu
         source ~/.config/pay-respects.nu
       '';
       shellAliases = {
