@@ -22,7 +22,7 @@
     bash = {
       enable = true;
       bashrcExtra = ''
-        if [[ $- == *i* ]]; then
+        if [[ $- == *i* ]] && [[ -t 0 ]]; then
           exec ${lib.getExe pkgs.nushell}
         fi
       '';

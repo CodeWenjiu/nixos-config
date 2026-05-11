@@ -60,12 +60,18 @@
     }
   '';
 
+  home.activation.fixOpencodeConfig = ''
+    CFG="$HOME/.config/opencode/opencode.jsonc"
+    if [ -f "$CFG" ]; then
+      if ! grep -q '"oh-my-opencode"' "$CFG"; then
+        echo '{"$schema":"https://opencode.ai/config.json","plugin":["oh-my-opencode"]}' > "$CFG"
+      fi
+    else
+      echo '{"$schema":"https://opencode.ai/config.json","plugin":["oh-my-opencode"]}' > "$CFG"
+    fi
+  '';
+
   home.activation.installOhMyOpencode = ''
-    if [ ! -f "$HOME/.config/opencode/opencode.jsonc" ]; then
-      echo '{"plugin":["oh-my-opencode"]}' > "$HOME/.config/opencode/opencode.jsonc"
-    fi
-    if [ ! -d "$HOME/.cache/opencode/packages/oh-my-opencode@latest/node_modules/oh-my-opencode" ]; then
-      run ${pkgs.opencode}/bin/opencode plugin -g oh-my-opencode
-    fi
+    run ${pkgs.opencode}/bin/opencode plugin -g oh-my-opencode
   '';
 }
