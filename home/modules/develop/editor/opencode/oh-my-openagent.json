@@ -2,60 +2,60 @@
   "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/dev/assets/oh-my-opencode.schema.json",
   "agents": {
     "hephaestus": {
-      "model": "opencode/gpt-5-nano"
+      "model": "deepseek/deepseek-v4-pro"
     },
     "oracle": {
-      "model": "opencode/gpt-5-nano"
+      "model": "deepseek/deepseek-v4-pro"
     },
     "librarian": {
-      "model": "opencode/gpt-5-nano"
+      "model": "deepseek/deepseek-v4-pro"
     },
     "explore": {
-      "model": "opencode/gpt-5-nano"
+      "model": "deepseek/deepseek-v4-pro"
     },
     "multimodal-looker": {
-      "model": "opencode/gpt-5-nano"
+      "model": "deepseek/deepseek-v4-pro"
     },
     "prometheus": {
-      "model": "opencode/gpt-5-nano"
+      "model": "deepseek/deepseek-v4-pro"
     },
     "metis": {
-      "model": "opencode/gpt-5-nano"
+      "model": "deepseek/deepseek-v4-pro"
     },
     "momus": {
-      "model": "opencode/gpt-5-nano"
+      "model": "deepseek/deepseek-v4-pro"
     },
     "atlas": {
-      "model": "opencode/gpt-5-nano"
+      "model": "deepseek/deepseek-v4-pro"
     },
     "sisyphus-junior": {
-      "model": "opencode/gpt-5-nano"
+      "model": "deepseek/deepseek-v4-pro"
     }
   },
   "categories": {
     "visual-engineering": {
-      "model": "opencode/gpt-5-nano"
+      "model": "deepseek/deepseek-v4-pro"
     },
     "ultrabrain": {
-      "model": "opencode/gpt-5-nano"
+      "model": "deepseek/deepseek-v4-pro"
     },
     "deep": {
-      "model": "opencode/gpt-5-nano"
+      "model": "deepseek/deepseek-v4-pro"
     },
     "artistry": {
-      "model": "opencode/gpt-5-nano"
+      "model": "deepseek/deepseek-v4-pro"
     },
     "quick": {
-      "model": "opencode/gpt-5-nano"
+      "model": "deepseek/deepseek-v4-pro"
     },
     "unspecified-low": {
-      "model": "opencode/gpt-5-nano"
+      "model": "deepseek/deepseek-v4-pro"
     },
     "unspecified-high": {
-      "model": "opencode/gpt-5-nano"
+      "model": "deepseek/deepseek-v4-pro"
     },
     "writing": {
-      "model": "opencode/gpt-5-nano"
+      "model": "deepseek/deepseek-v4-pro"
     }
   }
 }
