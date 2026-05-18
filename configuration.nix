@@ -12,6 +12,7 @@
     ./modules/rime.nix
     ./modules/game.nix
     ./modules/keyring.nix
+    ./modules/tailscale.nix
   ];
 
   # Enable networking

@@ -40,4 +40,10 @@
   };
 
   hardware.bluetooth.enable = true;
+
+  # Lid close behavior — set per-host
+  services.logind.settings.Login = {
+    HandleLidSwitch = "ignore";
+    HandleLidSwitchExternalPower = "ignore";
+  };
 }
