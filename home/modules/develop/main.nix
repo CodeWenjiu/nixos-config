@@ -9,16 +9,16 @@
 
   programs.direnv = {
     enable = true;
-    enableBashIntegration = false;
+    enableBashIntegration = true;
     nix-direnv.enable = true;
     silent = true;
   };
 
-  programs.bash.bashrcExtra = ''
-    if ! { [[ -n "''${BASH_EXECUTION_STRING:-}" ]] && ! [[ -t 0 ]]; }; then
-      eval "$(${pkgs.direnv}/bin/direnv hook bash)"
-    fi
-  '';
+  # programs.bash.bashrcExtra = ''
+  #   if ! { [[ -n "''${BASH_EXECUTION_STRING:-}" ]] && ! [[ -t 0 ]]; }; then
+  #     eval "$(${pkgs.direnv}/bin/direnv hook bash)"
+  #   fi
+  # '';
 
   imports = [
     ./cli/main.nix

@@ -15,5 +15,6 @@
     xorg.libXcursor
     xorg.libXrandr
     xorg.libXi
+    dbus
   ];
 }
