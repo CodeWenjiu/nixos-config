@@ -48,6 +48,7 @@
                 system.stateVersion = "25.05";
                 wsl = {
                   enable = true;
+                  useWindowsDriver = true;
                   defaultUser = "wenjiu";
 
                   usbip.enable = true;
@@ -59,6 +60,10 @@
                     { src = "${pkgs.coreutils}/bin/mkdir"; }
                     { src = "${pkgs.coreutils}/bin/cp"; }
                   ];
+                };
+                hardware.graphics = {
+                  enable = true;
+                  enable32Bit = true;
                 };
               }
             )
