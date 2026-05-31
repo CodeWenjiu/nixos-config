@@ -65,6 +65,19 @@
                   enable = true;
                   enable32Bit = true;
                 };
+
+                # AMD GPU acceleration: WSLg D3D12 driver + OpenSSL for vendor driver
+                # See: https://github.com/songpola/debug-nixos-amd-gpu-accel
+                environment.sessionVariables = {
+                  LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [
+                    "/run/opengl-driver"
+                    pkgs.openssl
+                  ];
+                  OPENSSL_NO_VENDOR = "1";
+                  OPENSSL_DIR = "${pkgs.openssl.dev}";
+                  OPENSSL_LIB_DIR = "${pkgs.openssl.out}/lib";
+                  OPENSSL_INCLUDE_DIR = "${pkgs.openssl.dev}/include";
+                };
               }
             )
 

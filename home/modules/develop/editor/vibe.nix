@@ -24,6 +24,49 @@
     recursive = true;
   };
 
+  home.file.".codex/config.toml".text = ''
+    model_provider = "custom"
+    model = "gpt-5.5"
+
+    model_reasoning_effort = "xhigh"
+    model_reasoning_summary = "detailed"
+    model_supports_reasoning_summaries = true
+    service_tier = "fast"
+
+    [model_providers.custom]
+    name = "custom"
+    wire_api = "responses"
+    requires_openai_auth = true
+    base_url = "https://vip.aipro.love/v1"
+
+    [projects."/home/wenjiu/project/chip-dev/remu"]
+    trust_level = "trusted"
+
+    [tui.model_availability_nux]
+    "gpt-5.5" = 2
+
+    [notice.model_migrations]
+    "gpt-5.3-codex" = "gpt-5.4"
+
+    [mcp_servers.context7]
+    command = "npx"
+    args = ["-y", "@upstash/context7-mcp"]
+
+    [mcp_servers.github]
+    url = "https://api.githubcopilot.com/mcp/"
+    bearer_token_env_var = "GITHUB_PAT_TOKEN"
+
+    [mcp_servers.nixos]
+    command = "${pkgs.mcp-nixos}/bin/mcp-nixos"
+
+    [mcp_servers.playwright]
+    command = "${pkgs.playwright-mcp}/bin/playwright-mcp"
+    args = ["--user-data-dir", "/home/wenjiu/.cache/playwright-mcp"]
+
+    [mcp_servers.thinking]
+    command = "${pkgs.mcp-server-sequential-thinking}/bin/mcp-server-sequential-thinking"
+  '';
+
   home.file.".deepseek/mcp.json".text = builtins.toJSON {
     timeouts = {
       connect_timeout = 10;

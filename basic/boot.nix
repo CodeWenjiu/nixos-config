@@ -16,5 +16,6 @@
     xorg.libXrandr
     xorg.libXi
     dbus
+    openssl
   ];
 }
