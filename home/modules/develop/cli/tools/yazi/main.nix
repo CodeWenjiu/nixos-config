@@ -7,71 +7,58 @@
     enable = true;
 
     settings = {
-      preview = {
-        image_quality = 90;
+      yazi = {
+        preview = {
+          image_quality = 90;
+        };
+
+        tasks = {
+          image_alloc = 0;
+        };
+
+        plugin = {
+          previewers = [
+            {
+              url = "*.csv";
+              run = "rich-preview";
+            }
+            {
+              url = "*.md";
+              run = "rich-preview";
+            }
+            {
+              url = "*.rst";
+              run = "rich-preview";
+            }
+            {
+              url = "*.ipynb";
+              run = "rich-preview";
+            }
+            {
+              url = "*.json";
+              run = "rich-preview";
+            }
+          ];
+        };
       };
 
-      tasks = {
-        image_alloc = 0;
-      };
-
-      plugin = {
-        prepend_fetchers = [
-          {
-            id = "git";
-            name = "*";
-            run = "git";
-          }
-          {
-            id = "git";
-            name = "*/";
-            run = "git";
-          }
-        ];
-
-        prepend_previewers = [
-          {
-            name = "*.csv";
-            run = "rich-preview";
-          }
-
-          {
-            name = "*.md";
-            run = "rich-preview";
-          }
-
-          {
-            name = "*.rst";
-            run = "rich-preview";
-          }
-
-          {
-            name = "*.ipynb";
-            run = "rich-preview";
-          }
-
-          {
-            name = "*.json";
-            run = "rich-preview";
-          }
-        ];
-      };
-
-      mgr = {
-        prepend_keymap = [
-          {
-            on = "<C-y>";
-            run = [ "plugin wl-clipboard" ];
-          }
-          {
-            on = [
-              "g"
-              "i"
-            ];
-            run = "plugin lazygit";
-            desc = "run lazygit";
-          }
-        ];
+      keymap = {
+        mgr = {
+          keymap = [
+            {
+              on = "<C-y>";
+              run = "plugin wl-clipboard";
+            }
+            {
+              on = [
+                "g"
+                "i"
+              ];
+              run = "plugin lazygit";
+              desc = "run lazygit";
+            }
+          ];
+        };
       };
     };
 
