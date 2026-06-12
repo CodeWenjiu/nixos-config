@@ -54,6 +54,29 @@
 
     userKeymaps = [
       {
+        context = "Pane";
+        unbind = {
+          "alt-left" = "pane::GoBack";
+          "alt-right" = "pane::GoForward";
+        };
+      }
+      {
+        context = "EditPredictionContext > Editor";
+        unbind = {
+          "alt-left" = "dev::EditPredictionContextGoBack";
+          "alt-right" = "dev::EditPredictionContextGoForward";
+        };
+      }
+      {
+        context = "Workspace";
+        unbind = {
+          "ctrl-k ctrl-left" = "workspace::ActivatePaneLeft";
+          "ctrl-k ctrl-right" = "workspace::ActivatePaneRight";
+          "ctrl-k ctrl-up" = "workspace::ActivatePaneUp";
+          "ctrl-k ctrl-down" = "workspace::ActivatePaneDown";
+        };
+      }
+      {
         bindings = {
           "alt-left" = [
             "workspace::ActivatePaneInDirection"
@@ -71,6 +94,29 @@
             "workspace::ActivatePaneInDirection"
             "Down"
           ];
+        };
+      }
+      {
+        context = "Workspace";
+        bindings = {
+          "alt-shift-h" = "workspace::ActivatePaneLeft";
+          "alt-shift-l" = "workspace::ActivatePaneRight";
+          "alt-shift-k" = "workspace::ActivatePaneUp";
+          "alt-shift-j" = "workspace::ActivatePaneDown";
+        };
+      }
+      {
+        context = "Terminal";
+        bindings = {
+          "alt-shift-h" = "workspace::ActivatePaneLeft";
+          "alt-shift-l" = "workspace::ActivatePaneRight";
+        };
+      }
+      {
+        context = "Editor && mode == full";
+        bindings = {
+          "alt-shift-h" = "workspace::ActivatePaneLeft";
+          "alt-shift-l" = "workspace::ActivatePaneRight";
         };
       }
     ];

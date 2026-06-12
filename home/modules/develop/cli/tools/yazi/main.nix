@@ -19,39 +19,41 @@
         prepend_fetchers = [
           {
             id = "git";
-            name = "*";
+            url = "*";
             run = "git";
+            group = "file";
           }
           {
             id = "git";
-            name = "*/";
+            url = "*/";
             run = "git";
+            group = "directory";
           }
         ];
 
         prepend_previewers = [
           {
-            name = "*.csv";
+            url = "*.csv";
             run = "rich-preview";
           }
 
           {
-            name = "*.md";
+            url = "*.md";
             run = "rich-preview";
           }
 
           {
-            name = "*.rst";
+            url = "*.rst";
             run = "rich-preview";
           }
 
           {
-            name = "*.ipynb";
+            url = "*.ipynb";
             run = "rich-preview";
           }
 
           {
-            name = "*.json";
+            url = "*.json";
             run = "rich-preview";
           }
         ];
