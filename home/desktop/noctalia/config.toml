@@ -82,6 +82,10 @@ widget_order = [ "media_player_main", "weather_main", "desktop-widget-0000000000
 
         [desktop_widgets.widget.desktop-widget-0000000000000002.settings]
         background = false
+        bar_width = 0.80000000000000004
+        bloom_intensity = 0.20000000000000001
+        inner_diameter = 0.70000000000000007
+        ring_opacity = 0.5
         sensitivity = 3.0
         visualization_mode = "bars_rings"
 
@@ -166,8 +170,11 @@ position = "top_right"
 [plugin_settings."noctalia/mpvpaper"]
 video_directory = "/mnt/data/wallpapers/dynamic"
 
+[plugin_settings."noctalia/translator"]
+target_lang = "zh"
+
 [plugins]
-enabled = [ "noctalia/screen_recorder", "noctalia/bongocat" ]
+enabled = [ "noctalia/screen_recorder", "noctalia/bongocat", "noctalia/kaomoji", "noctalia/translator", "noctalia/wallhaven" ]
 
 [shell]
 avatar_path = "/mnt/data/AvatarImage/avatar.png"
@@ -175,6 +182,7 @@ clipboard_enabled = true
 clipboard_history_max_entries = 100
 font_family = "Inter"
 niri_overview_type_to_launch_enabled = true
+polkit_agent = true
 settings_show_advanced = true
 telemetry_enabled = false
 
@@ -228,13 +236,13 @@ enabled = true
 transition_on_startup = true
 
     [wallpaper.default]
-    path = "/mnt/data/wallpapers/static/1.png"
+    path = "/mnt/data/wallpapers/1.png"
 
     [wallpaper.last]
-    path = "/mnt/data/wallpapers/static/1.png"
+    path = "/mnt/data/wallpapers/1.png"
 
     [wallpaper.monitors.eDP-1]
-    path = "/mnt/data/wallpapers/static/1.png"
+    path = "/mnt/data/wallpapers/1.png"
 
 [weather]
 effects = true
