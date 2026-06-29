@@ -16,6 +16,7 @@
         shell = {
           program = "${pkgs.nushell}/bin/nu";
         };
+        copy_on_select = true;
       };
 
       colorize_brackets = true;
@@ -110,6 +111,7 @@
         bindings = {
           "alt-shift-h" = "workspace::ActivatePaneLeft";
           "alt-shift-l" = "workspace::ActivatePaneRight";
+          "ctrl-v" = "terminal::Paste";
         };
       }
       {

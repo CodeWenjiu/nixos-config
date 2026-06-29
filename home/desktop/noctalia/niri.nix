@@ -4,9 +4,6 @@
   config,
   ...
 }:
-let
-  randomWallpaperScript = "~/.config/niri/scripts/random-wallpaper.nu";
-in
 {
 
   imports = [
@@ -19,31 +16,20 @@ in
     waylyrics
   ];
 
-  xdg.configFile."niri/scripts".source = ./scripts;
-
-  # see niri flake documentation: https://github.com/sodiboo/niri-flake/blob/main/docs.md
   programs.niri = {
     enable = true;
     package = pkgs.niri;
     settings = {
       spawn-at-startup = [
         {
-          command = [ "awww-daemon" ];
-        }
-        {
           command = [ "noctalia" ];
-        }
-        {
-          command = [
-            "${randomWallpaperScript}"
-            "--restore"
-          ];
         }
       ];
       window-rules = [
         {
           draw-border-with-background = false;
           clip-to-geometry = true;
+          opacity = 0.87;
           geometry-corner-radius = {
             bottom-left = 10.0;
             bottom-right = 10.0;
@@ -57,18 +43,6 @@ in
             { app-id = "io.github.waylyrics.Waylyrics"; }
           ];
           open-floating = true;
-        }
-      ];
-
-      # awww 的 layer surface namespace 是 "awww-daemon"，需匹配它才能让 overview 里显示壁纸
-      layer-rules = [
-        {
-          matches = [
-            {
-              namespace = "^awww-daemon$";
-            }
-          ];
-          place-within-backdrop = true;
         }
       ];
 
@@ -101,15 +75,15 @@ in
         "Mod+O".action = toggle-overview;
 
         # Screen Shot
-        "Mod+F8".action = {
+        "XF86SelectiveScreenshot".action = {
           screenshot = {
             show-pointer = false;
           };
         };
 
         # Others
-        "Mod+Shift+S".action = suspend;
-        "Mod+Shift+Q".action = quit;
+        "Mod+Shift+S".action = spawn "noctalia" "msg" "session" "lock";
+        "Mod+Shift+Q".action = spawn "noctalia" "msg" "session" "lock-and-suspend";
         "Mod+Shift+slash".action = show-hotkey-overlay;
 
         # open applications
@@ -118,17 +92,15 @@ in
         "Mod+B".action = spawn "firefox";
         "Mod+F".action = spawn "nautilus";
         "Mod+A".action = spawn "noctalia" "msg" "panel-toggle" "launcher";
-        "Mod+W".action = spawn "${randomWallpaperScript}";
-        "Mod+Shift+W".action = spawn "${randomWallpaperScript}" "-g";
+        "Mod+W".action = spawn "noctalia" "msg" "panel-toggle" "wallpaper";
 
         # Volume control
         "XF86AudioRaiseVolume".action = spawn "noctalia" "msg" "volume-up";
         "XF86AudioLowerVolume".action = spawn "noctalia" "msg" "volume-down";
-        "XF86AudioMute".action = spawn "noctalia" "msg" "volume-toggle-mute";
+        "XF86AudioMute".action = spawn "noctalia" "msg" "volume-mute";
         "XF86AudioMicMute".action = spawn "noctalia" "msg" "mic-mute";
 
         # Media control (music widget / MPRIS)
-        # Laptop-friendly: Mod+P = play/pause, Mod+[ = prev, Mod+] = next
         "Mod+P".action = spawn "noctalia" "msg" "media" "toggle";
         "Mod+bracketleft".action = spawn "noctalia" "msg" "media" "previous";
         "Mod+bracketright".action = spawn "noctalia" "msg" "media" "next";

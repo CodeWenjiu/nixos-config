@@ -3,6 +3,5 @@
 }:
 {
   imports = [
-    ./matugen/main.nix
   ];
 }

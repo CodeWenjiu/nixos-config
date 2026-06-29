@@ -13,6 +13,7 @@
     inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
 
     gpu-screen-recorder
+    mpvpaper
     wf-recorder
     cava
     cliphist

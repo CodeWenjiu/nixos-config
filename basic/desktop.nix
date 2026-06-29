@@ -1,5 +1,6 @@
 {
   pkgs,
+  lib,
   ...
 }:
 {
@@ -65,12 +66,12 @@
         ];
       };
       niri = {
-        default = [
-          "gnome"
+        default = lib.mkForce [
+          "wlr"
           "gtk"
         ];
-        "org.freedesktop.impl.portal.ScreenCast" = "gnome";
-        "org.freedesktop.impl.portal.Screenshot" = "gnome";
+        "org.freedesktop.impl.portal.ScreenCast" = lib.mkForce "wlr";
+        "org.freedesktop.impl.portal.Screenshot" = lib.mkForce "wlr";
       };
     };
   };

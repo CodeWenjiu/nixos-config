@@ -1,12 +1,16 @@
 [audio]
 enable_overdrive = true
+enable_sounds = true
+
+[backdrop]
+blur_intensity = 0.17999999597668648
 
 [bar.main]
 background_opacity = 0.40999999083578587
 capsule = true
 center = [ "workspaces" ]
 contact_shadow = true
-end = [ "tray", "battery", "temp", "network", "bluetooth", "volume", "brightness", "control-center" ]
+end = [ "tray", "battery", "network", "bluetooth", "volume", "brightness", "control-center" ]
 font_family = "Fira Code"
 margin_ends = 15
 margin_v = 0
@@ -14,7 +18,7 @@ position = "left"
 radius = 14
 reserve_space = true
 shadow = true
-start = [ "date", "clock", "weather", "sysmon", "launcher", "media" ]
+start = [ "date", "clock", "weather", "recorder", "notifications", "mpvpaper", "cat" ]
 thickness = 36
 widget_spacing = 5
 
@@ -65,7 +69,7 @@ widget_order = [ "media_player_main", "weather_main", "desktop-widget-0000000000
         background_radius = 11
         display = "graph"
         stat = "cpu_usage"
-        stat2 = "cpu_temp"
+        stat2 = "ram_pct"
 
     [desktop_widgets.widget.desktop-widget-0000000000000002]
     box_height = 0.0
@@ -78,7 +82,8 @@ widget_order = [ "media_player_main", "weather_main", "desktop-widget-0000000000
 
         [desktop_widgets.widget.desktop-widget-0000000000000002.settings]
         background = false
-        visualization_mode = "all"
+        sensitivity = 3.0
+        visualization_mode = "bars_rings"
 
     [desktop_widgets.widget.media_player_main]
     box_height = 0.0
@@ -158,11 +163,19 @@ layer = "overlay"
 [osd]
 position = "top_right"
 
+[plugin_settings."noctalia/mpvpaper"]
+video_directory = "/mnt/data/wallpapers/dynamic"
+
+[plugins]
+enabled = [ "noctalia/screen_recorder", "noctalia/bongocat" ]
+
 [shell]
 avatar_path = "/mnt/data/AvatarImage/avatar.png"
 clipboard_enabled = true
 clipboard_history_max_entries = 100
 font_family = "Inter"
+niri_overview_type_to_launch_enabled = true
+settings_show_advanced = true
 telemetry_enabled = false
 
     [shell.animation]
@@ -178,14 +191,61 @@ telemetry_enabled = false
     direction = "down_right"
 
 [theme]
-mode = "dark"
+builtin = "Noctalia"
+community_palette = "Oxocarbon"
+mode = "auto"
 source = "wallpaper"
 wallpaper_scheme = "m3-tonal-spot"
 
+    [theme.templates]
+    builtin_ids = [
+        "alacritty",
+        "btop",
+        "cava",
+        "emacs",
+        "foot",
+        "gtk3",
+        "gtk4",
+        "ghostty",
+        "helix",
+        "hyprland",
+        "kcolorscheme",
+        "kitty",
+        "labwc",
+        "mango",
+        "niri",
+        "qt",
+        "scroll",
+        "starship",
+        "sway",
+        "wezterm"
+    ]
+    community_ids = [ "zen-browser", "neovim", "obsidian", "vscode", "zed", "discord", "steam", "telegram", "yazi" ]
+
 [wallpaper]
-enabled = false
+directory = "/mnt/data/wallpapers"
+enabled = true
+transition_on_startup = true
+
+    [wallpaper.default]
+    path = "/mnt/data/wallpapers/static/1.png"
+
+    [wallpaper.last]
+    path = "/mnt/data/wallpapers/static/1.png"
+
+    [wallpaper.monitors.eDP-1]
+    path = "/mnt/data/wallpapers/static/1.png"
 
 [weather]
 effects = true
 enabled = true
 refresh_minutes = 30
+
+[widget.cat]
+type = "noctalia/bongocat:cat"
+
+[widget.mpvpaper]
+type = "noctalia/mpvpaper:mpvpaper"
+
+[widget.recorder]
+type = "noctalia/screen_recorder:recorder"
