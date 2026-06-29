@@ -4,6 +4,11 @@
   programs.zed-editor = {
     enable = true;
 
+    # Use immutable mode: settings managed purely by nix via symlinks
+    # Much more reliable than the activation-based mutable mode
+    mutableUserSettings = false;
+    mutableUserKeymaps = false;
+
     # Language servers and tools that Zed needs
     extraPackages = with pkgs; [
       github-mcp-server
@@ -23,16 +28,11 @@
       always_treat_brackets_as_autoclosed = true;
       show_signature_help_after_edits = true;
 
-      # Agent configuration
+      # Agent configuration: allow all tools by default, no permission prompts
       agent = {
         tool_permissions = {
           tools = {
-            fetch = {
-              default = "allow";
-            };
-            terminal = {
-              default = "allow";
-            };
+            default = "allow";
           };
         };
       };
@@ -48,6 +48,7 @@
       show_whitespaces = "selection";
       cursor_blink = false;
       relative_line_numbers = "disabled";
+      theme = "Noctalia Dark";
       scrollbar = {
         show = "auto";
       };

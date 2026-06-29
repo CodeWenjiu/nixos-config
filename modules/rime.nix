@@ -5,14 +5,19 @@
     enable = true;
     fcitx5.waylandFrontend = true;
     fcitx5.addons = with pkgs; [
+      # ── Engines ────────────────────────────
       fcitx5-rime
       qt6Packages.fcitx5-chinese-addons
+
+      # ── UI & Themes ────────────────────────
+      fcitx5-material-color
+      qt6Packages.fcitx5-qt
     ];
   };
 
-  # Select internationalisation properties.
   i18n.defaultLocale = "zh_CN.UTF-8";
 
+  # Environment variables for fcitx5
   environment.sessionVariables = {
     GTK_IM_MODULE = "fcitx";
     QT_IM_MODULE = "fcitx";

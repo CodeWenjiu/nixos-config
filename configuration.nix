@@ -21,9 +21,6 @@
   security.sudo.enable = false;
   security.sudo-rs.enable = true;
 
-  # Enable fingerprint reader
-  services.fprintd.enable = true;
-
   # see https://flatpak.org/setup/NixOS
   services.flatpak.enable = true;
 

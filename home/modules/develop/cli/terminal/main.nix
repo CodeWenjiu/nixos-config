@@ -24,5 +24,8 @@
     '';
   };
 
-  xdg.configFile."ghostty/shaders".source = ./shaders;
+  xdg.configFile."ghostty/shaders" = {
+    force = true;
+    source = ./shaders;
+  };
 }

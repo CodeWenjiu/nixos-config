@@ -9,6 +9,12 @@
 
   xdg.enable = true;
 
+  # Don't manage GTK themes via home-manager (handled by noctalia)
+  gtk.gtk4.enable = false;
+
+  # Explicitly disable kitty (we use ghostty)
+  programs.kitty.enable = false;
+
   imports = [
     ./modules/remote.nix
     ./modules/essential/main.nix
