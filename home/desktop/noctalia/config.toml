@@ -1,0 +1,191 @@
+[audio]
+enable_overdrive = true
+
+[bar.main]
+background_opacity = 0.40999999083578587
+capsule = true
+center = [ "workspaces" ]
+contact_shadow = true
+end = [ "tray", "battery", "temp", "network", "bluetooth", "volume", "brightness", "control-center" ]
+font_family = "Fira Code"
+margin_ends = 15
+margin_v = 0
+position = "left"
+radius = 14
+reserve_space = true
+shadow = true
+start = [ "date", "clock", "weather", "sysmon", "launcher", "media" ]
+thickness = 36
+widget_spacing = 5
+
+[brightness]
+enable_ddcutil = false
+
+[[control_center.shortcuts]]
+type = "power_profile"
+
+[[control_center.shortcuts]]
+type = "bluetooth"
+
+[[control_center.shortcuts]]
+type = "network"
+
+[[control_center.shortcuts]]
+type = "audio"
+
+[[control_center.shortcuts]]
+type = "weather"
+
+[[control_center.shortcuts]]
+type = "mic_mute"
+
+[desktop_widgets]
+enabled = true
+schema_version = 2
+widget_order = [ "media_player_main", "weather_main", "desktop-widget-0000000000000001", "desktop-widget-0000000000000002" ]
+
+    [desktop_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [desktop_widgets.widget.desktop-widget-0000000000000001]
+    box_height = 0.0
+    box_width = 0.0
+    cx = 171.0
+    cy = 924.5
+    output = "eDP-1"
+    rotation = 0.0
+    type = "sysmon"
+
+        [desktop_widgets.widget.desktop-widget-0000000000000001.settings]
+        background = true
+        background_opacity = 0.63
+        background_padding = 17
+        background_radius = 11
+        display = "graph"
+        stat = "cpu_usage"
+        stat2 = "cpu_temp"
+
+    [desktop_widgets.widget.desktop-widget-0000000000000002]
+    box_height = 0.0
+    box_width = 0.0
+    cx = 823.0
+    cy = 514.5
+    output = "eDP-1"
+    rotation = 0.0
+    type = "fancy_audio_visualizer"
+
+        [desktop_widgets.widget.desktop-widget-0000000000000002.settings]
+        background = false
+        visualization_mode = "all"
+
+    [desktop_widgets.widget.media_player_main]
+    box_height = 0.0
+    box_width = 0.0
+    cx = 1431.0
+    cy = 924.5
+    output = "eDP-1"
+    rotation = 0.0
+    scale = 1.0
+    type = "media_player"
+
+        [desktop_widgets.widget.media_player_main.settings]
+        background_opacity = 0.75
+
+    [desktop_widgets.widget.weather_main]
+    box_height = 0.0
+    box_width = 0.0
+    cx = 1494.0
+    cy = 738.5
+    output = "eDP-1"
+    rotation = 0.0
+    scale = 1.0
+    type = "weather"
+
+        [desktop_widgets.widget.weather_main.settings]
+        background_opacity = 0.63
+        show_forecast = true
+
+[dock]
+auto_hide = true
+background_opacity = 0.29999999999999999
+enabled = false
+pinned = [ "clash-verge" ]
+position = "bottom"
+
+[location]
+address = "GuangDong"
+auto_locate = true
+
+[lockscreen]
+enabled = true
+
+[lockscreen_widgets]
+enabled = false
+schema_version = 2
+widget_order = [ "lockscreen-login-box@eDP-1" ]
+
+    [lockscreen_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
+    box_height = 70.0
+    box_width = 400.0
+    cx = 823.0
+    cy = 910.0
+    output = "eDP-1"
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@eDP-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        input_opacity = 1.0
+        input_radius = 6.0
+        show_login_button = true
+
+[nightlight]
+enabled = true
+
+[notification]
+enable_daemon = true
+layer = "overlay"
+
+[osd]
+position = "top_right"
+
+[shell]
+avatar_path = "/mnt/data/AvatarImage/avatar.png"
+clipboard_enabled = true
+clipboard_history_max_entries = 100
+font_family = "Inter"
+telemetry_enabled = false
+
+    [shell.animation]
+    speed = 1.0
+
+    [shell.panel]
+    clipboard_placement = "attached"
+    launcher_placement = "attached"
+    polkit_placement = "attached"
+    transparency_mode = "glass"
+
+    [shell.shadow]
+    direction = "down_right"
+
+[theme]
+mode = "dark"
+source = "wallpaper"
+wallpaper_scheme = "m3-tonal-spot"
+
+[wallpaper]
+enabled = false
+
+[weather]
+effects = true
+enabled = true
+refresh_minutes = 30

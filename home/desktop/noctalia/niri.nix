@@ -31,7 +31,7 @@ in
           command = [ "awww-daemon" ];
         }
         {
-          command = [ "noctalia-shell" ];
+          command = [ "noctalia" ];
         }
         {
           command = [
@@ -117,25 +117,25 @@ in
         "Mod+E".action = spawn "zeditor";
         "Mod+B".action = spawn "firefox";
         "Mod+F".action = spawn "nautilus";
-        "Mod+A".action = spawn "noctalia-shell" "ipc" "call" "launcher" "toggle";
+        "Mod+A".action = spawn "noctalia" "msg" "panel-toggle" "launcher";
         "Mod+W".action = spawn "${randomWallpaperScript}";
         "Mod+Shift+W".action = spawn "${randomWallpaperScript}" "-g";
 
         # Volume control
-        "XF86AudioRaiseVolume".action = spawn "noctalia-shell" "ipc" "call" "volume" "increase";
-        "XF86AudioLowerVolume".action = spawn "noctalia-shell" "ipc" "call" "volume" "decrease";
-        "XF86AudioMute".action = spawn "noctalia-shell" "ipc" "call" "volume" "muteOutput";
-        "XF86AudioMicMute".action = spawn "noctalia-shell" "ipc" "call" "volume" "muteInput";
+        "XF86AudioRaiseVolume".action = spawn "noctalia" "msg" "volume-up";
+        "XF86AudioLowerVolume".action = spawn "noctalia" "msg" "volume-down";
+        "XF86AudioMute".action = spawn "noctalia" "msg" "volume-toggle-mute";
+        "XF86AudioMicMute".action = spawn "noctalia" "msg" "mic-mute";
 
         # Media control (music widget / MPRIS)
         # Laptop-friendly: Mod+P = play/pause, Mod+[ = prev, Mod+] = next
-        "Mod+P".action = spawn "noctalia-shell" "ipc" "call" "media" "playPause";
-        "Mod+bracketleft".action = spawn "noctalia-shell" "ipc" "call" "media" "previous";
-        "Mod+bracketright".action = spawn "noctalia-shell" "ipc" "call" "media" "next";
+        "Mod+P".action = spawn "noctalia" "msg" "media" "toggle";
+        "Mod+bracketleft".action = spawn "noctalia" "msg" "media" "previous";
+        "Mod+bracketright".action = spawn "noctalia" "msg" "media" "next";
 
         # Brightness control
-        "XF86MonBrightnessUp".action = spawn "noctalia-shell" "ipc" "call" "brightness" "increase";
-        "XF86MonBrightnessDown".action = spawn "noctalia-shell" "ipc" "call" "brightness" "decrease";
+        "XF86MonBrightnessUp".action = spawn "noctalia" "msg" "brightness-up";
+        "XF86MonBrightnessDown".action = spawn "noctalia" "msg" "brightness-down";
       };
 
       hotkey-overlay.skip-at-startup = true;
