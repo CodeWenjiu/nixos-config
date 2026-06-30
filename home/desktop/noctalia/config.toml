@@ -201,7 +201,7 @@ telemetry_enabled = false
 [theme]
 builtin = "Noctalia"
 community_palette = "Oxocarbon"
-mode = "auto"
+mode = "dark"
 source = "wallpaper"
 wallpaper_scheme = "m3-tonal-spot"
 
