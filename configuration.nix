@@ -21,6 +21,13 @@
   security.sudo.enable = false;
   security.sudo-rs.enable = true;
 
+  # Fingerprint reader — for noctalia lock screen (SDDM keeps password-only)
+  services.fprintd.enable = true;
+
+  # Disable fingerprint for sudo & tty login (password only)
+  security.pam.services.sudo.fprintAuth = false;
+  security.pam.services.login.fprintAuth = false;
+
   # see https://flatpak.org/setup/NixOS
   services.flatpak.enable = true;
 
