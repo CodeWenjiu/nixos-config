@@ -29,7 +29,7 @@
         {
           draw-border-with-background = false;
           clip-to-geometry = true;
-          opacity = 0.87;
+          opacity = 0.94;
           geometry-corner-radius = {
             bottom-left = 10.0;
             bottom-right = 10.0;
