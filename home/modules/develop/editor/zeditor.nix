@@ -12,6 +12,34 @@
       github-mcp-server
     ];
 
+    # Extensions auto-installed on startup
+    extensions = [
+      "assembly"
+      "dockerfile"
+      "git-firefly"
+      "glsl"
+      "html"
+      "json"
+      "just"
+      "just-ls"
+      "log"
+      "markdown"
+      "mcp-server-context7"
+      "mcp-server-github"
+      "nix"
+      "nu"
+      "probe-rs"
+      "python"
+      "rust"
+      "scala"
+      "scss"
+      "toml"
+      "typescript"
+      "typst"
+      "verilog"
+      "zig"
+    ];
+
     # Main configuration
     userSettings = {
       # Use nushell as the default terminal shell
@@ -28,10 +56,11 @@
 
       # Agent configuration: allow all tools by default, no permission prompts
       agent = {
+        favorite_models = [ ];
+        model_parameters = [ ];
         tool_permissions = {
-          tools = {
-            default = "allow";
-          };
+          default = "allow";
+          tools = { };
         };
       };
 
