@@ -83,7 +83,7 @@
 
         # Others
         "Mod+Shift+S".action = spawn "noctalia" "msg" "session" "lock";
-        "Mod+Shift+Q".action = spawn "sh" "-c" "noctalia msg session lock && sleep 1 && systemctl suspend";
+        "Mod+Shift+Q".action = spawn "noctalia" "msg" "session" "lock-and-suspend";
         "Mod+Shift+slash".action = show-hotkey-overlay;
 
         # open applications
