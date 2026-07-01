@@ -35,7 +35,6 @@ let
 in
 {
   home.packages = with pkgs; [
-    netease-cloud-music-gtk
     pavucontrol
     cnmplayer
   ];

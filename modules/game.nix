@@ -41,7 +41,7 @@
     steam-run
     protontricks
     winetricks
-    # lutris
+    lutris
     mangohud
     mesa-demos
     vulkan-tools

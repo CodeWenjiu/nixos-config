@@ -4,10 +4,8 @@
   programs.zed-editor = {
     enable = true;
 
-    # Use immutable mode: settings managed purely by nix via symlinks
-    # Much more reliable than the activation-based mutable mode
-    mutableUserSettings = false;
-    mutableUserKeymaps = false;
+    # Keep mutable mode: Zed GUI changes (API keys, models) persist across rebuilds
+    # checkLinkTargets conflicts resolved, activation now runs reliably
 
     # Language servers and tools that Zed needs
     extraPackages = with pkgs; [
