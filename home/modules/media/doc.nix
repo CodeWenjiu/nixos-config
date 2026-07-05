@@ -7,7 +7,7 @@
     readest
     obsidian
     feishu
-    # wpsoffice-cn
+    wpsoffice-cn
     onlyoffice-desktopeditors
   ];
 }
