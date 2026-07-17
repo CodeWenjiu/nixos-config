@@ -45,7 +45,10 @@
         )
 
         def --env sysrebuild [name] {
-          sudo nixos-rebuild switch --flake .#($name);
+          let cpu_count = (sys cpu | length);
+          let is_laptop = ((ls /sys/class/power_supply/ | where name =~ "BAT" | length) > 0);
+          let cores = if $is_laptop { ($cpu_count // 2) } else { $cpu_count };
+          sudo nixos-rebuild switch --flake .#($name) --cores $cores --max-jobs 2;
         }
 
         pay-respects nushell --alias ...[fuck] | save -f ~/.config/pay-respects.nu

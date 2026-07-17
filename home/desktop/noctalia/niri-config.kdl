@@ -1,0 +1,86 @@
+spawn-at-startup "noctalia"
+
+blur {
+  passes 3
+  offset 2.3
+  noise 0.001
+  saturation 2.0
+}
+
+window-rule {
+  draw-border-with-background false
+  clip-to-geometry true
+  opacity 0.94
+  geometry-corner-radius 10.0
+  background-effect { blur true; }
+}
+
+window-rule {
+  match app-id="io.github.waylyrics.Waylyrics"
+  open-floating true
+}
+
+layout {
+  background-color "transparent"
+  gaps 16
+}
+
+cursor {
+  xcursor-theme "Bibata-Modern-Classic"
+  xcursor-size 24
+}
+
+input {
+  touchpad {
+    tap
+    natural-scroll
+  }
+}
+
+hotkey-overlay { skip-at-startup; }
+
+binds {
+  Mod+L { focus-column-right; }
+  Mod+H { focus-column-left; }
+  Mod+J { focus-window-or-workspace-down; }
+  Mod+K { focus-window-or-workspace-up; }
+
+  Mod+Shift+L { move-column-right; }
+  Mod+Shift+H { move-column-left; }
+  Mod+Shift+J { move-window-down-or-to-workspace-down; }
+  Mod+Shift+K { move-window-up-or-to-workspace-up; }
+  Mod+Shift+F { toggle-window-floating; }
+
+  Mod+M { set-column-width "-10%"; }
+  Mod+Shift+M { set-column-width "+10%"; }
+  Mod+Alt+M { maximize-window-to-edges; }
+
+  Mod+C { close-window; }
+  Mod+O { toggle-overview; }
+
+  Print { screenshot; }
+
+  Mod+Shift+S { spawn "noctalia" "msg" "session" "lock"; }
+  Mod+Shift+Q { spawn "noctalia" "msg" "session" "lock-and-suspend"; }
+  Mod+Shift+slash { show-hotkey-overlay; }
+
+  Mod+T { spawn "ghostty"; }
+  Mod+E { spawn "zeditor"; }
+  Mod+B { spawn "firefox"; }
+  Mod+F { spawn "nautilus"; }
+  Mod+A { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
+  Mod+W { spawn "noctalia" "msg" "panel-toggle" "wallpaper"; }
+  Mod+Shift+W { spawn "noctalia" "msg" "panel-toggle" "noctalia/mpvpaper:picker"; }
+
+  XF86AudioRaiseVolume { spawn "noctalia" "msg" "volume-up"; }
+  XF86AudioLowerVolume { spawn "noctalia" "msg" "volume-down"; }
+  XF86AudioMute { spawn "noctalia" "msg" "volume-mute"; }
+  XF86AudioMicMute { spawn "noctalia" "msg" "mic-mute"; }
+
+  Mod+P { spawn "noctalia" "msg" "media" "toggle"; }
+  Mod+bracketleft { spawn "noctalia" "msg" "media" "previous"; }
+  Mod+bracketright { spawn "noctalia" "msg" "media" "next"; }
+
+  XF86MonBrightnessUp { spawn "noctalia" "msg" "brightness-up"; }
+  XF86MonBrightnessDown { spawn "noctalia" "msg" "brightness-down"; }
+}

@@ -1,18 +1,12 @@
 { pkgs, ... }:
 {
-  # Proper Zed configuration for NixOS
   programs.zed-editor = {
     enable = true;
 
-    # Keep mutable mode: Zed GUI changes (API keys, models) persist across rebuilds
-    # checkLinkTargets conflicts resolved, activation now runs reliably
-
-    # Language servers and tools that Zed needs
     extraPackages = with pkgs; [
       github-mcp-server
     ];
 
-    # Extensions auto-installed on startup
     extensions = [
       "assembly"
       "dockerfile"
@@ -39,124 +33,17 @@
       "verilog"
       "zig"
     ];
-
-    # Main configuration
-    userSettings = {
-      # Use nushell as the default terminal shell
-      terminal = {
-        shell = {
-          program = "${pkgs.nushell}/bin/nu";
-        };
-        copy_on_select = true;
-      };
-
-      colorize_brackets = true;
-      always_treat_brackets_as_autoclosed = true;
-      show_signature_help_after_edits = true;
-
-      # Agent configuration: allow all tools by default, no permission prompts
-      agent = {
-        favorite_models = [ ];
-        model_parameters = [ ];
-        tool_permissions = {
-          default = "allow";
-          tools = { };
-        };
-      };
-
-      # Tab settings
-      tab_size = 4;
-      hard_tabs = false;
-      indent_guides = {
-        enabled = true;
-      };
-
-      # Editor enhancements
-      show_whitespaces = "selection";
-      cursor_blink = false;
-      relative_line_numbers = "disabled";
-      theme = "Noctalia Dark";
-      scrollbar = {
-        show = "auto";
-      };
-    };
-
-    userKeymaps = [
-      {
-        context = "Pane";
-        unbind = {
-          "alt-left" = "pane::GoBack";
-          "alt-right" = "pane::GoForward";
-        };
-      }
-      {
-        context = "EditPredictionContext > Editor";
-        unbind = {
-          "alt-left" = "dev::EditPredictionContextGoBack";
-          "alt-right" = "dev::EditPredictionContextGoForward";
-        };
-      }
-      {
-        context = "Workspace";
-        unbind = {
-          "ctrl-k ctrl-left" = "workspace::ActivatePaneLeft";
-          "ctrl-k ctrl-right" = "workspace::ActivatePaneRight";
-          "ctrl-k ctrl-up" = "workspace::ActivatePaneUp";
-          "ctrl-k ctrl-down" = "workspace::ActivatePaneDown";
-        };
-      }
-      {
-        bindings = {
-          "alt-left" = [
-            "workspace::ActivatePaneInDirection"
-            "Left"
-          ];
-          "alt-right" = [
-            "workspace::ActivatePaneInDirection"
-            "Right"
-          ];
-          "alt-up" = [
-            "workspace::ActivatePaneInDirection"
-            "Up"
-          ];
-          "alt-down" = [
-            "workspace::ActivatePaneInDirection"
-            "Down"
-          ];
-        };
-      }
-      {
-        context = "Workspace";
-        bindings = {
-          "alt-shift-h" = "workspace::ActivatePaneLeft";
-          "alt-shift-l" = "workspace::ActivatePaneRight";
-          "alt-shift-k" = "workspace::ActivatePaneUp";
-          "alt-shift-j" = "workspace::ActivatePaneDown";
-        };
-      }
-      {
-        context = "Terminal";
-        bindings = {
-          "alt-shift-h" = "workspace::ActivatePaneLeft";
-          "alt-shift-l" = "workspace::ActivatePaneRight";
-          "ctrl-v" = "terminal::Paste";
-        };
-      }
-      {
-        context = "Editor && mode == full";
-        bindings = {
-          "alt-shift-h" = "workspace::ActivatePaneLeft";
-          "alt-shift-l" = "workspace::ActivatePaneRight";
-        };
-      }
-    ];
   };
+
+  # Standalone config files — edit zed-settings.json / zed-keymap.json directly
+  xdg.configFile."zed/settings.json".source = ./zed-settings.json;
+  xdg.configFile."zed/keymap.json".source = ./zed-keymap.json;
 
   programs.nushell.extraConfig = ''
     $env.config.buffer_editor = "zeditor";
   '';
 
   home.packages = with pkgs; [
-    package-version-server # which zed required
+    package-version-server
   ];
 }

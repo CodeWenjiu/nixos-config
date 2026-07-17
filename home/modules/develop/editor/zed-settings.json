@@ -1,0 +1,75 @@
+{
+  "language_models": {
+    "opencode": {
+      "show_zen_models": false
+    }
+  },
+  "cli_default_open_behavior": "new_window",
+  "agent": {
+    "sandbox_permissions": {
+      "network_hosts": [
+        "github.com",
+        "raw.githubusercontent.com"
+      ]
+    },
+    "default_model": {
+      "provider": "opencode",
+      "model": "go/glm-5.2",
+      "enable_thinking": false
+    },
+    "favorite_models": [],
+    "model_parameters": [],
+    "tool_permissions": {
+      "default": "allow",
+      "tools": {}
+    }
+  },
+  "always_treat_brackets_as_autoclosed": true,
+  "colorize_brackets": true,
+  "cursor_blink": false,
+  "hard_tabs": false,
+  "indent_guides": {
+    "enabled": true
+  },
+  "relative_line_numbers": "disabled",
+  "scrollbar": {
+    "show": "auto"
+  },
+  "show_signature_help_after_edits": true,
+  "show_whitespaces": "selection",
+  "tab_size": 4,
+  "terminal": {
+    "font_family": "FreeMono",
+    "copy_on_select": true,
+    "shell": {
+      "program": "/nix/store/4winq2kkb7xgm8caab2ips94v0f76anl-nushell-0.114.0/bin/nu"
+    }
+  },
+  "theme": "Noctalia Dark",
+  "auto_install_extensions": {
+    "assembly": true,
+    "dockerfile": true,
+    "git-firefly": true,
+    "glsl": true,
+    "html": true,
+    "json": true,
+    "just": true,
+    "just-ls": true,
+    "log": true,
+    "markdown": true,
+    "mcp-server-context7": true,
+    "mcp-server-github": true,
+    "nix": true,
+    "nu": true,
+    "probe-rs": true,
+    "python": true,
+    "rust": true,
+    "scala": true,
+    "scss": true,
+    "toml": true,
+    "typescript": true,
+    "typst": true,
+    "verilog": true,
+    "zig": true
+  }
+}

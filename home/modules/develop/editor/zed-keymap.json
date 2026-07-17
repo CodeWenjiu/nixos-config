@@ -1,0 +1,67 @@
+[
+  {
+    "bindings": {
+      "alt-down": [
+        "workspace::ActivatePaneInDirection",
+        "Down"
+      ],
+      "alt-left": [
+        "workspace::ActivatePaneInDirection",
+        "Left"
+      ],
+      "alt-right": [
+        "workspace::ActivatePaneInDirection",
+        "Right"
+      ],
+      "alt-up": [
+        "workspace::ActivatePaneInDirection",
+        "Up"
+      ]
+    }
+  },
+  {
+    "context": "EditPredictionContext > Editor",
+    "unbind": {
+      "alt-left": "dev::EditPredictionContextGoBack",
+      "alt-right": "dev::EditPredictionContextGoForward"
+    }
+  },
+  {
+    "bindings": {
+      "alt-shift-h": "workspace::ActivatePaneLeft",
+      "alt-shift-l": "workspace::ActivatePaneRight"
+    },
+    "context": "Editor && mode == full"
+  },
+  {
+    "context": "Pane",
+    "unbind": {
+      "alt-left": "pane::GoBack",
+      "alt-right": "pane::GoForward"
+    }
+  },
+  {
+    "bindings": {
+      "alt-shift-h": "workspace::ActivatePaneLeft",
+      "alt-shift-l": "workspace::ActivatePaneRight",
+      "ctrl-v": "terminal::Paste"
+    },
+    "context": "Terminal"
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "ctrl-k ctrl-down": "workspace::ActivatePaneDown",
+      "ctrl-k ctrl-left": "workspace::ActivatePaneLeft",
+      "ctrl-k ctrl-right": "workspace::ActivatePaneRight",
+      "ctrl-k ctrl-up": "workspace::ActivatePaneUp",
+      "ctrl-t": "project_symbols::Toggle"
+    },
+    "bindings": {
+      "alt-shift-h": "workspace::ActivatePaneLeft",
+      "alt-shift-j": "workspace::ActivatePaneDown",
+      "alt-shift-k": "workspace::ActivatePaneUp",
+      "alt-shift-l": "workspace::ActivatePaneRight"
+    }
+  }
+]
