@@ -25,6 +25,9 @@
     xwayland-satellite
   ];
 
+  # mpv-hook.lua: auto-sync video wallpaper colors to noctalia theme
+  xdg.configFile."mpv/scripts/mpv-hook.lua".source = ./mpv-hook.lua;
+
   programs.noctalia = {
     enable = true;
     systemd.enable = false;

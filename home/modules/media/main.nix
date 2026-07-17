@@ -11,6 +11,7 @@
     ./email.nix
     ./vedio.nix
     ./obs.nix
+    ./fluxdown.nix
   ];
 
   home.packages = with pkgs; [

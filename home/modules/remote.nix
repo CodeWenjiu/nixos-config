@@ -7,4 +7,8 @@
     wev
     tailscale
   ];
+
+  programs.nushell.shellAliases = {
+    sys_keyscan = "wev";
+  };
 }

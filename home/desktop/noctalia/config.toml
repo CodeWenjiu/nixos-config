@@ -18,7 +18,7 @@ position = "left"
 radius = 14
 reserve_space = true
 shadow = true
-start = [ "date", "clock", "weather", "recorder", "notifications", "mpvpaper", "cat" ]
+start = [ "date", "clock", "weather", "recorder", "notifications", "cat" ]
 thickness = 36
 widget_spacing = 5
 
@@ -124,8 +124,8 @@ pinned = [ "clash-verge" ]
 position = "bottom"
 
 [location]
-address = "GuangDong"
-auto_locate = true
+address = "BeiJing"
+auto_locate = false
 
 [lockscreen]
 enabled = true
@@ -174,7 +174,14 @@ video_directory = "/mnt/data/wallpapers/dynamic"
 target_lang = "zh"
 
 [plugins]
-enabled = [ "noctalia/screen_recorder", "noctalia/bongocat", "noctalia/kaomoji", "noctalia/translator", "noctalia/wallhaven" ]
+enabled = [
+    "noctalia/screen_recorder",
+    "noctalia/bongocat",
+    "noctalia/kaomoji",
+    "noctalia/translator",
+    "noctalia/wallhaven",
+    "noctalia/mpvpaper"
+]
 
 [shell]
 avatar_path = "/mnt/data/AvatarImage/avatar.png"
@@ -231,18 +238,22 @@ wallpaper_scheme = "m3-tonal-spot"
     community_ids = [ "zen-browser", "neovim", "obsidian", "vscode", "zed", "discord", "steam", "telegram", "yazi" ]
 
 [wallpaper]
-directory = "/mnt/data/wallpapers"
+directory = "/mnt/data/wallpapers/static"
 enabled = true
 transition_on_startup = true
 
     [wallpaper.default]
-    path = "/mnt/data/wallpapers/1.png"
+    path = "/home/wenjiu/.cache/noctalia/mpvpaper/3c1cc709c7421d82f4596b82e62084c4.jpg"
 
     [wallpaper.last]
-    path = "/mnt/data/wallpapers/1.png"
+    path = "/home/wenjiu/.cache/noctalia/mpvpaper/3c1cc709c7421d82f4596b82e62084c4.jpg"
 
     [wallpaper.monitors.eDP-1]
-    path = "/mnt/data/wallpapers/1.png"
+    path = "/home/wenjiu/.cache/noctalia/mpvpaper/3c1cc709c7421d82f4596b82e62084c4.jpg"
+
+    [[wallpaper.favorite]]
+    path = "/mnt/data/wallpapers/XP-pen-review-artwork-waneella.gif"
+    theme_mode = "auto"
 
 [weather]
 effects = true

@@ -75,11 +75,7 @@
         "Mod+O".action = toggle-overview;
 
         # Screen Shot
-        "XF86SelectiveScreenshot".action = {
-          screenshot = {
-            show-pointer = false;
-          };
-        };
+        "Print".action.screenshot = [ ];
 
         # Others
         "Mod+Shift+S".action = spawn "noctalia" "msg" "session" "lock";
@@ -93,6 +89,7 @@
         "Mod+F".action = spawn "nautilus";
         "Mod+A".action = spawn "noctalia" "msg" "panel-toggle" "launcher";
         "Mod+W".action = spawn "noctalia" "msg" "panel-toggle" "wallpaper";
+        "Mod+Shift+W".action = spawn "noctalia" "msg" "panel-toggle" "noctalia/mpvpaper:picker";
 
         # Volume control
         "XF86AudioRaiseVolume".action = spawn "noctalia" "msg" "volume-up";

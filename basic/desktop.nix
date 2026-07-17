@@ -47,7 +47,6 @@
 
     acpi
     xdg-desktop-portal-gtk
-    xdg-desktop-portal-gnome
   ];
 
   # XDG Portal configuration
