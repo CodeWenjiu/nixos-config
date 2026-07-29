@@ -35,7 +35,7 @@ let
 in
 {
   home.packages = with pkgs; [
-    pavucontrol
+    pwvucontrol
     cnmplayer
   ];
 }

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
   i18n.inputMethod = {
     type = "fcitx5";
@@ -8,6 +8,9 @@
       # ── Engines ────────────────────────────
       fcitx5-rime
       qt6Packages.fcitx5-chinese-addons
+
+      # ── Voice input ─────────────────────────
+      inputs.fcitx5-vinput.packages.${pkgs.stdenv.hostPlatform.system}.default
 
       # ── UI & Themes ────────────────────────
       fcitx5-material-color

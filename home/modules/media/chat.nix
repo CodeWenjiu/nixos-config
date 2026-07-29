@@ -6,7 +6,7 @@
   home.packages = with pkgs; [
     wechat
     # discord
-    telegram-desktop
+    # telegram-desktop
     qq
 
     guvcview

@@ -1,5 +1,4 @@
 {
-  pkgs,
   ...
 }:
 {
@@ -11,11 +10,6 @@
   #   http_proxy = "http://127.0.0.1:7897";
   #   https_proxy = "http://127.0.0.1:7897";
   # };
-
-  environment.systemPackages = with pkgs; [
-    clash-verge-rev
-    keybinder # for global hotkeys
-  ];
 
   programs.clash-verge = {
     enable = true;
