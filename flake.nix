@@ -77,6 +77,9 @@
               };
             }
 
+            # nixpkgs and home-manager both define programs.noctalia — keep flake's
+            { disabledModules = [ "programs/wayland/noctalia.nix" ]; }
+
             inputs.noctalia.nixosModules.default
             vscode-server.nixosModules.default
             (

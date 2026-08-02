@@ -11,15 +11,15 @@ let
 in
 {
   home.packages = with pkgs; [
-    bilibili-latest
+    bilibili
     mpv
   ];
 
-  xdg.desktopEntries.bilibili = {
-    name = "Bilibili";
-    exec = "${bilibili-latest}/bin/bilibili";
-    icon = "bilibili";
-    terminal = false;
-    categories = [ "AudioVideo" "Network" ];
-  };
+  # xdg.desktopEntries.bilibili = {
+  #   name = "Bilibili";
+  #   exec = "${bilibili-latest}/bin/bilibili";
+  #   icon = "bilibili";
+  #   terminal = false;
+  #   categories = [ "AudioVideo" "Network" ];
+  # };
 }
