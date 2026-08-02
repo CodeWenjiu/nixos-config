@@ -15,6 +15,11 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
 
+    # Second, independently-locked nixpkgs pool for slow-moving, non-critical
+    # packages. Main nixpkgs rolls fast; this pool is updated lazily via
+    # `nix flake update nixpkgs-lazy` (see sysup-extra in shell.nix).
+    nixpkgs-lazy.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+
     # boot
     minegrub-theme.url = "github:Lxtharia/minegrub-theme";
 
@@ -47,6 +52,7 @@
       minegrub-theme,
 
       nixpkgs,
+      nixpkgs-lazy,
       # nur,
       vscode-server,
       home-manager,
@@ -64,7 +70,7 @@
         wenjiu = nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = {
-            inherit inputs;
+            inherit inputs nixpkgs-lazy;
           };
           modules = [
             minegrub-theme.nixosModules.default

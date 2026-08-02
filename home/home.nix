@@ -17,6 +17,7 @@
 
   imports = [
     ./modules/remote.nix
+    ./modules/lazy-pool.nix
     ./modules/essential/main.nix
 
     ./modules/media/main.nix

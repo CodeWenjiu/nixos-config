@@ -51,6 +51,45 @@
           sudo nixos-rebuild switch --flake .#($name) --cores $cores --max-jobs 2;
         }
 
+        # Two-tier flake update: core inputs first, peripheral inputs separately.
+        # Each input is updated individually so one broken input never blocks the rest.
+        def --env sysup-core [] {
+          let tier = [nixpkgs home-manager niri noctalia];
+          mut failed: list<string> = [];
+          for input in $tier {
+            nix flake update $input
+            if $env.LAST_EXIT_CODE != 0 {
+              $failed = ($failed | append $input)
+            }
+          }
+          if ($failed | length) > 0 {
+            print -e $"sysup-core: failed to update: ($failed | str join ', ')"
+          } else {
+            print $"sysup-core: updated ($tier | str join ', ')"
+          }
+        }
+
+        def --env sysup-extra [] {
+          # nixpkgs-lazy: slow-moving pool for non-critical packages
+          let tier = [nixpkgs-lazy minegrub-theme vscode-server fcitx5-vinput];
+          mut failed: list<string> = [];
+          for input in $tier {
+            nix flake update $input
+            if $env.LAST_EXIT_CODE != 0 {
+              $failed = ($failed | append $input)
+            }
+          }
+          if ($failed | length) > 0 {
+            print -e $"sysup-extra: failed to update: ($failed | str join ', ')"
+          } else {
+            print $"sysup-extra: updated ($tier | str join ', ')"
+          }
+        }
+
+        def --env sysup-all [] {
+          nix flake update
+        }
+
         pay-respects nushell --alias ...[fuck] | save -f ~/.config/pay-respects.nu
         source ~/.config/pay-respects.nu
       '';
