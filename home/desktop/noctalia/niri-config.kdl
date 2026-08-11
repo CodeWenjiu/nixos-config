@@ -2,6 +2,13 @@ prefer-no-csd
 
 spawn-at-startup "noctalia"
 
+// Show the wallpaper inside the niri overview backdrop
+// (noctalia's built-in backdrop, or the mpvpaper dynamic wallpaper plugin)
+layer-rule {
+  match namespace="^(noctalia-backdrop|mpvpaper)$"
+  place-within-backdrop true
+}
+
 blur {
   passes 3
   offset 2.3
