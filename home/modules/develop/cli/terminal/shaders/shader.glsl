@@ -1,28 +1,5 @@
 // based on https://gist.github.com/chardskarth/95874c54e29da6b5a36ab7b50ae2d088
 
-// CRT barrel distortion - warps UV to simulate curved screen
-const float CRT_CURVATURE = 0.06;
-
-vec2 applyCRT(vec2 fragCoord) {
-    vec2 uv = fragCoord / iResolution.xy;
-    vec2 centered = uv - 0.5;
-    float r2 = dot(centered, centered);
-    return uv + centered * CRT_CURVATURE * r2;
-}
-
-// Chromatic aberration - shifts R/B channels at screen edges
-const float CA_STRENGTH = 0.0025;
-
-vec4 applyCA(vec2 uv) {
-    vec4 color = texture(iChannel0, uv);
-    float dist = length(uv - 0.5);
-    vec2 dir = normalize(uv - 0.5 + vec2(0.0001));
-    vec2 offset = dir * CA_STRENGTH * dist;
-    color.r = texture(iChannel0, uv + offset).r;
-    color.b = texture(iChannel0, uv - offset).b;
-    return color;
-}
-
 // Glow effect constants
 const vec2 GLOW_STEP_BASE = vec2(2.0);
 const float GLOW_CONTRIBUTION = 0.15;
@@ -219,43 +196,14 @@ vec4 applySpotlight(vec4 color, vec2 fragCoord) {
     return color;
 }
 
-// Scanlines, vignette and film grain post-processing
-const float SCANLINE_STRENGTH = 0.12;
-const float VIGNETTE_STRENGTH = 0.30;
-const float GRAIN_STRENGTH = 0.025;
-
-float hash12(vec2 p) {
-    return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
-}
-
-vec4 applyPost(vec4 color, vec2 fragCoord) {
-    vec2 uv = fragCoord / iResolution.xy;
-
-    // Scanlines
-    float scanline = 1.0 - SCANLINE_STRENGTH * (1.0 - abs(sin(fragCoord.y * 1.8)));
-    color.rgb *= scanline;
-
-    // Vignette
-    float dist = length(uv - 0.5) * 1.3;
-    float vignette = 1.0 - smoothstep(0.5, 1.0, dist) * VIGNETTE_STRENGTH;
-    color.rgb *= vignette;
-
-    // Film grain
-    float grain = hash12(uv.yx + fract(iTime * 0.05)) * GRAIN_STRENGTH;
-    grain -= GRAIN_STRENGTH * 0.5;
-    color.rgb += grain;
-
-    return color;
-}
-
 void mainImage(out vec4 fragColor, in vec2 fragCoord) {
     vec2 uv = fragCoord / iResolution.xy;
-    vec2 warpedUV = applyCRT(fragCoord);
 
-    fragColor = applyCA(warpedUV);
-    fragColor = applyGlow(fragColor, warpedUV);
-    fragColor = applyTrail(fragColor, fragCoord);
-    fragColor = applyEdgeGlow(fragColor, warpedUV);
-    fragColor = applySpotlight(fragColor, fragCoord);
-    fragColor = applyPost(fragColor, fragCoord);
+    // Start from the raw terminal frame, then layer effects on top
+    vec4 color = texture(iChannel0, uv);
+    color = applyGlow(color, uv);
+    color = applyTrail(color, fragCoord);
+    color = applyEdgeGlow(color, uv);
+    color = applySpotlight(color, fragCoord);
+    fragColor = color;
 }

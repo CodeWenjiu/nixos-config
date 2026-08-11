@@ -18,7 +18,7 @@ position = "left"
 radius = 14
 reserve_space = true
 shadow = true
-start = [ "date", "clock", "weather", "recorder", "notifications", "cat" ]
+start = [ "date", "clock", "weather", "recorder", "notifications", "cat", "wallhaven" ]
 thickness = 36
 widget_spacing = 5
 
@@ -117,15 +117,18 @@ widget_order = [ "media_player_main", "weather_main", "desktop-widget-0000000000
         show_forecast = true
 
 [dock]
-auto_hide = true
+auto_hide = false
 background_opacity = 0.29999999999999999
-enabled = false
-pinned = [ "clash-verge" ]
+enabled = true
+pinned = []
 position = "bottom"
+reserve_space = false
+show_dots = true
+smart_auto_hide = true
 
 [location]
 address = "BeiJing"
-auto_locate = false
+auto_locate = true
 
 [lockscreen]
 enabled = true
@@ -235,7 +238,21 @@ wallpaper_scheme = "m3-tonal-spot"
         "sway",
         "wezterm"
     ]
-    community_ids = [ "zen-browser", "neovim", "obsidian", "vscode", "zed", "discord", "steam", "telegram", "yazi" ]
+    community_ids = [
+        "pear-desktop",
+        "spicetify",
+        "zen-browser",
+        "neovim",
+        "obsidian",
+        "vscode",
+        "zed",
+        "discord",
+        "lazygit",
+        "obs",
+        "steam",
+        "telegram",
+        "yazi"
+    ]
 
 [wallpaper]
 directory = "/mnt/data/wallpapers/static"
@@ -268,3 +285,6 @@ type = "noctalia/mpvpaper:mpvpaper"
 
 [widget.recorder]
 type = "noctalia/screen_recorder:recorder"
+
+[widget.wallhaven]
+type = "noctalia/wallhaven:wallhaven"
