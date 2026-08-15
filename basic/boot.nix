@@ -40,5 +40,8 @@
 
   programs.nix-ld.enable = true;
 
-  zramSwap.enable = true;
+  zramSwap = {
+      enable = true;
+      memoryPercent = 100;
+  };
 }

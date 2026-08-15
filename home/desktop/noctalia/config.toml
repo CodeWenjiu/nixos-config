@@ -177,14 +177,7 @@ video_directory = "/mnt/data/wallpapers/dynamic"
 target_lang = "zh"
 
 [plugins]
-enabled = [
-    "noctalia/screen_recorder",
-    "noctalia/bongocat",
-    "noctalia/kaomoji",
-    "noctalia/translator",
-    "noctalia/wallhaven",
-    "noctalia/mpvpaper"
-]
+enabled = [ "noctalia/screen_recorder", "noctalia/kaomoji", "noctalia/translator", "noctalia/mpvpaper" ]
 
 [shell]
 avatar_path = "/mnt/data/AvatarImage/avatar.png"
@@ -260,13 +253,13 @@ enabled = true
 transition_on_startup = true
 
     [wallpaper.default]
-    path = "/home/wenjiu/.cache/noctalia/mpvpaper/3c1cc709c7421d82f4596b82e62084c4.jpg"
+    path = "/home/wenjiu/.cache/noctalia/mpvpaper/c0a46c46d52f122c3b3ea1055bbbecb9.jpg"
 
     [wallpaper.last]
-    path = "/home/wenjiu/.cache/noctalia/mpvpaper/3c1cc709c7421d82f4596b82e62084c4.jpg"
+    path = "/home/wenjiu/.cache/noctalia/mpvpaper/c0a46c46d52f122c3b3ea1055bbbecb9.jpg"
 
     [wallpaper.monitors.eDP-1]
-    path = "/home/wenjiu/.cache/noctalia/mpvpaper/3c1cc709c7421d82f4596b82e62084c4.jpg"
+    path = "/home/wenjiu/.cache/noctalia/mpvpaper/c0a46c46d52f122c3b3ea1055bbbecb9.jpg"
 
     [[wallpaper.favorite]]
     path = "/mnt/data/wallpapers/XP-pen-review-artwork-waneella.gif"
