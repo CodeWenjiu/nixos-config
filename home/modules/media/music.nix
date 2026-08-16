@@ -1,13 +1,27 @@
-{
-  pkgs,
-  ...
-}:
+{ pkgs, ... }:
+
+# ── How to bump pigma ────────────────────────────────────────────
+# 1. Set version and rev to the new tag (e.g. v0.3.0), then set the
+#    pigma-src hash to `pkgs.lib.fakeHash` and build once; the error
+#    prints the correct hash ("got: sha256-..."). Same trick for y7dl.
+# 2. Check whether the y7dl submodule pin moved at the new tag:
+#      git clone -q --filter=blob:none --no-checkout --depth 1 \
+#        --branch v0.3.0 https://github.com/akirco/pigma.git /tmp/pigma
+#      git -C /tmp/pigma ls-tree v0.3.0 crates/y7dl
+#      git -C /tmp/pigma show v0.3.0:.gitmodules
+#    - same SHA  -> y7dl-src unchanged
+#    - new SHA   -> update rev and re-fetch its hash
+#    - new submodules -> add another fetch + `cp` in the runCommand below
+# 3. Rust deps need no manual hash: cargoLock.lockFile derives everything
+#    from the lockfile checksums. If the build fails on a missing system
+#    lib, add it to buildInputs (compile-time) and rely on autoPatchelfHook
+#    to complain about runtime misses.
 let
   pigma-src = pkgs.fetchFromGitHub {
     owner = "akirco";
     repo = "pigma";
-    rev = "v0.2.8";
-    hash = "sha256-1IqdnpCFVkOpp2YnjGi0TkZB6ZqDv0ZxPEPSoC83rRA=";
+    rev = "v0.2.11";
+    hash = "sha256-RkLO2LALxIa7nxdEIkE48RkDwNJUXH55QLUGkYVHU30=";
   };
 
   # crates/y7dl is a git submodule pinned to this commit (gitlink at v0.2.8).
@@ -29,7 +43,7 @@ let
 
   pigma = pkgs.rustPlatform.buildRustPackage {
     pname = "pigma";
-    version = "0.2.8";
+    version = "0.2.11";
     inherit src;
 
     cargoLock = {
