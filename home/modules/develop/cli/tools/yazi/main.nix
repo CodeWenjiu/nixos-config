@@ -17,20 +17,20 @@
       };
 
       plugin = {
-        prepend_fetchers = [
-          {
-            id = "git";
-            url = "*";
-            run = "git";
-            group = "file";
-          }
-          {
-            id = "git";
-            url = "*/";
-            run = "git";
-            group = "directory";
-          }
-        ];
+        # prepend_fetchers = [
+        #   {
+        #     id = "git";
+        #     url = "*";
+        #     run = "git";
+        #     group = "file";
+        #   }
+        #   {
+        #     id = "git";
+        #     url = "*/";
+        #     run = "git";
+        #     group = "directory";
+        #   }
+        # ];
 
         prepend_previewers = [
           {
