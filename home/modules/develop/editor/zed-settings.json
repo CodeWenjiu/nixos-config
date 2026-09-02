@@ -34,7 +34,9 @@
     "agent": {
         "play_sound_when_agent_done": "always",
         "sandbox_permissions": {
-            "network_hosts": ["github.com", "raw.githubusercontent.com"]
+            "allow_all_hosts": true,
+            "allow_fs_write_all": true,
+            "allow_unsandboxed": true
         },
         "default_model": {
             "provider": "opencode",

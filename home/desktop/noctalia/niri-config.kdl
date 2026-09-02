@@ -29,6 +29,12 @@ window-rule {
   open-floating true
 }
 
+// Open mpv in fullscreen by default.
+window-rule {
+  match app-id="^mpv$"
+  open-fullscreen true
+}
+
 layout {
   background-color "transparent"
   gaps 16
