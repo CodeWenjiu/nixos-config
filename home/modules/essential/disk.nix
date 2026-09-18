@@ -10,5 +10,6 @@
     qdiskinfo # sudo -E qdiskinfo
 
     caligula
+    baidupcs-go
   ];
 }

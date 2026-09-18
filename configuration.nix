@@ -45,10 +45,19 @@
   };
 
   # flake
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
+  nix.settings = {
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+
+    # 国内二进制缓存镜像（TUNA），官方源兜底。
+    # 镜像内容与官方 cache.nixos.org 签名一致，无需额外信任 key。
+    substituters = [
+      "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
+      "https://cache.nixos.org"
+    ];
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

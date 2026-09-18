@@ -54,5 +54,12 @@
 
     # Uosc replaces the default OSC automatically (it sets osc=no itself),
     # so no need to set osc=false here.
+
+    bindings = {
+      # Shift+Right/Left: speed up / slow down playback.
+      # Matches uosc's default speed_step of 0.1 (non-factor).
+      "Shift+RIGHT" = "add speed 0.1";
+      "Shift+LEFT" = "add speed -0.1";
+    };
   };
 }

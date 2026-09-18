@@ -1,23 +1,16 @@
 {
+    "proxy": "",
     "language_models": {
+        "opencode": {
+            "show_zen_models": false
+        },
         "anthropic_compatible": {
-            "volcengine": {
+            "volceingine": {
                 "api_url": "https://ark.cn-beijing.volces.com/api/coding",
                 "available_models": [
                     {
-                        "name": "deepseek-v4-pro",
-                        "max_tokens": 1048576,
-                        "max_output_tokens": 384000,
-                        "extra_beta_headers": [],
-                        "capabilities": {
-                            "tools": true,
-                            "images": false,
-                            "prompt_caching": false
-                        }
-                    },
-                    {
                         "name": "deepseek-v4-flash",
-                        "max_tokens": 1048576,
+                        "max_tokens": 1000000,
                         "max_output_tokens": 384000,
                         "extra_beta_headers": [],
                         "capabilities": {
@@ -28,7 +21,7 @@
                     }
                 ]
             }
-        }
+        },
     },
     "cli_default_open_behavior": "new_window",
     "agent": {
@@ -37,11 +30,6 @@
             "allow_all_hosts": true,
             "allow_fs_write_all": true,
             "allow_unsandboxed": true
-        },
-        "default_model": {
-            "provider": "opencode",
-            "model": "go/glm-5.2",
-            "enable_thinking": false
         },
         "favorite_models": [],
         "model_parameters": [],
