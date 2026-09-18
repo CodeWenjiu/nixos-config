@@ -71,7 +71,7 @@
 
         def --env sysup-extra [] {
           # nixpkgs-lazy: slow-moving pool for non-critical packages
-          let tier = [nixpkgs-lazy minegrub-theme vscode-server fcitx5-vinput];
+          let tier = [nixpkgs-lazy minegrub-theme vscode-server];
           mut failed: list<string> = [];
           for input in $tier {
             nix flake update $input
