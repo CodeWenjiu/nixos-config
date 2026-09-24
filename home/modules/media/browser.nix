@@ -1,13 +1,9 @@
 {
-  pkgs,
   config,
   ...
 }:
 {
-  home.packages = with pkgs; [
-    firefox
-  ];
-
+  # firefox is installed via programs.firefox below
   programs.firefox = {
     enable = true;
     configPath = "${config.xdg.configHome}/mozilla/firefox";

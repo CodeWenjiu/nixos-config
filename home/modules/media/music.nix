@@ -20,8 +20,8 @@ let
   pigma-src = pkgs.fetchFromGitHub {
     owner = "akirco";
     repo = "pigma";
-    rev = "v0.2.11";
-    hash = "sha256-RkLO2LALxIa7nxdEIkE48RkDwNJUXH55QLUGkYVHU30=";
+    rev = "v0.2.14";
+    hash = "sha256-vNbNZpacTBQfH8KWSu4rDQubMMfNXjTZ5TQ2XbaYTi8=";
   };
 
   # crates/y7dl is a git submodule pinned to this commit (gitlink at v0.2.8).
@@ -43,7 +43,7 @@ let
 
   pigma = pkgs.rustPlatform.buildRustPackage {
     pname = "pigma";
-    version = "0.2.11";
+    version = "0.2.14";
     inherit src;
 
     cargoLock = {
@@ -63,10 +63,64 @@ let
 
     doCheck = false;
   };
+
+  # ── voicefox ────────────────────────────────────────────────────
+  # TUI music player (Rust workspace; only the `app` crate produces
+  # the `voicefox` binary). Links system libmpv via mpv-unwrapped;
+  # openssl is needed because reqwest's default TLS pulls in
+  # openssl-sys. To bump: set version/rev below, then set `hash` to
+  # pkgs.lib.fakeHash, rebuild once and paste the reported hash.
+  voicefox-src = pkgs.fetchFromGitHub {
+    owner = "emoeem";
+    repo = "voicefox";
+    rev = "v0.3.16";
+    hash = "sha256-ioYGFX8VDxTVQG6jJbck6Hw3dTfn5ONNWTh2Y484d+A=";
+  };
+
+  voicefox = pkgs.rustPlatform.buildRustPackage {
+    pname = "voicefox";
+    version = "0.3.16";
+
+    src = voicefox-src;
+
+    cargoLock = {
+      lockFile = "${voicefox-src}/Cargo.lock";
+    };
+
+    # Only the `voicefox` bin: the workspace also ships a
+    # src/bin/search_filter_bench.rs debug tool we don't want installed.
+    cargoBuildFlags = [
+      "-p"
+      "voicefox-app"
+      "--bin"
+      "voicefox"
+    ];
+
+    nativeBuildInputs = with pkgs; [
+      autoPatchelfHook
+      pkg-config
+    ];
+
+    buildInputs = with pkgs; [
+      mpv-unwrapped
+      openssl
+      stdenv.cc.cc.lib
+    ];
+
+    doCheck = false;
+
+    meta = {
+      description = "Terminal music player with multi-source search and libmpv playback";
+      homepage = "https://github.com/emoeem/voicefox";
+      license = pkgs.lib.licenses.mit;
+      mainProgram = "voicefox";
+    };
+  };
 in
 {
   home.packages = with pkgs; [
     pwvucontrol
     pigma
+    # voicefox
   ];
 }

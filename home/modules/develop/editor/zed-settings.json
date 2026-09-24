@@ -1,8 +1,65 @@
 {
     "proxy": "",
     "language_models": {
-        "opencode": {
-            "show_zen_models": false
+        "openai_compatible": {
+            "qwen": {
+                "api_url": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+                "available_models": [
+                    {
+                        "name": "qwen3.8-flash",
+                        "max_tokens": 1000000,
+                        "max_output_tokens": 131000,
+                        "max_completion_tokens": 131000,
+                        "reasoning_effort": "max",
+                        "capabilities": {
+                            "tools": true,
+                            "images": true,
+                            "parallel_tool_calls": true,
+                            "prompt_cache_key": true,
+                            "chat_completions": false,
+                            "interleaved_reasoning": true,
+                            "max_tokens_parameter": false
+                        }
+                    },
+                    {
+                        "name": "deepseek-v4.1-flash",
+                        "max_tokens": 1000000,
+                        "max_output_tokens": 393000,
+                        "max_completion_tokens": 393000,
+                        "reasoning_effort": "max",
+                        "capabilities": {
+                            "tools": true,
+                            "images": true,
+                            "parallel_tool_calls": true,
+                            "prompt_cache_key": true,
+                            "chat_completions": false,
+                            "interleaved_reasoning": true,
+                            "max_tokens_parameter": false
+                        }
+                    }
+                ]
+            },
+            "dpsk": {
+                "api_url": "https://api.deepseek.com",
+                "available_models": [
+                    {
+                        "name": "deepseek-flash",
+                        "max_tokens": 1000000,
+                        "max_output_tokens": 384000,
+                        "max_completion_tokens": 384000,
+                        "reasoning_effort": "max",
+                        "capabilities": {
+                            "tools": true,
+                            "images": true,
+                            "parallel_tool_calls": true,
+                            "prompt_cache_key": true,
+                            "chat_completions": false,
+                            "interleaved_reasoning": true,
+                            "max_tokens_parameter": false
+                        }
+                    }
+                ]
+            }
         },
         "anthropic_compatible": {
             "volceingine": {
@@ -22,6 +79,9 @@
                 ]
             }
         },
+        "opencode": {
+            "show_zen_models": false
+        }
     },
     "cli_default_open_behavior": "new_window",
     "agent": {
@@ -30,6 +90,12 @@
             "allow_all_hosts": true,
             "allow_fs_write_all": true,
             "allow_unsandboxed": true
+        },
+        "default_model": {
+            "effort": "max",
+            "provider": "qwen",
+            "model": "deepseek-v4.1-flash",
+            "enable_thinking": true
         },
         "favorite_models": [],
         "model_parameters": [],

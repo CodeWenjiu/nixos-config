@@ -96,6 +96,9 @@
               home-manager.useGlobalPkgs = false;
               home-manager.useUserPackages = true;
               home-manager.backupFileExtension = "backup";
+              # Apps (zed, etc.) rewrite their HM-managed files in place;
+              # clobber stale .backup files instead of aborting activation.
+              home-manager.overwriteBackup = true;
 
               home-manager.extraSpecialArgs = {
                 inherit inputs;

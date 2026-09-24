@@ -21,7 +21,7 @@
       keybind = ctrl+shift+alt+j=new_split:down
       keybind = ctrl+shift+alt+k=new_split:up
       keybind = ctrl+shift+alt+l=new_split:right
-      keybind = ctrl+shift+alt+q=close_surface
+      keybind = ctrl+shift+alt+c=close_surface
 
       keybind = shift+alt+h=goto_split:left
       keybind = shift+alt+j=goto_split:down

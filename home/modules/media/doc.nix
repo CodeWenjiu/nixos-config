@@ -8,6 +8,7 @@
     obsidian
     feishu
     wpsoffice-cn
-    onlyoffice-desktopeditors
+    # onlyoffice-desktopeditors
+    zathura
   ];
 }

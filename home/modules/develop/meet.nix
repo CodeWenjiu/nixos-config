@@ -3,6 +3,8 @@
   ...
 }:
 {
+    wenjiu.lazyPackages = [ "wemeet" ];
+
   home.packages = with pkgs; [
     wemeet
   ];
