@@ -9,6 +9,7 @@ in
   # status bar
   imports = [
     ./${configer}/main.nix
+    ./clash-verge/main.nix
   ];
 
   home.packages = with pkgs; [
