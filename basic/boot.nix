@@ -40,6 +40,11 @@
 
   programs.nix-ld.enable = true;
 
+  programs.nix-ld.libraries = with pkgs; [
+    libinput libxkbcommon fontconfig freetype
+    libgbm libdrm expat libpng
+  ];
+
   zramSwap = {
       enable = true;
       memoryPercent = 100;

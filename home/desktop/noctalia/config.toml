@@ -59,6 +59,8 @@ widget_order = [ "media_player_main", "weather_main", "desktop-widget-0000000000
     cx = 171.0
     cy = 924.5
     output = "eDP-1"
+    placement_height = 1029.0
+    placement_width = 1646.0
     rotation = 0.0
     type = "sysmon"
 
@@ -77,6 +79,8 @@ widget_order = [ "media_player_main", "weather_main", "desktop-widget-0000000000
     cx = 823.0
     cy = 514.5
     output = "eDP-1"
+    placement_height = 1029.0
+    placement_width = 1646.0
     rotation = 0.0
     type = "fancy_audio_visualizer"
 
@@ -86,8 +90,9 @@ widget_order = [ "media_player_main", "weather_main", "desktop-widget-0000000000
         bloom_intensity = 0.20000000000000001
         inner_diameter = 0.70000000000000007
         ring_opacity = 0.5
-        sensitivity = 3.0
-        visualization_mode = "bars_rings"
+        rotation_speed = 0.0
+        sensitivity = 1.0
+        visualization_mode = "wave_rings"
 
     [desktop_widgets.widget.media_player_main]
     box_height = 0.0
@@ -95,6 +100,8 @@ widget_order = [ "media_player_main", "weather_main", "desktop-widget-0000000000
     cx = 1431.0
     cy = 924.5
     output = "eDP-1"
+    placement_height = 1029.0
+    placement_width = 1646.0
     rotation = 0.0
     scale = 1.0
     type = "media_player"
@@ -108,6 +115,8 @@ widget_order = [ "media_player_main", "weather_main", "desktop-widget-0000000000
     cx = 1494.0
     cy = 738.5
     output = "eDP-1"
+    placement_height = 1029.0
+    placement_width = 1646.0
     rotation = 0.0
     scale = 1.0
     type = "weather"
@@ -144,11 +153,13 @@ widget_order = [ "lockscreen-login-box@eDP-1" ]
     visible = true
 
     [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
-    box_height = 70.0
-    box_width = 400.0
+    box_height = 196.0
+    box_width = 720.0
     cx = 823.0
     cy = 910.0
     output = "eDP-1"
+    placement_height = 1029.0
+    placement_width = 1646.0
     rotation = 0.0
     type = "login_box"
 
@@ -156,9 +167,17 @@ widget_order = [ "lockscreen-login-box@eDP-1" ]
         background_color = "surface_variant"
         background_opacity = 0.88
         background_radius = 12.0
+        center_password_text = false
         input_opacity = 1.0
         input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
         show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
 
 [nightlight]
 enabled = true
@@ -206,7 +225,7 @@ builtin = "Noctalia"
 community_palette = "Oxocarbon"
 mode = "dark"
 source = "wallpaper"
-wallpaper_scheme = "m3-tonal-spot"
+wallpaper_scheme = "soft"
 
     [theme.templates]
     builtin_ids = [
@@ -263,6 +282,10 @@ transition_on_startup = true
 
     [[wallpaper.favorite]]
     path = "/mnt/data/wallpapers/XP-pen-review-artwork-waneella.gif"
+    theme_mode = "auto"
+
+    [[wallpaper.favorite]]
+    path = "/mnt/data/wallpapers/static/1293932.jpg"
     theme_mode = "auto"
 
 [weather]

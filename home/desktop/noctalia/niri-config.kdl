@@ -2,10 +2,12 @@ prefer-no-csd
 
 spawn-at-startup "noctalia"
 
-// Show the wallpaper inside the niri overview backdrop
-// (noctalia's built-in backdrop, or the mpvpaper dynamic wallpaper plugin)
+// Show the wallpaper inside the niri overview backdrop.
+// noctalia-wallpaper is noctalia's real wallpaper layer (static wallpapers),
+// noctalia-backdrop is its blurred/tinted copy and only exists while
+// [backdrop] is enabled in noctalia's config, mpvpaper is the video wallpaper.
 layer-rule {
-  match namespace="^(noctalia-backdrop|mpvpaper)$"
+  match namespace="^(noctalia-wallpaper|noctalia-backdrop|mpvpaper)"
   place-within-backdrop true
 }
 
