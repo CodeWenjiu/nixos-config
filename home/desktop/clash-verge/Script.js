@@ -8,12 +8,22 @@
 // silently applying a config without the tailnet fixes.
 
 function main(config, profileName) {
-  // 1. Tailscale's control plane and DERP servers are ordinary internet
-  //    traffic. Without a rule they fall into the catch-all proxy group, so
-  //    with TUN on they would be tunnelled through the subscription's node.
+  // 1. Rules that must not ride the subscription's routing.
   var direct = [
+    // Tailscale's control plane and DERP servers are ordinary internet
+    // traffic. Without a rule they fall into the catch-all proxy group, so
+    // with TUN on they would be tunnelled through the subscription's node.
     'DOMAIN-SUFFIX,tailscale.com,DIRECT',
     'DOMAIN-SUFFIX,tailscale.io,DIRECT',
+    // Personal model relay on Zeabur. It answers with different ingress IPs
+    // depending on the resolver: CN resolvers (and mihomo's own, with the
+    // policy below) return a Tencent IP that is fine to reach directly, while
+    // the relay nodes' overseas resolvers return Azure JP addresses that are
+    // not directly reachable from here - and that the nodes themselves
+    // intermittently fail to dial ("dial tcp 20.x:443: i/o timeout"). Without
+    // a rule it rides the catch-all group, so under TUN a model request dies
+    // whenever the auto-selected node cannot reach the Azure answer.
+    'DOMAIN-SUFFIX,xin1122.zeabur.app,DIRECT',
   ];
   var rules = (config.rules || []).filter(function (r) {
     return direct.indexOf(r) === -1;
@@ -41,6 +51,15 @@ function main(config, profileName) {
   config.dns['nameserver-policy']["+.ts.net"] = [
     '100.100.100.100',
     '199.247.155.53',
+  ];
+
+  // 4. Drive the relay above straight at its Tencent ingress. mihomo races
+  //    all of its nameservers, and 8.8.8.8's global view can return the Azure
+  //    addresses that are not reachable directly from here; pinning both the
+  //    resolution and the route to the CN side keeps the two consistent.
+  config.dns['nameserver-policy']["+.xin1122.zeabur.app"] = [
+    'https://doh.pub/dns-query',
+    'https://dns.alidns.com/dns-query',
   ];
 
   return config;
