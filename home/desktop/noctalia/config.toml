@@ -181,6 +181,7 @@ widget_order = [ "lockscreen-login-box@eDP-1" ]
 
 [nightlight]
 enabled = true
+force = true
 
 [notification]
 enable_daemon = true
@@ -272,13 +273,13 @@ enabled = true
 transition_on_startup = true
 
     [wallpaper.default]
-    path = "/home/wenjiu/.cache/noctalia/mpvpaper/c0a46c46d52f122c3b3ea1055bbbecb9.jpg"
+    path = "/mnt/data/wallpapers/static/ark.png"
 
     [wallpaper.last]
-    path = "/home/wenjiu/.cache/noctalia/mpvpaper/c0a46c46d52f122c3b3ea1055bbbecb9.jpg"
+    path = "/mnt/data/wallpapers/static/ark.png"
 
     [wallpaper.monitors.eDP-1]
-    path = "/home/wenjiu/.cache/noctalia/mpvpaper/c0a46c46d52f122c3b3ea1055bbbecb9.jpg"
+    path = "/mnt/data/wallpapers/static/ark.png"
 
     [[wallpaper.favorite]]
     path = "/mnt/data/wallpapers/XP-pen-review-artwork-waneella.gif"
@@ -286,6 +287,10 @@ transition_on_startup = true
 
     [[wallpaper.favorite]]
     path = "/mnt/data/wallpapers/static/1293932.jpg"
+    theme_mode = "auto"
+
+    [[wallpaper.favorite]]
+    path = "/mnt/data/wallpapers/static/5.png"
     theme_mode = "auto"
 
 [weather]
