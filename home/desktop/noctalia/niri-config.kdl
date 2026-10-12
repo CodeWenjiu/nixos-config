@@ -11,6 +11,13 @@ layer-rule {
   place-within-backdrop true
 }
 
+// Keep the niri-zoom magnifier overlay out of automated screencopy captures
+// (grim, OBS) while it is up. Interactive screenshots still see it.
+layer-rule {
+  match namespace="^niri-zoom$"
+  block-out-from "screen-capture"
+}
+
 blur {
   passes 3
   offset 2.3
@@ -111,6 +118,18 @@ binds {
   Mod+A { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
   Mod+W { spawn "noctalia" "msg" "panel-toggle" "wallpaper"; }
   Mod+Shift+W { spawn "noctalia" "msg" "panel-toggle" "noctalia/mpvpaper:picker"; }
+
+  // niri-zoom: zoom with Ctrl+scroll (view follows the cursor), Ctrl+Mod+Z
+  // resets and closes. niri treats mouse wheel and touchpad scrolling as
+  // separate bindings; the touchpad ones follow natural-scroll (enabled
+  // here), so swiping down zooms in, the way rolling the wheel away does.
+  // cooldown-ms=0, otherwise niri throttles the scroll events and zooming
+  // feels sluggish.
+  CTRL+WheelScrollUp cooldown-ms=0 { spawn "niri-zoomctl" "in"; }
+  CTRL+WheelScrollDown cooldown-ms=0 { spawn "niri-zoomctl" "out"; }
+  CTRL+TouchpadScrollUp cooldown-ms=0 { spawn "niri-zoomctl" "in"; }
+  CTRL+TouchpadScrollDown cooldown-ms=0 { spawn "niri-zoomctl" "out"; }
+  CTRL+Mod+Z { spawn "niri-zoomctl" "reset"; }
 
   XF86AudioRaiseVolume { spawn "noctalia" "msg" "volume-up"; }
   XF86AudioLowerVolume { spawn "noctalia" "msg" "volume-down"; }

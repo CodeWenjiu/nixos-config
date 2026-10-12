@@ -4,35 +4,16 @@
   pkgs,
   ...
 }:
-let
-  proxy = "http://127.0.0.1:7897";
-  # Tailnet, loopback and LAN must never go through the proxy.
-  noProxy = lib.concatStringsSep "," [
-    "localhost"
-    "127.0.0.1"
-    "::1"
-    ".ts.net" # MagicDNS names
-    "100.64.0.0/10" # tailnet + MagicDNS
-    "10.0.0.0/8"
-    "172.16.0.0/12"
-    "192.168.0.0/16"
-  ];
-in
 {
-  # Clash Verge's "system proxy" only reaches applications that read dconf's
-  # GNOME proxy keys (GTK/libsoup); browsers keep their own settings and
-  # everything else - curl, git, electron apps - needs it in the environment.
-  environment.variables = {
-    HTTP_PROXY = proxy;
-    HTTPS_PROXY = proxy;
-    http_proxy = proxy;
-    https_proxy = proxy;
-    ALL_PROXY = "socks5://127.0.0.1:7897";
-    all_proxy = "socks5://127.0.0.1:7897";
-    NO_PROXY = noProxy;
-    no_proxy = noProxy;
-  };
-
+  # Deliberately no HTTP_PROXY/ALL_PROXY environment variables: a static
+  # proxy address makes every process that inherits it (curl, git, Zed,
+  # Electron apps) depend on the core staying up. Clash Verge's exit stops
+  # the core and closes the mixed port, and those processes then keep
+  # dialling 127.0.0.1:7897 - the machine reads as "no network" until clash
+  # is started again. While clash runs, TUN mode covers transparent routing,
+  # and Clash Verge's own "system proxy" toggle covers GUI apps (it resets
+  # that toggle on exit itself). Export proxies per-shell when they are
+  # wanted, e.g. `export HTTPS_PROXY=http://127.0.0.1:7897`.
   programs.clash-verge = {
     enable = true;
     autoStart = true;

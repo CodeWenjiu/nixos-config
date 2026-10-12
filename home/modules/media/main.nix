@@ -11,6 +11,7 @@
     ./email.nix
     ./vedio.nix
     ./obs.nix
+    ./niri-zoom.nix
     ./fluxdown.nix
   ];
 
