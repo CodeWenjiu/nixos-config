@@ -125,10 +125,10 @@ binds {
   // here), so swiping down zooms in, the way rolling the wheel away does.
   // cooldown-ms=0, otherwise niri throttles the scroll events and zooming
   // feels sluggish.
-  CTRL+WheelScrollUp cooldown-ms=0 { spawn "niri-zoomctl" "in"; }
-  CTRL+WheelScrollDown cooldown-ms=0 { spawn "niri-zoomctl" "out"; }
-  CTRL+TouchpadScrollUp cooldown-ms=0 { spawn "niri-zoomctl" "in"; }
-  CTRL+TouchpadScrollDown cooldown-ms=0 { spawn "niri-zoomctl" "out"; }
+  CTRL+Mod+WheelScrollUp cooldown-ms=0 { spawn "niri-zoomctl" "in"; }
+  CTRL+Mod+WheelScrollDown cooldown-ms=0 { spawn "niri-zoomctl" "out"; }
+  CTRL+Mod+TouchpadScrollUp cooldown-ms=0 { spawn "niri-zoomctl" "in"; }
+  CTRL+Mod+TouchpadScrollDown cooldown-ms=0 { spawn "niri-zoomctl" "out"; }
   CTRL+Mod+Z { spawn "niri-zoomctl" "reset"; }
 
   XF86AudioRaiseVolume { spawn "noctalia" "msg" "volume-up"; }

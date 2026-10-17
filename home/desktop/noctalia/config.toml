@@ -273,13 +273,13 @@ enabled = true
 transition_on_startup = true
 
     [wallpaper.default]
-    path = "/mnt/data/wallpapers/static/ark.png"
+    path = "/home/wenjiu/.cache/noctalia/mpvpaper/c0a46c46d52f122c3b3ea1055bbbecb9.jpg"
 
     [wallpaper.last]
-    path = "/mnt/data/wallpapers/static/ark.png"
+    path = "/home/wenjiu/.cache/noctalia/mpvpaper/c0a46c46d52f122c3b3ea1055bbbecb9.jpg"
 
     [wallpaper.monitors.eDP-1]
-    path = "/mnt/data/wallpapers/static/ark.png"
+    path = "/home/wenjiu/.cache/noctalia/mpvpaper/c0a46c46d52f122c3b3ea1055bbbecb9.jpg"
 
     [[wallpaper.favorite]]
     path = "/mnt/data/wallpapers/XP-pen-review-artwork-waneella.gif"
