@@ -11,12 +11,9 @@ layer-rule {
   place-within-backdrop true
 }
 
-// Keep the niri-zoom magnifier overlay out of automated screencopy captures
-// (grim, OBS) while it is up. Interactive screenshots still see it.
-layer-rule {
-  match namespace="^niri-zoom$"
-  block-out-from "screen-capture"
-}
+// niri-zoom's overlay is intentionally not blocked out from captures: during
+// screen sharing, viewers should see the zoomed view. (Any block-out-from rule
+// would also apply to portal screencasts, blacking the zoom out for viewers.)
 
 blur {
   passes 3
