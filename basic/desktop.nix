@@ -74,7 +74,11 @@
           "wlr"
           "gtk"
         ];
-        "org.freedesktop.impl.portal.ScreenCast" = lib.mkForce "wlr";
+        # niri's primary screencast path is xdg-desktop-portal-gnome: niri
+        # implements org.gnome.Mutter.ScreenCast there, and its SHM fallback
+        # (fix for apps like wemeet/feishu) only exists on that path. The wlr
+        # portal bypasses niri entirely and is now only used for screenshots.
+        "org.freedesktop.impl.portal.ScreenCast" = lib.mkForce "gnome";
         "org.freedesktop.impl.portal.Screenshot" = lib.mkForce "wlr";
       };
     };
