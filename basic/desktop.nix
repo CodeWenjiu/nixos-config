@@ -13,7 +13,12 @@
   services.displayManager.gdm.enable = false;
   services.desktopManager.gnome.enable = false;
 
-  programs.niri.enable = true;
+  programs.niri = {
+    enable = true;
+    # Track niri's git main via the epireyn flake (see flake.nix).
+    # This package also provides the session entry + niri.service for login.
+    package = pkgs.niri-unstable;
+  };
   # noctalia-shell systemd service is deprecated — now spawned from niri's spawn-at-startup
   programs.gpu-screen-recorder.enable = true;
 

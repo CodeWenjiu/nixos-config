@@ -56,6 +56,13 @@
     substituters = [
       "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
       "https://cache.nixos.org"
+      # niri-unstable 的二进制缓存（epireyn/niri-flake 提供，仅 x86_64-linux）
+      "https://niri-epireyn.cachix.org"
+    ];
+
+    # 与默认值（cache.nixos.org）按列表拼接，不会覆盖默认信任。
+    trusted-public-keys = [
+      "niri-epireyn.cachix.org-1:tlVyFN7CtsDT+ZcLPS+ekFWeT1X6X4OqvWqbBMyIzFA="
     ];
   };
 

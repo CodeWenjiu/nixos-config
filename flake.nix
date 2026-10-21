@@ -4,9 +4,11 @@
   nixConfig = {
     extra-substituters = [
       "https://nix-community.cachix.org"
+      "https://niri-epireyn.cachix.org"
     ];
     extra-trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "niri-epireyn.cachix.org-1:tlVyFN7CtsDT+ZcLPS+ekFWeT1X6X4OqvWqbBMyIzFA="
     ];
   };
 
@@ -28,8 +30,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Actively maintained fork of sodiboo/niri-flake: its niri-unstable
+    # follows the niri main branch and has a binary cache. The original's
+    # overlay has been broken since 25.05 (sodiboo/niri-flake#1365).
     niri = {
-      url = "github:sodiboo/niri-flake"; # wait for https://github.com/sodiboo/niri-flake/issues/1365 fixed
+      url = "github:epireyn/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -75,6 +80,8 @@
               nixpkgs.config = {
                 allowUnfree = true;
               };
+              # Provides pkgs.niri-unstable from the niri flake input.
+              nixpkgs.overlays = [ inputs.niri.overlays.niri ];
             }
 
             # nixpkgs and home-manager both define programs.noctalia — keep flake's
@@ -108,6 +115,9 @@
                 { ... }:
                 {
                   nixpkgs.config.allowUnfree = true;
+                  # home-manager.useGlobalPkgs = false, so the overlay needs to
+                  # be applied to the home-manager pkgs as well.
+                  nixpkgs.overlays = [ inputs.niri.overlays.niri ];
                   imports = [
                     (import ./home/home.nix)
                   ];

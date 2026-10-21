@@ -17,7 +17,7 @@
 
   programs.niri = {
     enable = true;
-    package = pkgs.niri;
+    package = pkgs.niri-unstable;
     config = builtins.readFile ./niri-config.kdl;
   };
 }
