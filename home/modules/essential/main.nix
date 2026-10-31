@@ -14,5 +14,7 @@
     ./disk.nix
     ./font.nix
     ./file_manager.nix
+    ./input-method.nix
+    ./qingjian.nix
   ];
 }

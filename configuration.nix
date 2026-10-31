@@ -9,11 +9,12 @@
     ./basic/io.nix
 
     ./modules/clash.nix
-    ./modules/rime.nix
     ./modules/game.nix
     ./modules/keyring.nix
     ./modules/tailscale.nix
   ];
+
+  i18n.defaultLocale = "zh_CN.UTF-8";
 
   # Enable networking
   networking.networkmanager.enable = true;
