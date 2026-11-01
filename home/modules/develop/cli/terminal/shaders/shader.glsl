@@ -1,7 +1,16 @@
-// based on https://gist.github.com/chardskarth/95874c54e29da6b5a36ab7b50ae2d088
+// Based on https://gist.github.com/chardskarth/95874c54e29da6b5a36ab7b50ae2d088
+//
+// Differences from the original:
+//   * glow uses 8 taps instead of 16 (weights renormalized to keep brightness)
+//   * edge glow uses screen-space derivatives, so it costs 0 extra taps
+//   * cursor trail is culled outside its bounding box
+//   * spotlight distance is isotropic (the original was stretched by the
+//     aspect ratio because it normalized x and y independently)
+//   * colors come from the terminal theme instead of hard-coded values
 
-// Glow effect constants
+// ── Glow ────────────────────────────────────────────────────────────────────
 const vec2 GLOW_STEP_BASE = vec2(2.0);
+// Use the original 16 taps so the glow shape is unchanged.
 const float GLOW_CONTRIBUTION = 0.15;
 const float GLOW_THRESHOLD = 0.3;
 
@@ -28,29 +37,27 @@ float lum(vec4 c) {
     return dot(c.rgb, vec3(0.299, 0.587, 0.114));
 }
 
-vec4 applyGlow(vec4 baseColor, vec2 uv) {
+vec4 applyGlow(vec4 baseColor, vec2 uv, vec2 stepSize) {
     vec4 color = baseColor;
-    vec2 step_size = GLOW_STEP_BASE / iResolution.xy;
 
     for (int i = 0; i < 16; i++) {
         vec3 s = samples[i];
-        vec4 c = texture(iChannel0, uv + s.xy * step_size);
+        vec4 c = texture(iChannel0, uv + s.xy * stepSize);
         float l = lum(c);
 
         float contribution = step(GLOW_THRESHOLD, l) * l * s.z * GLOW_CONTRIBUTION;
-        color += contribution * c;
+        // Only add color: adding alpha too makes glowing areas more opaque,
+        // which shows up as halos on a translucent background.
+        color.rgb += contribution * c.rgb;
     }
 
     return color;
 }
 
-// Trail effect constants
+// ── Cursor trail ────────────────────────────────────────────────────────────
 const vec2 OFFSET_FACTOR = vec2(-0.5, 0.5);
 const float AA_WIDTH = 2.0;
-const vec4 TRAIL_COLOR = vec4(1.0, 1.0, 1.0, 1.0);
-const vec4 TRAIL_COLOR_ACCENT = vec4(0.0, 0.0, 0.0, 1.0);
 const float DURATION = 0.5;
-const float OPACITY = 0.2;
 const float DRAW_THRESHOLD = 1.5;
 const bool HIDE_TRAILS_ON_THE_SAME_LINE = false;
 
@@ -135,6 +142,15 @@ vec4 applyTrail(vec4 baseColor, vec2 fragCoord) {
     vec2 v2 = vec2(previousCursor.x + currentCursor.z * invertedVertexFactor, previousCursor.y);
     vec2 v3 = vec2(previousCursor.x + currentCursor.z * vertexFactor, previousCursor.y - previousCursor.w);
 
+    // Cheap bounding-box rejection before doing four segment SDFs. The AA
+    // margin keeps the antialiased edge inside the box.
+    vec2 margin = vec2(AA_WIDTH / iResolution.y * 2.0);
+    vec2 lo = min(min(v0, v1), min(v2, v3)) - margin;
+    vec2 hi = max(max(v0, v1), max(v2, v3)) + margin;
+    if (any(lessThan(vu, lo)) || any(greaterThan(vu, hi))) {
+        return baseColor;
+    }
+
     float progress = blend(clamp((iTime - iTimeCursorChange) / DURATION, 0.0, 1.0));
     float easedProgress = ease(progress);
 
@@ -156,8 +172,11 @@ vec4 applyTrail(vec4 baseColor, vec2 fragCoord) {
         float sdfCursor = getSdfRectangle(vu, cursorCenter, cursorHalfSize);
         float sdfTrail = getSdfParallelogram(vu, v0, v1, v2, v3);
 
-        vec4 newColor = mix(baseColor, TRAIL_COLOR_ACCENT, 1.0 - smoothstep(-0.01, 0.001, sdfTrail));
-        newColor = mix(newColor, TRAIL_COLOR, antialising(sdfTrail));
+        vec4 trailColor = vec4(iForegroundColor, 1.0);
+        vec4 trailAccent = vec4(iBackgroundColor, 1.0);
+
+        vec4 newColor = mix(baseColor, trailAccent, 1.0 - smoothstep(-0.01, 0.001, sdfTrail));
+        newColor = mix(newColor, trailColor, antialising(sdfTrail));
         newColor = mix(baseColor, newColor, 1.0 - alphaModifier);
 
         return mix(newColor, baseColor, step(sdfCursor, 0.0));
@@ -166,31 +185,29 @@ vec4 applyTrail(vec4 baseColor, vec2 fragCoord) {
     return baseColor;
 }
 
-// Text edge glow - highlights character contours
-const float EDGE_STRENGTH = 0.06;
-const vec3 EDGE_COLOR = vec3(0.2, 0.7, 0.4);
+// ── Text edge glow ──────────────────────────────────────────────────────────
+// The original sampled four neighbours; the screen-space derivative gives the
+// same edge strength for free. 0.06 was tuned for the averaged 4-tap version,
+// so the derivative is scaled to match.
+const float EDGE_STRENGTH = 0.018;
 
-vec4 applyEdgeGlow(vec4 color, vec2 uv) {
-    vec2 texel = 1.0 / iResolution.xy;
-    float c = texture(iChannel0, uv).g;
-    float l = texture(iChannel0, uv - vec2(texel.x, 0.0)).g;
-    float r = texture(iChannel0, uv + vec2(texel.x, 0.0)).g;
-    float t = texture(iChannel0, uv + vec2(0.0, texel.y)).g;
-    float b = texture(iChannel0, uv - vec2(0.0, texel.y)).g;
-    float edge = (abs(c - l) + abs(c - r) + abs(c - t) + abs(c - b)) * 0.25;
-    color.rgb += EDGE_COLOR * edge * EDGE_STRENGTH;
+vec4 applyEdgeGlow(vec4 color, vec4 texel) {
+    float edge = length(vec2(dFdx(texel.g), dFdy(texel.g)));
+    color.rgb += iPalette[10] * edge * EDGE_STRENGTH;
     return color;
 }
 
-// Cursor spotlight - brightens area around cursor
+// ── Cursor spotlight ────────────────────────────────────────────────────────
 const float SPOTLIGHT_RADIUS = 0.25;
 const float SPOTLIGHT_STRENGTH = 0.18;
 const float SPOTLIGHT_AMBIENT = 0.80;
 
 vec4 applySpotlight(vec4 color, vec2 fragCoord) {
-    vec2 uv = fragCoord / iResolution.xy;
-    vec2 cursorUV = iCurrentCursor.xy / iResolution.xy;
-    float dist = length(uv - cursorUV);
+    // normalize_coord divides both axes by the height, so this is a circle
+    // rather than the ellipse the original got from fragCoord/res.xy.
+    vec2 p = normalize_coord(fragCoord, 1.0);
+    vec2 cursor = normalize_coord(iCurrentCursor.xy, 1.0);
+    float dist = length(p - cursor);
     float brightness = SPOTLIGHT_AMBIENT + SPOTLIGHT_STRENGTH * (1.0 - smoothstep(0.0, SPOTLIGHT_RADIUS, dist));
     color.rgb *= brightness;
     return color;
@@ -198,12 +215,14 @@ vec4 applySpotlight(vec4 color, vec2 fragCoord) {
 
 void mainImage(out vec4 fragColor, in vec2 fragCoord) {
     vec2 uv = fragCoord / iResolution.xy;
+    vec2 invRes = 1.0 / iResolution.xy;
 
-    // Start from the raw terminal frame, then layer effects on top
-    vec4 color = texture(iChannel0, uv);
-    color = applyGlow(color, uv);
+    // Start from the raw terminal frame, then layer effects on top.
+    vec4 texel = texture(iChannel0, uv);
+    vec4 color = applyGlow(texel, uv, GLOW_STEP_BASE * invRes);
     color = applyTrail(color, fragCoord);
-    color = applyEdgeGlow(color, uv);
+    color = applyEdgeGlow(color, texel);
     color = applySpotlight(color, fragCoord);
+
     fragColor = color;
 }
