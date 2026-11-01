@@ -201,6 +201,11 @@ vec4 applyEdgeGlow(vec4 color, vec4 texel) {
 const float SPOTLIGHT_RADIUS = 0.25;
 const float SPOTLIGHT_STRENGTH = 0.18;
 const float SPOTLIGHT_AMBIENT = 0.80;
+// Luminance range that counts as "background". The theme background is much
+// darker than any text, so only the background is dimmed away from the
+// cursor; glyphs keep their full brightness.
+const float BG_LOW = 0.10;
+const float BG_HIGH = 0.35;
 
 vec4 applySpotlight(vec4 color, vec2 fragCoord) {
     // normalize_coord divides both axes by the height, so this is a circle
@@ -209,9 +214,40 @@ vec4 applySpotlight(vec4 color, vec2 fragCoord) {
     vec2 cursor = normalize_coord(iCurrentCursor.xy, 1.0);
     float dist = length(p - cursor);
     float brightness = SPOTLIGHT_AMBIENT + SPOTLIGHT_STRENGTH * (1.0 - smoothstep(0.0, SPOTLIGHT_RADIUS, dist));
-    color.rgb *= brightness;
+
+    float bg = 1.0 - smoothstep(BG_LOW, BG_HIGH, lum(color));
+    color.rgb *= mix(1.0, brightness, bg);
     return color;
 }
+
+// ── Background grain ────────────────────────────────────────────────────────
+// Static (no iTime) so it reads as texture instead of moving noise. Only the
+// dark background gets it; text stays perfectly sharp.
+const float GRAIN_STRENGTH = 0.012;
+
+uint pcg(uint v) {
+    uint state = v * 747796405u + 2891336453u;
+    uint word = ((state >> ((state >> 28u) + 4u)) ^ state) * 277803737u;
+    return (word >> 22u) ^ word;
+}
+
+float grain(vec2 fragCoord) {
+    // PCG instead of fract(sin(dot(...))): the sin hash develops visible
+    // diagonal correlations at high resolutions, which show up as a faint
+    // band across flat backgrounds.
+    uvec2 p = uvec2(fragCoord);
+    uint h = pcg(p.x + pcg(p.y));
+    return float(h >> 8) * (1.0 / 16777215.0);
+}
+
+vec4 applyGrain(vec4 color, vec2 fragCoord) {
+    float bg = 1.0 - smoothstep(BG_LOW, BG_HIGH, lum(color));
+    color.rgb += (grain(fragCoord) - 0.5) * GRAIN_STRENGTH * bg;
+    return color;
+}
+
+// Unfocused surfaces recede slightly so the active split is obvious.
+const float UNFOCUSED_DIM = 0.92;
 
 void mainImage(out vec4 fragColor, in vec2 fragCoord) {
     vec2 uv = fragCoord / iResolution.xy;
@@ -223,6 +259,8 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
     color = applyTrail(color, fragCoord);
     color = applyEdgeGlow(color, texel);
     color = applySpotlight(color, fragCoord);
+    color = applyGrain(color, fragCoord);
+    color.rgb *= mix(UNFOCUSED_DIM, 1.0, float(iFocus));
 
     fragColor = color;
 }
