@@ -12,7 +12,6 @@
     ./vedio.nix
     ./obs.nix
     ./niri-zoom.nix
-    ./fluxdown.nix
   ];
 
   home.packages = with pkgs; [
