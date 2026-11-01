@@ -14,6 +14,8 @@
 
       keybind = ctrl+backspace=text:\x17
       keybind = ctrl+v=paste_from_clipboard
+      keybind = performable:ctrl+c=copy_to_clipboard
+      selection-clear-on-copy = true
 
       # ── Splits ──────────────────────────────
       keybind = ctrl+shift+alt+enter=new_split:auto
@@ -39,8 +41,6 @@
       keybind = ctrl+shift+alt+n=new_tab
       keybind = ctrl+shift+alt+]=next_tab
       keybind = ctrl+shift+alt+[=previous_tab
-
-      copy-on-select = clipboard
 
       theme = noctalia
       custom-shader = ~/.config/ghostty/shaders/shader.glsl
