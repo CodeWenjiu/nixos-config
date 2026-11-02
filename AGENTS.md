@@ -6,7 +6,7 @@ This repository is a flake-based NixOS + Home Manager setup.
 - `flake.nix`: entry point, inputs, and `nixosConfigurations`.
 - `configuration.nix`: top-level system imports and global settings.
 - `basic/`: baseline OS setup (boot, desktop, I/O).
-- `modules/`: reusable system modules (for example `clash.nix`, `rime.nix`).
+- `modules/`: reusable system modules (for example `mihomo.nix`, `rime.nix`).
 - `platform/`: hardware/platform-specific system wiring.
 - `hosts/<host>/hardware-configuration.nix`: host-generated hardware config.
 - `home/`: Home Manager configuration tree.

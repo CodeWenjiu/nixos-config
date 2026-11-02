@@ -4,29 +4,44 @@
   pkgs,
   ...
 }:
-# Stage 1 of the Clash Verge -> clashtui migration: run a *second*, isolated
-# mihomo as a user service on its own ports, with TUN and DNS hijack off, so
-# Clash Verge keeps owning :7897, :53 and the default route until this path is
-# proven. Nothing here touches the system network stack.
+# Stage 2a: clashtui now fronts the system-wide mihomo service defined in
+# modules/mihomo.nix. It still runs on the staging ports and with TUN off, so
+# Clash Verge keeps owning :7897 and the default route until the cutover.
+#
+# clashtui rewrites these files at runtime, so they must stay plain files:
+# a home.file symlink would make every save fail with EROFS.
 let
-  stateDir = "${config.xdg.configHome}/mihomo-tui";
   clashtuiDir = "${config.xdg.configHome}/clashtui";
   overrideDir = "${clashtuiDir}/mihomo";
 
-  # Minimal, direct-only config so the staging core can start before any
-  # subscription is imported. clashtui overwrites this file when a profile is
-  # selected, which is expected.
-  #
-  # The disabled tun block is not cosmetic: mihomo reports stack "Mips" when
-  # the section is absent, and clashtui 0.3.1 rejects that value while parsing
-  # GET /configs, so the TUI would fail before showing anything.
-  seedMihomo = pkgs.writeText "mihomo-tui-seed.yaml" ''
-    mixed-port: 7898
-    allow-lan: false
-    mode: rule
-    log-level: info
-    ipv6: true
+  seedClashtui = pkgs.writeText "clashtui-config.yaml" ''
+    mihomo:
+      core:
+        config_dir: /var/lib/mihomo
+        bin_path: ${config.home.profileDirectory}/bin/mihomo
+        config_path: /var/lib/mihomo/config.yaml
+      core_service:
+        service_name: mihomo
+        is_user: false
+    singbox:
+      core:
+        config_dir: /var/lib/mihomo
+        bin_path: ${config.home.profileDirectory}/bin/mihomo
+        config_path: /var/lib/mihomo/config.json
+      core_service:
+        service_name: mihomo
+        is_user: false
+    extra:
+      edit_cmd: ""
+      open_dir_cmd: ""
+  '';
+
+  # Top-level keys clashtui merges into every generated profile. The gvisor
+  # stack is pinned even while TUN is off: mihomo reports stack "Mips" for an
+  # absent tun section, and clashtui 0.3.1 refuses to parse that value.
+  seedOverride = pkgs.writeText "mihomo-override.yaml" ''
     external-controller: 127.0.0.1:9091
+    mixed-port: 7898
     secret: ""
     profile:
       store-selected: true
@@ -34,46 +49,6 @@ let
       enable: false
       stack: gvisor
       auto-route: false
-    rules:
-      - MATCH,DIRECT
-  '';
-
-  # Top-level keys clashtui merges into every generated profile. Pinning the
-  # ports and the disabled TUN keeps imported subscriptions from colliding
-  # with Clash Verge during the coexistence phase.
-  seedOverride = pkgs.writeText "mihomo-tui-override.yaml" ''
-    external-controller: 127.0.0.1:9091
-    mixed-port: 7898
-    secret: ""
-    tun:
-      enable: false
-      stack: gvisor
-      auto-route: false
-  '';
-
-  # clashtui reads controller/mixed-port out of the override file and restarts
-  # the unit named here. Kept as plain files (not home.file symlinks) because
-  # clashtui rewrites them at runtime.
-  seedClashtui = pkgs.writeText "clashtui-config.yaml" ''
-    mihomo:
-      core:
-        config_dir: ${stateDir}
-        bin_path: ${config.home.profileDirectory}/bin/mihomo
-        config_path: ${stateDir}/config.yaml
-      core_service:
-        service_name: mihomo-tui
-        is_user: true
-    singbox:
-      core:
-        config_dir: ${stateDir}
-        bin_path: ${config.home.profileDirectory}/bin/sing-box
-        config_path: ${stateDir}/config.json
-      core_service:
-        service_name: mihomo-tui
-        is_user: true
-    extra:
-      edit_cmd: ""
-      open_dir_cmd: ""
   '';
 in
 {
@@ -82,19 +57,15 @@ in
     pkgs.mihomo
   ];
 
-  home.activation.clashtuiStaging = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    # clashtui only creates its per-core data directories on a first run
-    # (no config.yaml yet). A profile directory left by an older release
-    # skips that branch, and the TUI then fails at startup with ENOENT while
-    # reading the missing profiles/templates directories.
-    run mkdir -p ${stateDir} ${clashtuiDir} ${overrideDir} \
+  home.activation.clashtuiConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    # clashtui only creates its per-core data directories on a first run (no
+    # config.yaml yet). A config left by an older release skips that branch,
+    # and the TUI then dies at startup with ENOENT while reading the missing
+    # profiles/templates directories.
+    run mkdir -p ${clashtuiDir} ${overrideDir} \
       ${overrideDir}/profiles ${overrideDir}/templates \
       ${clashtuiDir}/sing-box/profiles ${clashtuiDir}/sing-box/templates \
       ${clashtuiDir}/sing-box/proxy_providers
-    if [ ! -e ${stateDir}/config.yaml ]; then
-      run cp ${seedMihomo} ${stateDir}/config.yaml
-      run chmod u+w ${stateDir}/config.yaml
-    fi
     if [ ! -e ${clashtuiDir}/config.yaml ]; then
       run cp ${seedClashtui} ${clashtuiDir}/config.yaml
       run chmod u+w ${clashtuiDir}/config.yaml
@@ -104,16 +75,4 @@ in
       run chmod u+w ${overrideDir}/core_override_config.yaml
     fi
   '';
-
-  systemd.user.services.mihomo-tui = {
-    Unit = {
-      Description = "Mihomo staging core for clashtui (no TUN, no DNS hijack)";
-    };
-    Service = {
-      ExecStart = "${pkgs.mihomo}/bin/mihomo -d ${stateDir} -f ${stateDir}/config.yaml";
-      Restart = "on-failure";
-      RestartSec = 3;
-    };
-    Install.WantedBy = [ "default.target" ];
-  };
 }

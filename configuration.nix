@@ -8,7 +8,7 @@
     ./basic/boot.nix
     ./basic/io.nix
 
-    ./modules/clash.nix
+    ./modules/mihomo.nix
     ./modules/game.nix
     ./modules/keyring.nix
     ./modules/tailscale.nix
