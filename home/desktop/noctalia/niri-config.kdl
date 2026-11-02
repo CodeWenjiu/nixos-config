@@ -137,6 +137,11 @@ binds {
   Mod+bracketleft { spawn "noctalia" "msg" "media" "previous"; }
   Mod+bracketright { spawn "noctalia" "msg" "media" "next"; }
 
+  // mihomo: Ctrl+Mod+T toggles TUN, Ctrl+Mod+P toggles proxying (rule/direct).
+  // Both go through the local REST API, so no root and no service restart.
+  CTRL+Mod+T { spawn "mihomo-tun-toggle"; }
+  CTRL+Mod+P { spawn "mihomo-proxy-toggle"; }
+
   XF86MonBrightnessUp { spawn "noctalia" "msg" "brightness-up"; }
   XF86MonBrightnessDown { spawn "noctalia" "msg" "brightness-down"; }
 }

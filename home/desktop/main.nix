@@ -9,6 +9,7 @@ in
   # status bar
   imports = [
     ./${configer}/main.nix
+    ./mihomo-keys.nix
   ];
 
   home.packages = with pkgs; [
