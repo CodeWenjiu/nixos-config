@@ -7,10 +7,10 @@
   home.packages = with pkgs; [
     # gemini-cli
     # cursor-cli
-    codex
-    opencode
+    # codex
     # claude-code
-    nodejs
+    opencode
+    deepseek-harness
   ];
 
   home.sessionPath = [
