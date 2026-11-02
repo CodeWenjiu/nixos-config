@@ -83,7 +83,14 @@ in
   ];
 
   home.activation.clashtuiStaging = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    run mkdir -p ${stateDir} ${clashtuiDir} ${overrideDir}
+    # clashtui only creates its per-core data directories on a first run
+    # (no config.yaml yet). A profile directory left by an older release
+    # skips that branch, and the TUI then fails at startup with ENOENT while
+    # reading the missing profiles/templates directories.
+    run mkdir -p ${stateDir} ${clashtuiDir} ${overrideDir} \
+      ${overrideDir}/profiles ${overrideDir}/templates \
+      ${clashtuiDir}/sing-box/profiles ${clashtuiDir}/sing-box/templates \
+      ${clashtuiDir}/sing-box/proxy_providers
     if [ ! -e ${stateDir}/config.yaml ]; then
       run cp ${seedMihomo} ${stateDir}/config.yaml
       run chmod u+w ${stateDir}/config.yaml
