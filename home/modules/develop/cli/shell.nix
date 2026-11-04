@@ -4,9 +4,14 @@
   ...
 }:
 {
+  home.sessionPath = [
+    "${config.home.homeDirectory}/.apps"
+  ];
+
   programs = {
     nushell = {
       enable = true;
+      loadSessionVariables = true;
 
       plugins = with pkgs.nushellPlugins; [
         gstat
@@ -40,7 +45,6 @@
 
         $env.PATH = ($env.PATH |
             split row (char esep) |
-            prepend ${config.home.homeDirectory}/.apps |
             append /usr/bin/env
         )
 
