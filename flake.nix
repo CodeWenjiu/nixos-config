@@ -20,6 +20,12 @@
     # `nix flake update nixpkgs-lazy` (see sysup-extra in shell.nix).
     nixpkgs-lazy.url = "github:nixos/nixpkgs?ref=nixos-unstable";
 
+    # Craft 系列（DeckCraft 等）的社区打包，直接跟上游 release。
+    nix-craftapps = {
+      url = "github:olafkfreund/nix-craftapps";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # boot
     minegrub-theme.url = "github:Lxtharia/minegrub-theme";
 
@@ -88,6 +94,14 @@
             { disabledModules = [ "programs/wayland/noctalia.nix" ]; }
 
             inputs.noctalia.nixosModules.default
+
+            # Craft 系列：系统层只负责 /usr/share/fonts 链接；
+            # 具体启用哪些 app 在 Home Manager 的 doc.nix 里选。
+            inputs.nix-craftapps.nixosModules.default
+            {
+              programs.craftapps.enable = true;
+            }
+
             vscode-server.nixosModules.default
             (
               {
@@ -110,6 +124,10 @@
               home-manager.extraSpecialArgs = {
                 inherit inputs;
               };
+
+              home-manager.sharedModules = [
+                inputs.nix-craftapps.homeManagerModules.default
+              ];
 
               home-manager.users.wenjiu =
                 { ... }:
