@@ -48,8 +48,10 @@
     '';
   };
 
-  xdg.configFile."ghostty/shaders" = {
+  # 只管理单个文件：整个目录做 source 时，Home Manager 在目录与符号链接
+  # 之间切换会尝试备份 .backup 目录，历史残留会让激活直接失败。
+  xdg.configFile."ghostty/shaders/shader.glsl" = {
     force = true;
-    source = ./shaders;
+    source = ./shaders/shader.glsl;
   };
 }
