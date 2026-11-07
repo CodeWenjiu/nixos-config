@@ -60,29 +60,33 @@
         ];
       };
 
-      mgr = {
-        prepend_keymap = [
-          {
-            on = "<C-y>";
-            run = [ "plugin wl-clipboard" ];
-          }
-          {
-            on = [
-              "g"
-              "i"
-            ];
-            run = "plugin lazygit";
-            desc = "run lazygit";
-          }
-        ];
-      };
+    };
+
+    # yazi reads keybindings only from keymap.toml
+    # (yazi-config/src/keymap/keymap.rs). A `mgr.prepend_keymap` placed inside
+    # yazi.toml is silently ignored, which is why the lazygit chord never fired.
+    keymap = {
+      mgr.prepend_keymap = [
+        {
+          on = "<C-y>";
+          run = [ "plugin wl-clipboard" ];
+        }
+        {
+          on = [
+            "g"
+            "i"
+          ];
+          run = "plugin gitui";
+          desc = "run gitui";
+        }
+      ];
     };
 
     plugins = {
       inherit (pkgs.yaziPlugins)
         full-border
         git
-        lazygit
+        gitui
         starship
         rich-preview
         wl-clipboard

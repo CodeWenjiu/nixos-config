@@ -6,7 +6,7 @@
   home.packages = with pkgs; [
     git
     gh
-    lazygit
+    gitui
 
     jujutsu
     jjui
