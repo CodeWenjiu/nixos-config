@@ -1,0 +1,21 @@
+// gitui ships with ANSI Blue for the selection and command-bar background and
+// a pile of saturated colours for the rest. Against the pastel palette noctalia
+// derives from the wallpaper (background #1a2023, ANSI 0 #212b30) that reads as
+// a hard blue slab.
+//
+// Everything below is expressed as ANSI names rather than hex so the UI keeps
+// tracking ghostty: noctalia rewrites the palette when the wallpaper changes,
+// and gitui follows without touching this file.
+(
+    selected_tab: Some("Cyan"),
+    selection_bg: Some("Black"),
+    selection_fg: Some("White"),
+    cmdbar_bg: Some("Black"),
+    command_fg: Some("White"),
+    commit_hash: Some("Blue"),
+    commit_time: Some("Gray"),
+    diff_file_modified: Some("LightYellow"),
+    block_title_focused: Some("Cyan"),
+    push_gauge_bg: Some("Black"),
+    push_gauge_fg: Some("Blue"),
+)
