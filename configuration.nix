@@ -6,6 +6,7 @@
   imports = [
     ./basic/desktop.nix
     ./basic/console.nix
+    ./basic/fonts.nix
     ./basic/boot.nix
     ./basic/io.nix
 
