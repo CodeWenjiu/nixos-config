@@ -5,7 +5,7 @@
 {
   home.packages = with pkgs; [
     # readest
-    # obsidian
+    obsidian
     feishu
     wpsoffice-cn
     # onlyoffice-desktopeditors

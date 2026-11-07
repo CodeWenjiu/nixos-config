@@ -112,6 +112,7 @@ binds {
   Mod+E { spawn "zeditor"; }
   Mod+B { spawn "firefox"; }
   Mod+F { spawn "nautilus"; }
+  Mod+N { spawn "obsidian"; }
   Mod+A { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
   Mod+W { spawn "noctalia" "msg" "panel-toggle" "wallpaper"; }
   Mod+Shift+W { spawn "noctalia" "msg" "panel-toggle" "noctalia/mpvpaper:picker"; }
