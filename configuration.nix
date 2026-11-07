@@ -5,6 +5,7 @@
 {
   imports = [
     ./basic/desktop.nix
+    ./basic/console.nix
     ./basic/boot.nix
     ./basic/io.nix
 
