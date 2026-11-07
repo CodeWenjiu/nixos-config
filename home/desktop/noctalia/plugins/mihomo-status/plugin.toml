@@ -1,0 +1,12 @@
+id = "wenjiu/mihomo-status"
+name = "Mihomo status"
+version = "1.0.0"
+plugin_api = 24
+author = "wenjiu"
+license = "MIT"
+icon = "shield-check"
+description = "Shows whether the mihomo TUN device is up and which routing mode the proxy is in. Click toggles TUN, right click toggles rule/direct."
+
+[[widget]]
+id = "status"
+entry = "widget.luau"

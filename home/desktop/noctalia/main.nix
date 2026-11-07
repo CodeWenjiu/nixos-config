@@ -28,6 +28,10 @@
   # mpv-hook.lua: auto-sync video wallpaper colors to noctalia theme
   xdg.configFile."mpv/scripts/mpv-hook.lua".source = ./mpv-hook.lua;
 
+  # Noctalia plugin source for the mihomo status widget. A path source keeps
+  # the plugin Nix-managed and read-only for Noctalia.
+  xdg.configFile."noctalia-plugins/mihomo-status".source = ./plugins/mihomo-status;
+
   programs.noctalia = {
     enable = true;
     systemd.enable = false;

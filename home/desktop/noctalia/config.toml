@@ -10,7 +10,7 @@ background_opacity = 0.40999999083578587
 capsule = true
 center = [ "workspaces" ]
 contact_shadow = true
-end = [ "tray", "battery", "network", "bluetooth", "volume", "brightness", "control-center" ]
+end = [ "mihomo", "tray", "battery", "network", "bluetooth", "volume", "brightness", "control-center" ]
 font_family = "Fira Code"
 margin_ends = 15
 margin_v = 0
@@ -197,7 +197,13 @@ video_directory = "/mnt/data/wallpapers/dynamic"
 target_lang = "zh"
 
 [plugins]
-enabled = [ "noctalia/screen_recorder", "noctalia/kaomoji", "noctalia/translator", "noctalia/mpvpaper" ]
+enabled = [ "noctalia/screen_recorder", "noctalia/kaomoji", "noctalia/translator", "noctalia/mpvpaper", "wenjiu/mihomo-status" ]
+
+[[plugins.source]]
+name = "nix-managed"
+kind = "path"
+location = "~/.config/noctalia-plugins"
+enabled = true
 
 [shell]
 avatar_path = "/mnt/data/AvatarImage/avatar.png"
@@ -309,3 +315,6 @@ type = "noctalia/screen_recorder:recorder"
 
 [widget.wallhaven]
 type = "noctalia/wallhaven:wallhaven"
+
+[widget.mihomo]
+type = "wenjiu/mihomo-status:status"
