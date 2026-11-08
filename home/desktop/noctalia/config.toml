@@ -137,7 +137,7 @@ smart_auto_hide = true
 
 [location]
 address = "BeiJing"
-auto_locate = true
+auto_locate = false
 
 [lockscreen]
 enabled = true
@@ -145,7 +145,7 @@ enabled = true
 [lockscreen_widgets]
 enabled = false
 schema_version = 2
-widget_order = [ "lockscreen-login-box@eDP-1" ]
+widget_order = [ "lockscreen-login-box@winit", "lockscreen-login-box@eDP-1" ]
 
     [lockscreen_widgets.grid]
     cell_size = 16
@@ -164,7 +164,34 @@ widget_order = [ "lockscreen-login-box@eDP-1" ]
     type = "login_box"
 
         [lockscreen_widgets.widget."lockscreen-login-box@eDP-1".settings]
-        background_color = "surface_variant"
+        background_color = "surface_container"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@winit"]
+    box_height = 196.0
+    box_width = 749.0
+    cx = 390.5
+    cy = 815.0
+    output = "winit"
+    placement_height = 997.0
+    placement_width = 781.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@winit".settings]
+        background_color = "surface_container"
         background_opacity = 0.88
         background_radius = 12.0
         center_password_text = false
@@ -199,13 +226,30 @@ target_lang = "zh"
 [plugins]
 enabled = [ "noctalia/screen_recorder", "noctalia/kaomoji", "noctalia/translator", "noctalia/mpvpaper", "wenjiu/mihomo-status" ]
 
-[[plugins.source]]
-name = "nix-managed"
-kind = "path"
-location = "~/.config/noctalia-plugins"
-enabled = true
+    [[plugins.source]]
+    enabled = true
+    kind = "git"
+    location = "https://github.com/noctalia-dev/official-plugins"
+    name = "official"
+
+    [[plugins.source]]
+    enabled = true
+    kind = "git"
+    location = "https://github.com/noctalia-dev/community-plugins"
+    name = "community"
+
+    # Declaring any source here replaces the built-in official/community list
+    # instead of appending to it. Both must stay, or every official plugin
+    # unloads - which stops the mpvpaper service and freezes the wallpaper.
+    # An export from the app does not carry them, so re-add after pasting one.
+    [[plugins.source]]
+    enabled = true
+    kind = "path"
+    location = "~/.config/noctalia-plugins"
+    name = "nix-managed"
 
 [shell]
+app_icon_color = "primary"
 avatar_path = "/mnt/data/AvatarImage/avatar.png"
 clipboard_enabled = true
 clipboard_history_max_entries = 100
@@ -213,6 +257,7 @@ font_family = "Inter"
 niri_overview_type_to_launch_enabled = true
 polkit_agent = true
 settings_show_advanced = true
+show_close_buttons = false
 telemetry_enabled = false
 
     [shell.animation]
@@ -261,15 +306,14 @@ wallpaper_scheme = "soft"
         "pear-desktop",
         "spicetify",
         "zen-browser",
+        "discord",
+        "telegram",
         "neovim",
         "obsidian",
         "vscode",
         "zed",
-        "discord",
-        "lazygit",
-        "obs",
         "steam",
-        "telegram",
+        "obs",
         "yazi"
     ]
 
@@ -287,13 +331,8 @@ transition_on_startup = true
     [wallpaper.monitors.eDP-1]
     path = "/home/wenjiu/.cache/noctalia/mpvpaper/c0a46c46d52f122c3b3ea1055bbbecb9.jpg"
 
-    [[wallpaper.favorite]]
-    path = "/mnt/data/wallpapers/XP-pen-review-artwork-waneella.gif"
-    theme_mode = "auto"
-
-    [[wallpaper.favorite]]
-    path = "/mnt/data/wallpapers/static/1293932.jpg"
-    theme_mode = "auto"
+    [wallpaper.monitors.winit]
+    path = "/home/wenjiu/.cache/noctalia/mpvpaper/c0a46c46d52f122c3b3ea1055bbbecb9.jpg"
 
     [[wallpaper.favorite]]
     path = "/mnt/data/wallpapers/static/5.png"
@@ -307,6 +346,9 @@ refresh_minutes = 30
 [widget.cat]
 type = "noctalia/bongocat:cat"
 
+[widget.mihomo]
+type = "wenjiu/mihomo-status:status"
+
 [widget.mpvpaper]
 type = "noctalia/mpvpaper:mpvpaper"
 
@@ -315,6 +357,3 @@ type = "noctalia/screen_recorder:recorder"
 
 [widget.wallhaven]
 type = "noctalia/wallhaven:wallhaven"
-
-[widget.mihomo]
-type = "wenjiu/mihomo-status:status"
