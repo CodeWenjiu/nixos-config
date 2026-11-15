@@ -12,6 +12,7 @@
 
     ./modules/mihomo.nix
     ./modules/game.nix
+    ./modules/horizon-launcher.nix
     ./modules/keyring.nix
     ./modules/tailscale.nix
   ];
