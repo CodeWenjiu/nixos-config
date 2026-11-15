@@ -2,7 +2,6 @@
 {
   home.packages = with pkgs; [
     bilibili
-    bilibili-tui
     # mpv is provided by programs.mpv below (mpv-with-scripts)
   ];
 
