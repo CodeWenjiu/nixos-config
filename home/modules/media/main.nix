@@ -8,6 +8,7 @@
     ./chat.nix
     ./music.nix
     ./doc.nix
+    ./elyoffice.nix
     ./mime.nix
     ./email.nix
     ./vedio.nix

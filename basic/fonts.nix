@@ -1,28 +1,26 @@
 { pkgs, ... }:
 {
-  # System-level fonts exist for consumers that read the font *directory*
-  # instead of going through fontconfig:
+  # System-level fonts exist for consumers that cannot see the user profile:
   #
   #   * kmscon renders the emergency TTY from this directory (see console.nix);
-  #   * the Craft apps scan /usr/share/fonts, which programs.craftapps.linkFonts
-  #     points at exactly this directory, and never look at the per-user
-  #     ~/.local/share/fonts where home/modules/essential/font.nix installs
-  #     things.
+  #   * the SDDM greeter runs outside the user session and resolves through the
+  #     system fontconfig only;
+  #   * FHS/AppImage wrappers read /usr/share/fonts directly. The Ely Office
+  #     apps do see the home-manager profile through XDG_DATA_DIRS, but that is
+  #     not something worth relying on.
   #
-  # That is why the Craft UI ignored the Inter preference set in the home
-  # module and fell back to DejaVu Sans - Inter simply was not in the directory
-  # they read. Keep this list to the fonts those two need; everything else on
-  # the desktop resolves through fontconfig and the home module.
+  # Everything else on the desktop resolves through fontconfig and
+  # home/modules/essential/font.nix. Keep this list small.
   fonts.packages = with pkgs; [
     inter
     source-sans
     # The desktop resolves Chinese through fontconfig and lands on Source Han
     # Sans, which home/modules/essential/font.nix installs into the user
-    # profile. The Craft apps cannot see that profile, and the only Chinese
-    # they found in this directory were the Noto Sans CJK collection plus
-    # Unifont - so the same text rendered in a different face depending on
-    # which window you looked at. Shipping Source Han Sans here too gives them
-    # the family the rest of the desktop uses.
+    # profile. The SDDM greeter and the wrappers above cannot see that profile,
+    # and the only Chinese in the system directory would otherwise be the Noto
+    # Sans CJK collection plus Unifont - so the same text rendered in a
+    # different face depending on which window you looked at. Shipping Source
+    # Han Sans here too gives them the family the rest of the desktop uses.
     source-han-sans
   ];
 }
