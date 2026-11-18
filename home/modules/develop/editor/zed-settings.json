@@ -120,10 +120,7 @@
     "tab_size": 4,
     "terminal": {
         "font_family": "FreeMono",
-        "copy_on_select": true,
-        "shell": {
-            "program": "/nix/store/4winq2kkb7xgm8caab2ips94v0f76anl-nushell-0.114.0/bin/nu"
-        }
+        "copy_on_select": true
     },
     "theme": "Noctalia Dark",
     "auto_install_extensions": {
