@@ -26,6 +26,17 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # 自己写的 Rigili（GPUI 的 bilibili 客户端）。用 github: 而不是 path:
+    # path 类型的 input 会无视 .gitignore 把整个目录拷进 store，而这个仓库的
+    # target/ 有 60 GB 级别。
+    # 注意：github input 钉住的是已推送的 commit，所以改完代码要 commit + push
+    # 再 `nix flake update rigili`。日常开发别走这条，用 `nix develop` 或把
+    # target/release/rigili 软链到 ~/.apps（已在 sessionPath 里）。
+    rigili = {
+      url = "github:CodeWenjiu/rigili";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # boot
     minegrub-theme.url = "github:Lxtharia/minegrub-theme";
 

@@ -233,6 +233,27 @@
         "type": "github"
       }
     },
+    "rigili": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "rust-overlay": "rust-overlay"
+      },
+      "locked": {
+        "lastModified": 1794903610,
+        "narHash": "sha256-J//HOG4VlVMfpZJUPYHepnOaQGBrvHb495HzPlja8Ec=",
+        "owner": "CodeWenjiu",
+        "repo": "rigili",
+        "rev": "e1bedf0f5a700257d30876101b15d1625b487713",
+        "type": "github"
+      },
+      "original": {
+        "owner": "CodeWenjiu",
+        "repo": "rigili",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
@@ -242,7 +263,29 @@
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-lazy": "nixpkgs-lazy",
         "noctalia": "noctalia",
+        "rigili": "rigili",
         "vscode-server": "vscode-server"
+      }
+    },
+    "rust-overlay": {
+      "inputs": {
+        "nixpkgs": [
+          "rigili",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1794216702,
+        "narHash": "sha256-J+4v+Olc/2mN/bSc9CuAQ/PB7c0w1mzDJK8JvS7rKmM=",
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "rev": "b70538330f20adc9665afa2976471eb5b85ebd1f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "type": "github"
       }
     },
     "vscode-server": {

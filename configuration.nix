@@ -13,6 +13,7 @@
     ./modules/mihomo.nix
     ./modules/game.nix
     ./modules/horizon-launcher.nix
+    ./modules/rigili.nix
     ./modules/keyring.nix
     ./modules/tailscale.nix
   ];
