@@ -1,126 +1,105 @@
 { pkgs, ... }:
 
-# ── How to bump pigma ────────────────────────────────────────────
-# 1. Set version and rev to the new tag (e.g. v0.3.0), then set the
-#    pigma-src hash to `pkgs.lib.fakeHash` and build once; the error
-#    prints the correct hash ("got: sha256-..."). Same trick for y7dl.
-# 2. Check whether the y7dl submodule pin moved at the new tag:
-#      git clone -q --filter=blob:none --no-checkout --depth 1 \
-#        --branch v0.3.0 https://github.com/akirco/pigma.git /tmp/pigma
-#      git -C /tmp/pigma ls-tree v0.3.0 crates/y7dl
-#      git -C /tmp/pigma show v0.3.0:.gitmodules
-#    - same SHA  -> y7dl-src unchanged
-#    - new SHA   -> update rev and re-fetch its hash
-#    - new submodules -> add another fetch + `cp` in the runCommand below
-# 3. Rust deps need no manual hash: cargoLock.lockFile derives everything
-#    from the lockfile checksums. If the build fails on a missing system
-#    lib, add it to buildInputs (compile-time) and rely on autoPatchelfHook
-#    to complain about runtime misses.
+# ── How to bump netodia ───────────────────────────────────────────
+# 用上游 release 的预编译包,不从源码构建:这是一个 14 crate 的 Rust +
+# Slint workspace,编译一次要十几分钟,而它在这里只是"替换 pigma"的成品
+# 应用,没必要承担这个成本。
+#
+# 1. 改 version 为新的 tag。
+# 2. 把 hash 设成 pkgs.lib.fakeHash,构建一次,错误里会给出 "got: sha256-..."。
+# 3. 如果上游新增了运行时依赖,autoPatchelfHook 会在构建期报出缺哪个 .so,
+#    把它加进 buildInputs。
 let
-  pigma-src = pkgs.fetchFromGitHub {
-    owner = "akirco";
-    repo = "pigma";
-    rev = "v0.2.14";
-    hash = "sha256-vNbNZpacTBQfH8KWSu4rDQubMMfNXjTZ5TQ2XbaYTi8=";
+  version = "0.1.8";
+
+  # 上游 release 里的 x86_64 tarball。注意它是预编译产物,
+  # 所以这个包不可复现到源码级别(sourceProvenance 标了 binaryNativeCode)。
+  src = pkgs.fetchurl {
+    url = "https://github.com/HELPMEEADICE/Netodia/releases/download/v${version}/netodia-v${version}-x86_64-linux.tar.gz";
+    hash = "sha256-danwGv3OlavzVjq6p2/DLeUzv6D4FU0XeE+tIxqD6/k=";
   };
 
-  # crates/y7dl is a git submodule pinned to this commit (gitlink at v0.2.8).
-  # fetchFromGitHub tarballs don't include submodules, so fetch it separately
-  # and splice it into the source tree below.
-  y7dl-src = pkgs.fetchFromGitHub {
-    owner = "akirco";
-    repo = "y7dl";
-    rev = "c9a8599e4b1c29707208ca4c8d3fe393202b8e10";
-    hash = "sha256-YRHRAtJkkyrPchML47S0rF8PFyRXmL9ga6z7BU124WU=";
-  };
+  netodia = pkgs.stdenvNoCC.mkDerivation {
+    pname = "netodia";
+    inherit version src;
 
-  src = pkgs.runCommand "pigma-src" { } ''
-    cp -r ${pigma-src} $out
-    chmod -R u+w $out
-    rm -rf $out/crates/y7dl
-    cp -r ${y7dl-src} $out/crates/y7dl
-  '';
-
-  pigma = pkgs.rustPlatform.buildRustPackage {
-    pname = "pigma";
-    version = "0.2.14";
-    inherit src;
-
-    cargoLock = {
-      lockFile = "${src}/Cargo.lock";
-    };
-
-    nativeBuildInputs = with pkgs; [
-      autoPatchelfHook
-      pkg-config
-      lld
+    # 二进制里记着 libasound / libdbus / libEGL / libGL / fontconfig /
+    # wayland / xkbcommon / X11 系列;autoPatchelfHook 负责改写它们的
+    # RPATH,buildInputs 决定它们指向哪里。
+    nativeBuildInputs = [
+      pkgs.autoPatchelfHook
+      pkgs.makeWrapper
     ];
 
     buildInputs = with pkgs; [
       alsa-lib
+      dbus
+      fontconfig
+      freetype
+      libGL
+      libx11
+      libxcb
+      libxcursor
+      libxi
+      libxkbcommon
+      libxrender
+      wayland
       stdenv.cc.cc.lib
     ];
 
-    doCheck = false;
-  };
+    dontConfigure = true;
+    dontBuild = true;
 
-  # ── voicefox ────────────────────────────────────────────────────
-  # TUI music player (Rust workspace; only the `app` crate produces
-  # the `voicefox` binary). Links system libmpv via mpv-unwrapped;
-  # openssl is needed because reqwest's default TLS pulls in
-  # openssl-sys. To bump: set version/rev below, then set `hash` to
-  # pkgs.lib.fakeHash, rebuild once and paste the reported hash.
-  voicefox-src = pkgs.fetchFromGitHub {
-    owner = "emoeem";
-    repo = "voicefox";
-    rev = "v0.3.16";
-    hash = "sha256-ioYGFX8VDxTVQG6jJbck6Hw3dTfn5ONNWTh2Y484d+A=";
-  };
+    # winit 把 X11 / Wayland 后端和 glutin 的 EGL/GL 都放在 dlopen 后面（这样
+    # 一个二进制能同时跑两种会话），DT_NEEDED 里看不到它们，autoPatchelfHook
+    # 也就无从改 RPATH。只能显式把库放进 LD_LIBRARY_PATH。
+    postFixup = ''
+      wrapProgram $out/bin/Netodia \
+        --prefix LD_LIBRARY_PATH : ${
+          pkgs.lib.makeLibraryPath [
+            pkgs.libGL
+            pkgs.wayland
+            pkgs.libxkbcommon
+            pkgs.libx11
+            pkgs.libxcb
+            pkgs.libxcursor
+            pkgs.libxi
+            pkgs.libxrender
+            pkgs.fontconfig
+            pkgs.freetype
+          ]
+        }
+    '';
 
-  voicefox = pkgs.rustPlatform.buildRustPackage {
-    pname = "voicefox";
-    version = "0.3.16";
+    installPhase = ''
+      runHook preInstall
 
-    src = voicefox-src;
+      # tarball 里的产物名是 `Netodia`;桌面文件的 Exec 写的是 `netodia`,
+      # 所以两个名字都提供。
+      install -Dm755 Netodia $out/bin/Netodia
+      ln -s Netodia $out/bin/netodia
 
-    cargoLock = {
-      lockFile = "${voicefox-src}/Cargo.lock";
-    };
+      install -Dm644 netodia.png \
+        $out/share/icons/hicolor/256x256/apps/netodia.png
+      install -Dm644 com.github.helpmeeadice.netodia.desktop \
+        $out/share/applications/netodia.desktop
 
-    # Only the `voicefox` bin: the workspace also ships a
-    # src/bin/search_filter_bench.rs debug tool we don't want installed.
-    cargoBuildFlags = [
-      "-p"
-      "voicefox-app"
-      "--bin"
-      "voicefox"
-    ];
-
-    nativeBuildInputs = with pkgs; [
-      autoPatchelfHook
-      pkg-config
-    ];
-
-    buildInputs = with pkgs; [
-      mpv-unwrapped
-      openssl
-      stdenv.cc.cc.lib
-    ];
-
-    doCheck = false;
+      runHook postInstall
+    '';
 
     meta = {
-      description = "Terminal music player with multi-source search and libmpv playback";
-      homepage = "https://github.com/emoeem/voicefox";
-      license = pkgs.lib.licenses.mit;
-      mainProgram = "voicefox";
+      description = "Third-party NetEase Cloud Music desktop client (Slint + Rust)";
+      homepage = "https://github.com/HELPMEEADICE/Netodia";
+      license = pkgs.lib.licenses.agpl3Plus;
+      sourceProvenance = [ pkgs.lib.sourceTypes.binaryNativeCode ];
+      mainProgram = "netodia";
+      platforms = [ "x86_64-linux" ];
     };
   };
 in
 {
   home.packages = with pkgs; [
     pwvucontrol
-    pigma
-    # voicefox
+    netodia
   ];
 }
