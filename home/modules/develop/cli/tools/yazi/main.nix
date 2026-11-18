@@ -64,7 +64,7 @@
 
     # yazi reads keybindings only from keymap.toml
     # (yazi-config/src/keymap/keymap.rs). A `mgr.prepend_keymap` placed inside
-    # yazi.toml is silently ignored, which is why the lazygit chord never fired.
+    # yazi.toml is silently ignored.
     keymap = {
       mgr.prepend_keymap = [
         {
@@ -76,8 +76,8 @@
             "g"
             "i"
           ];
-          run = "plugin gitui";
-          desc = "run gitui";
+          run = "plugin lazygit";
+          desc = "run lazygit";
         }
       ];
     };
@@ -86,7 +86,7 @@
       inherit (pkgs.yaziPlugins)
         full-border
         git
-        gitui
+        lazygit
         starship
         rich-preview
         wl-clipboard
