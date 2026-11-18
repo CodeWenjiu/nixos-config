@@ -114,6 +114,26 @@
         "type": "github"
       }
     },
+    "nix-craftapps": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1794806634,
+        "narHash": "sha256-pEsyilE+Wg7ILsDxrj6Jr+DvgSkRwkui8Mu4YEcM7bE=",
+        "owner": "olafkfreund",
+        "repo": "nix-craftapps",
+        "rev": "ed9067144859fce25a3c37df0d0bd0589676cd22",
+        "type": "github"
+      },
+      "original": {
+        "owner": "olafkfreund",
+        "repo": "nix-craftapps",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1689850295,
@@ -218,6 +238,7 @@
         "home-manager": "home-manager",
         "minegrub-theme": "minegrub-theme",
         "niri": "niri",
+        "nix-craftapps": "nix-craftapps",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-lazy": "nixpkgs-lazy",
         "noctalia": "noctalia",

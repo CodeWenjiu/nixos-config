@@ -8,28 +8,50 @@
 
     defaultApplications =
       {
-        # ── Ely Office ─────────────────────────────────────────────
-        # 只映射各 app 自己声明的 MimeType（见各自的 .desktop）。模板、宏、
-        # WPS 专用容器它不声明，交给下面的 WPS 兜底，免得默认 handler 指向
-        # 一个打不开它们的程序。
-        "application/pdf" = "ely-pdf.desktop";
+        # ── Craft 系列 ─────────────────────────────────────────────
+        # PDF：PdfCraft
+        "application/pdf" = "ai.storyteller.pdfcraft.desktop";
 
+        # 演示文稿：DeckCraft（旧版 .ppt 不映射，仍走 WPS）
         "application/vnd.openxmlformats-officedocument.presentationml.presentation" =
-          "ely-show.desktop";
-        "application/vnd.oasis.opendocument.presentation" = "ely-show.desktop";
-        "application/vnd.ms-powerpoint" = "ely-show.desktop";
+          "ai.storyteller.deckcraft.desktop";
+        "application/vnd.openxmlformats-officedocument.presentationml.template" =
+          "ai.storyteller.deckcraft.desktop";
+        "application/vnd.openxmlformats-officedocument.presentationml.slideshow" =
+          "ai.storyteller.deckcraft.desktop";
+        "application/x-deckcraft" = "ai.storyteller.deckcraft.desktop";
+        "application/wps-office.pptx" = "ai.storyteller.deckcraft.desktop";
+        "application/wps-office.potx" = "ai.storyteller.deckcraft.desktop";
 
+        # 文档：WordCraft（不抢 .md/.html/.tex）
         "application/vnd.openxmlformats-officedocument.wordprocessingml.document" =
-          "ely-doc.desktop";
-        "application/vnd.oasis.opendocument.text" = "ely-doc.desktop";
-        "application/msword" = "ely-doc.desktop";
-        "application/rtf" = "ely-doc.desktop";
-        "text/rtf" = "ely-doc.desktop";
+          "ai.storyteller.wordcraft.desktop";
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.template" =
+          "ai.storyteller.wordcraft.desktop";
+        "application/vnd.ms-word.document.macroEnabled.12" =
+          "ai.storyteller.wordcraft.desktop";
+        "application/vnd.ms-word.template.macroEnabled.12" =
+          "ai.storyteller.wordcraft.desktop";
+        "application/msword" = "ai.storyteller.wordcraft.desktop";
+        "application/msword-template" = "ai.storyteller.wordcraft.desktop";
+        "application/vnd.oasis.opendocument.text" =
+          "ai.storyteller.wordcraft.desktop";
+        "application/rtf" = "ai.storyteller.wordcraft.desktop";
+        "text/rtf" = "ai.storyteller.wordcraft.desktop";
+        "application/wps-office.docx" = "ai.storyteller.wordcraft.desktop";
+        "application/wps-office.dotx" = "ai.storyteller.wordcraft.desktop";
 
+        # 表格：GridCraft（不抢 .csv/.tsv）
         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" =
-          "ely-table.desktop";
-        "application/vnd.oasis.opendocument.spreadsheet" = "ely-table.desktop";
-        "application/vnd.ms-excel" = "ely-table.desktop";
+          "ai.storyteller.gridcraft.desktop";
+        "application/vnd.ms-excel.sheet.macroEnabled.12" =
+          "ai.storyteller.gridcraft.desktop";
+        "application/vnd.ms-excel.sheet.binary.macroEnabled.12" =
+          "ai.storyteller.gridcraft.desktop";
+        "application/vnd.oasis.opendocument.spreadsheet" =
+          "ai.storyteller.gridcraft.desktop";
+        "application/wps-office.xlsx" = "ai.storyteller.gridcraft.desktop";
+        "application/wps-office.xltx" = "ai.storyteller.gridcraft.desktop";
 
         # ── 原有 scheme handler ────────────────────────────────────
         "x-scheme-handler/clash" = "clash-verge.desktop";
@@ -39,22 +61,6 @@
         "x-scheme-handler/tonsite" = "org.telegram.desktop.desktop";
       }
       // lib.genAttrs [
-        # 模板 / 宏：Ely Office 不声明这些，仍交给 WPS
-        "application/vnd.openxmlformats-officedocument.presentationml.template"
-        "application/vnd.openxmlformats-officedocument.presentationml.slideshow"
-        "application/vnd.openxmlformats-officedocument.wordprocessingml.template"
-        "application/vnd.ms-word.document.macroEnabled.12"
-        "application/vnd.ms-word.template.macroEnabled.12"
-        "application/msword-template"
-        "application/vnd.ms-excel.sheet.macroEnabled.12"
-        "application/vnd.ms-excel.sheet.binary.macroEnabled.12"
-        "application/wps-office.docx"
-        "application/wps-office.dotx"
-        "application/wps-office.pptx"
-        "application/wps-office.potx"
-        "application/wps-office.xlsx"
-        "application/wps-office.xltx"
-
         # WPS 专用格式：仍用 WPS 统一启动器兜底
         "application/wps-office.ppt"
         "application/wps-office.pot"
