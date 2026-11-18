@@ -80,6 +80,12 @@ animations {
 
 hotkey-overlay { skip-at-startup; }
 
+gestures {
+  hot-corners {
+    off
+  }
+}
+
 binds {
   Mod+L { focus-column-right; }
   Mod+H { focus-column-left; }
