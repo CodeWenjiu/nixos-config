@@ -241,11 +241,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1794903610,
-        "narHash": "sha256-J//HOG4VlVMfpZJUPYHepnOaQGBrvHb495HzPlja8Ec=",
+        "lastModified": 1795391077,
+        "narHash": "sha256-WwqFb8IzUwkFV6agxtfRg2TtXmYjP4F1N7lwfJhKaF4=",
         "owner": "CodeWenjiu",
         "repo": "rigili",
-        "rev": "e1bedf0f5a700257d30876101b15d1625b487713",
+        "rev": "6343f5280e6c71218e4d5c0e250908e88be6def2",
         "type": "github"
       },
       "original": {
