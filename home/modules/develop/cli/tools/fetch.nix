@@ -5,14 +5,14 @@
 {
   home.packages = with pkgs; [
     onefetch
-    # bottom
-    btop
+    bottom
+    # btop
     intel-gpu-tools
   ];
 
   programs.nushell.shellAliases = {
     gitfetch = "onefetch";
-    systop = "btop";
+    systop = "btm";
     gputop = "intel-gpu-tools";
   };
 }
