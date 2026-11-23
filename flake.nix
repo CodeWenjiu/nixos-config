@@ -26,6 +26,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # WowType：fcitx5 的拼音输入法（Rust 引擎 + C++ addon）。官方 flake 同时
+    # 提供 packages.default 和 overlay。跟 release 分支，不用 main。
+    wowtype = {
+      url = "github:Gloridust/WowType/release";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # 自己写的 Rigili（GPUI 的 bilibili 客户端）。用 github: 而不是 path:
     # path 类型的 input 会无视 .gitignore 把整个目录拷进 store，而这个仓库的
     # target/ 有 60 GB 级别。

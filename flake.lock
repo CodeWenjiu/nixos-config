@@ -264,7 +264,8 @@
         "nixpkgs-lazy": "nixpkgs-lazy",
         "noctalia": "noctalia",
         "rigili": "rigili",
-        "vscode-server": "vscode-server"
+        "vscode-server": "vscode-server",
+        "wowtype": "wowtype"
       }
     },
     "rust-overlay": {
@@ -303,6 +304,27 @@
       "original": {
         "owner": "nix-community",
         "repo": "nixos-vscode-server",
+        "type": "github"
+      }
+    },
+    "wowtype": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1795284958,
+        "narHash": "sha256-O8nuR9Mp2vIC6vayZYONnkIXtR/b/cEfVx2qZ8aDXzs=",
+        "owner": "Gloridust",
+        "repo": "WowType",
+        "rev": "89847d5120b5985c9c9ddd5841f118eb1dcb0a49",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Gloridust",
+        "ref": "release",
+        "repo": "WowType",
         "type": "github"
       }
     },
