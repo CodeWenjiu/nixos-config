@@ -218,6 +218,10 @@ layer = "overlay"
 position = "top_right"
 
 [plugin_settings."noctalia/mpvpaper"]
+# mpvpaper 默认会在全屏窗口盖住壁纸时自动暂停（--auto-pause --auto-mode FULL）。
+# 平铺布局下全屏是常态，暂停只会让壁纸变成一张静止的帧，所以关掉：
+# off = 不传 --auto-pause；max = 最大化也暂停；full = 仅全屏暂停。
+auto_pause = "off"
 video_directory = "/mnt/data/wallpapers/dynamic"
 
 [plugin_settings."noctalia/translator"]
