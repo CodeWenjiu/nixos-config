@@ -56,14 +56,22 @@
       "flakes"
     ];
 
-    # 国内二进制缓存镜像（TUNA），官方源兜底。
-    # 镜像内容与官方 cache.nixos.org 签名一致，无需额外信任 key。
+    # 官方源优先。TUNA 镜像缺不少 NAR（构建时见过 “does not exist in binary
+    # cache”），放第一位会让每个缺失的路径都多问一次，而且它的连接更容易
+    # stalled。国内直连官方源在这里实际走 mihomo 代理，够快。
     substituters = [
-      "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
       "https://cache.nixos.org"
+      "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
       # niri-unstable 的二进制缓存（epireyn/niri-flake 提供，仅 x86_64-linux）
       "https://niri-epireyn.cachix.org"
     ];
+
+    # 默认 stalled-download-timeout 是 300 秒、download-attempts 是 5：一条连上了
+    # 但对面不回数据的连接会让 nix 静默等 5 分钟，期间屏幕一动不动，看着像卡死；
+    # 算上重试要 25 分钟才报错。收紧到 30 秒 / 3 次，卡住就重连。
+    connect-timeout = 5;
+    stalled-download-timeout = 30;
+    download-attempts = 3;
 
     # 与默认值（cache.nixos.org）按列表拼接，不会覆盖默认信任。
     trusted-public-keys = [
